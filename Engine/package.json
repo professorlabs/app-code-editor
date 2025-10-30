@@ -1,0 +1,35 @@
+{
+  "name": "latex2html-professional",
+  "version": "2.0.0",
+  "description": "Professional LaTeX to HTML Converter - Full Feature Support",
+  "main": "engine.js",
+  "bin": {
+    "latex2html": "engine.js"
+  },
+  "scripts": {
+    "start": "node engine.js",
+    "test": "node tests/test-all.js",
+    "build-examples": "node tools/build-examples.js",
+    "dev": "node engine.js --watch"
+  },
+  "keywords": [
+    "latex",
+    "html", 
+    "converter",
+    "professional",
+    "documents",
+    "resume",
+    "book",
+    "a4",
+    "typesetting"
+  ],
+  "author": "Professor Lab",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/professorlab/latex2html-professional.git"
+  }
+}

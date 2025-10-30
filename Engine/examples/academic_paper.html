@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Approaches for Climate Change Prediction: A Comprehensive Survey</title>
+    <meta name="author" content="Jane Smith\textsuperscript{1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Machine Learning Approaches for Climate Change Prediction: A Comprehensive Survey">
+    <meta property="og:description" content="">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Machine Learning Approaches for Climate Change Prediction: A Comprehensive Survey">
+    <meta property="twitter:description" content="">
+    
+    <style>
+/* ===== DEFAULT THEME STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.title {
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.author {
+    text-align: center;
+    font-size: 1.3em;
+    color: #6c757d;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.date {
+    text-align: center;
+    color: #868e96;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.abstract {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.abstract-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+
+/* ===== SECTIONS ===== */
+h1 {
+    font-size: 2.2em;
+    margin: 50px 0 25px 0;
+    color: #1a1a1a;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 15px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 40px 0 20px 0;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.4em;
+    margin: 30px 0 15px 0;
+    color: #34495e;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 1.2em;
+    margin: 25px 0 12px 0;
+    color: #495057;
+    font-weight: 500;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    border: 1px solid #e9ecef;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav li {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+nav li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 123, 255, 0.3);
+}
+
+nav li:active {
+    transform: translateY(0);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* ===== BOXES & CONTAINERS ===== */
+.box {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.box:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.box-title {
+    position: absolute;
+    top: -12px;
+    left: 25px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* ===== LISTS ===== */
+ul {
+    margin: 20px 0 20px 30px;
+    padding-left: 20px;
+}
+
+ol {
+    margin: 20px 0 20px 30px;
+    padding-left: 20px;
+}
+
+li {
+    margin: 10px 0;
+    color: #495057;
+    line-height: 1.6;
+}
+
+ul li::marker {
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+ol li::marker {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ===== TEXT FORMATTING ===== */
+.textbf {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.textit {
+    font-style: italic;
+    color: #6c757d;
+}
+
+.texttt {
+    font-family: 'Courier New', monospace;
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #d63384;
+}
+
+.emph {
+    font-style: italic;
+    color: #007bff;
+}
+
+.underline {
+    text-decoration: underline;
+    text-decoration-color: #007bff;
+    text-underline-offset: 4px;
+}
+
+/* ===== PARAGRAPHS ===== */
+p {
+    margin: 18px 0;
+    text-align: justify;
+    text-indent: 2em;
+    line-height: 1.8;
+}
+
+p:first-of-type {
+    text-indent: 0;
+}
+
+/* ===== QUOTES ===== */
+blockquote {
+    border-left: 4px solid #007bff;
+    margin: 25px 0;
+    padding: 15px 25px;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #495057;
+    border-radius: 0 8px 8px 0;
+}
+
+blockquote p {
+    text-indent: 0;
+}
+
+/* ===== CODE BLOCKS ===== */
+.code-box {
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin: 30px 0;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.code-box:hover {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+}
+
+.code-tabs {
+    display: flex;
+    background: #2d2d30;
+    padding: 0;
+    position: relative;
+    border-bottom: 1px solid #3e3e42;
+}
+
+.code-tab {
+    padding: 12px 24px;
+    background: transparent;
+    color: #969696;
+    border: none;
+    cursor: pointer;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.code-tab:hover {
+    color: #fff;
+    background: #383838;
+}
+
+.code-tab.active {
+    color: #fff;
+    background: #1e1e1e;
+}
+
+.code-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #007acc, #0099ff);
+}
+
+.code-content {
+    padding: 25px;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: auto;
+    position: relative;
+    min-height: 200px;
+}
+
+.code-pane {
+    display: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-pane.active {
+    display: block;
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #3e3e42;
+}
+
+.code-title {
+    color: #569cd6;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #007acc, #005a9e);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(135deg, #005a9e, #004578);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 122, 204, 0.3);
+}
+
+.copy-btn.success {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+}
+
+.copy-icon {
+    transition: all 0.3s ease;
+}
+
+.copy-btn.success .copy-icon {
+    transform: scale(1.2);
+}
+
+/* SYNTAX HIGHLIGHTING */
+.syntax-keyword { color: #569cd6; font-weight: 600; }
+.syntax-string { color: #ce9178; }
+.syntax-number { color: #b5cea8; }
+.syntax-comment { color: #6a9955; font-style: italic; }
+.syntax-function { color: #dcdcaa; }
+.syntax-variable { color: #9cdcfe; }
+.syntax-operator { color: #d4d4d4; }
+.syntax-type { color: #4ec9b0; }
+.syntax-annotation { color: #ff9800; }
+.syntax-preprocessor { color: #c586c0; }
+.syntax-template { color: #ce9178; }
+.syntax-selector { color: #d7ba7d; }
+.syntax-property { color: #9cdcfe; }
+.syntax-value { color: #ce9178; }
+.syntax-tag { color: #569cd6; }
+.syntax-attribute { color: #92c5f8; }
+.syntax-command { color: #dcdcaa; }
+.syntax-decorator { color: #c586c0; }
+
+.inline-code {
+    background: #f1f3f4;
+    color: #d63384;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid #e9ecef;
+}
+
+/* ===== IMAGES ===== */
+.center {
+    text-align: center;
+    margin: 30px 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== TABLE OF CONTENTS ===== */
+.table-of-contents {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.table-of-contents h2 {
+    margin-top: 0;
+    color: #1a1a1a;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.toc-content {
+    line-height: 1.8;
+}
+
+.toc-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.toc-content li {
+    margin: 8px 0;
+    padding: 5px 0;
+}
+
+.toc-content a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.toc-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* ===== PAGE BREAK ===== */
+.page-break {
+    page-break-before: always;
+    margin: 60px 0;
+    border-top: 2px dashed #dee2e6;
+    padding-top: 20px;
+}
+
+.page-break::before {
+    content: "— Page Break —";
+    display: block;
+    text-align: center;
+    color: #adb5bd;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    .title {
+        font-size: 2.2em;
+    }
+    
+    .author {
+        font-size: 1.1em;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+        margin: 30px 0 20px 0;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+        margin: 25px 0 15px 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    nav li {
+        width: 100%;
+        text-align: center;
+        max-width: 200px;
+    }
+    
+    .box {
+        padding: 20px;
+    }
+    
+    .code-tab {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+    
+    .code-content {
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    p {
+        text-indent: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    .title {
+        font-size: 1.8em;
+    }
+    
+    .box {
+        padding: 15px;
+        margin: 20px 0;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    body {
+        background: white;
+        color: black;
+        max-width: 100%;
+        padding: 0;
+        font-size: 12pt;
+    }
+    
+    .title {
+        font-size: 24pt;
+    }
+    
+    h1 {
+        font-size: 18pt;
+        page-break-before: always;
+    }
+    
+    h2 {
+        font-size: 16pt;
+    }
+    
+    h3 {
+        font-size: 14pt;
+    }
+    
+    nav {
+        display: none;
+    }
+    
+    .page-break {
+        page-break-before: always;
+    }
+    
+    .page-break::before {
+        display: none;
+    }
+    
+    .code-box {
+        border: 1px solid black;
+        background: white;
+        page-break-inside: avoid;
+    }
+    
+    img {
+        max-width: 100%;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.6s ease-out;
+}
+</style>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+
+
+\title{Machine Learning Approaches for Climate Change Prediction: A Comprehensive Survey}
+\author{Jane Smith\textsuperscript{1}, John Johnson\textsuperscript{2}, Sarah Williams\textsuperscript{1}}
+\textsuperscript{1}Department of Computer Science, Stanford University<br>
+\textsuperscript{2}Climate Research Institute, MIT<br>
+<code class="inline-code">janesmith@stanford.edu</code>, johnj@mit.edu, sarahw@stanford.edu}
+
+\date{<br>today}
+
+<div class="document-body">
+
+<div class="title-section"></div>
+
+<div class="abstract">
+                <div class="abstract-title">Abstract</div>
+                <div class="abstract-content">
+Climate change represents one of the most pressing challenges of our time, requiring sophisticated computational approaches for accurate prediction and modeling. This comprehensive survey presents a systematic review of machine learning techniques applied to climate change prediction over the past decade. We analyze 200+ research papers covering various ML approaches including deep learning, ensemble methods, and hybrid models. Our findings indicate that transformer-based architectures and graph neural networks show particular promise for capturing complex spatiotemporal patterns in climate data. We identify key challenges, propose future research directions, and provide recommendations for practitioners in the field. The survey also addresses issues of model interpretability, data quality, and the importance of interdisciplinary collaboration.
+</div>
+            </div>
+
+<span class="textbf">Keywords:</span> Machine Learning, Climate Change, Deep Learning, Time Series Analysis, Environmental Modeling
+
+<h1 id="section-1">Introduction</h1>
+Climate change has emerged as one of the most critical challenges facing humanity in the 21st century \cite{ipcc2021}. The increasing availability of climate data, combined with advancements in machine learning, has created unprecedented opportunities for developing more accurate prediction models. Traditional climate models, while physically-based, often struggle with computational efficiency and capturing non-linear relationships in the climate system \cite{reichstein2019}.
+
+Machine learning approaches offer several advantages for climate change prediction:
+<ul class="itemize"><li>Ability to learn complex non-linear relationships from large datasets</li>
+<li>Computational efficiency for real-time predictions</li>
+<li>Capability to integrate heterogeneous data sources</li></ul>
+
+This paper provides a comprehensive survey of machine learning applications in climate change prediction, categorizing approaches by methodology, data types, and prediction horizons. We also discuss challenges and opportunities for future research in this rapidly evolving field.
+
+<h1 id="section-2">Background and Related Work</h1>
+
+<h2 id="section-10-1">Traditional Climate Modeling</h2>
+Traditional climate models are based on physical equations describing atmospheric, oceanic, and land surface processes. These General Circulation Models (GCMs) have been the foundation of climate science for decades \cite{flato2013}. While physically interpretable, GCMs face several limitations:
+<ul class="itemize"><li>High computational cost requiring supercomputing resources</li>
+<li>Parameterization uncertainties for sub-grid scale processes</li></ul>
+
+<h2 id="section-10-2">Machine Learning in Climate Science</h2>
+The application of machine learning to climate science has gained significant momentum in recent years. Early work focused on statistical learning methods such as support vector machines and random forests for climate pattern recognition \cite{schneider2017}. The advent of deep learning has revolutionized the field, enabling the modeling of highly complex climate systems \cite{reichstein2019}.
+
+Table <a href="#tab:ml<sub>a</sub>pproaches" class="ref">[tab:ml<sub>a</sub>pproaches]</a> summarizes the evolution of machine learning approaches in climate prediction.
+
+<div class="table" id="tab:ml<sub>a</sub>pproaches">
+                <div class="table-content">[ht]
+\centering
+\caption{Evolution of Machine Learning Approaches in Climate Prediction}
+\label{tab:ml<sub>a</sub>pproaches}
+<table class="tabular"><tr><td>\toprule
+Time Period</td><td>Primary Methods</td><td>Key Applications</td></tr><tr><td>\midrule
+2000-2010</td><td>Statistical Methods</td><td>Weather classification, simple prediction</td></tr><tr><td>2010-2015</td><td>Classical ML</td><td>Pattern recognition, feature selection</td></tr><tr><td>2015-2018</td><td>Early Deep Learning</td><td>Image analysis, time series forecasting</td></tr><tr><td>2018-Present</td><td>Advanced DL</td><td>Spatiotemporal modeling, hybrid approaches</td></tr><tr><td>\bottomrule</td></tr></table>
+</div>
+                <div class="table-caption">Table 1: Evolution of Machine Learning Approaches in Climate Prediction</div>
+            </div>
+
+<h1 id="section-3">Methodology</h1>
+
+<h2 id="section-10-3">Search Strategy</h2>
+We conducted a systematic literature review following PRISMA guidelines \cite{moher2009}. Our search encompassed:
+<ul class="itemize"><li>IEEE Xplore, ACM Digital Library, and arXiv</li>
+<li>Time period: 2013-2023</li>
+<li>Keywords: "machine learning", "climate change", "prediction", "forecasting"</li></ul>
+
+<h2 id="section-10-4">Classification Framework</h2>
+We developed a classification framework to categorize machine learning approaches based on:
+<ol class="enumerate"><li><span class="textbf">Learning Paradigm:</span> Supervised, unsupervised, reinforcement learning</li>
+<li><span class="textbf">Model Architecture:</span> Neural networks, tree-based methods, kernel methods</li>
+<li><span class="textbf">Data Modality:</span> Satellite imagery, sensor data, climate model outputs</li></ol>
+
+<h1 id="section-4">Deep Learning Approaches</h1>
+
+<h2 id="section-10-5">Convolutional Neural Networks</h2>
+CNNs have been widely applied to analyze satellite imagery and gridded climate data. The hierarchical feature extraction capabilities of CNNs make them particularly suitable for identifying spatial patterns in climate data \cite{reichstein2019}.
+
+<h2 id="section-10-6">Recurrent Neural Networks</h2>
+RNNs and their variants (LSTM, GRU) excel at modeling temporal dependencies in climate time series. These approaches have shown success in:
+<ul class="itemize"><li>Temperature prediction</li>
+<li>Precipitation forecasting</li></ul>
+
+<h2 id="section-10-7">Transformer Models</h2>
+Recent transformer architectures have revolutionized sequence modeling in climate applications \cite{chen2023}. The self-attention mechanism allows for:
+<ul class="itemize"><li>Long-range dependency modeling</li>
+<li>Parallel processing of sequences</li></ul>
+
+<h2 id="section-10-8">Graph Neural Networks</h2>
+GNNs have emerged as powerful tools for modeling climate systems as graphs, where nodes represent geographical locations and edges represent spatial relationships \cite{jaeger2021}.
+
+<h1 id="section-5">Implementation Example</h1>
+
+<div class="code-box white-bg"><div class="code-tabs"><button class="code-tab active" data-tab="code-python">python</button><button class="code-tab " data-tab="code-javascript">javascript</button></div><div class="code-content"><div id="code-python" class="code-pane active"><div class="code-header"><span class="code-title">python</span><button class="copy-btn" title="Copy code"><span class="copy-icon">📋</span> Copy</button></div><div class="code-text"><span class="syntax-keyword">import</span> torch
+<span class="syntax-keyword">import</span> torch.nn <span class="syntax-keyword">as</span> nn
+<span class="syntax-keyword">import</span> numpy <span class="syntax-keyword">as</span> np
+<span class="syntax-keyword">class</span> <span class="syntax-function">ClimatePredictor</span>(nn.Module):
+<span class="syntax-keyword">def</span> &lt;sub&gt;_&lt;/sub&gt;init&lt;sub&gt;_&lt;/sub&gt;(<span class="syntax-keyword">self</span>, input&lt;sub&gt;d&lt;/sub&gt;im, hidden&lt;sub&gt;d&lt;/sub&gt;im, output&lt;sub&gt;d&lt;/sub&gt;im):
+<span class="syntax-function">super</span>(ClimatePredictor, <span class="syntax-keyword">self</span>).&lt;sub&gt;_&lt;/sub&gt;init&lt;sub&gt;_&lt;/sub&gt;()
+<span class="syntax-keyword">self</span>.conv1 = nn.<span class="syntax-function">Conv2d</span>(input&lt;sub&gt;d&lt;/sub&gt;im, <span <span class="syntax-keyword">class</span>="syntax-number">64</span>, kernel&lt;sub&gt;s&lt;/sub&gt;ize=<span <span class="syntax-keyword">class</span>="syntax-number">3</span>, padding=<span <span class="syntax-keyword">class</span>="syntax-number">1</span>)
+<span class="syntax-keyword">self</span>.conv2 = nn.<span class="syntax-function">Conv2d</span>(<span <span class="syntax-keyword">class</span>="syntax-number">64</span>, <span <span class="syntax-keyword">class</span>="syntax-number">128</span>, kernel&lt;sub&gt;s&lt;/sub&gt;ize=<span <span class="syntax-keyword">class</span>="syntax-number">3</span>, padding=<span <span class="syntax-keyword">class</span>="syntax-number">1</span>)
+<span class="syntax-keyword">self</span>.lstm = nn.<span class="syntax-function">LSTM</span>(<span <span class="syntax-keyword">class</span>="syntax-number">128</span>, hidden&lt;sub&gt;d&lt;/sub&gt;im, batch&lt;sub&gt;f&lt;/sub&gt;irst=<span class="syntax-keyword">True</span>)
+<span class="syntax-keyword">self</span>.attention = nn.<span class="syntax-function">MultiheadAttention</span>(hidden&lt;sub&gt;d&lt;/sub&gt;im, num&lt;sub&gt;h&lt;/sub&gt;eads=<span <span class="syntax-keyword">class</span>="syntax-number">8</span>)
+<span class="syntax-keyword">self</span>.fc = nn.<span class="syntax-function">Linear</span>(hidden&lt;sub&gt;d&lt;/sub&gt;im, output&lt;sub&gt;d&lt;/sub&gt;im)
+<span class="syntax-keyword">def</span> <span class="syntax-function">forward</span>(<span class="syntax-keyword">self</span>, x):
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>># Spatial feature extraction</span>
+x = torch.<span class="syntax-function">relu</span>(<span class="syntax-keyword">self</span>.<span class="syntax-function">conv1</span>(x))
+x = torch.max&lt;sub&gt;p&lt;/sub&gt;<span class="syntax-function">ool2d</span>(x, <span <span class="syntax-keyword">class</span>="syntax-number">2</span>)
+x = torch.<span class="syntax-function">relu</span>(<span class="syntax-keyword">self</span>.<span class="syntax-function">conv2</span>(x))
+x = torch.max&lt;sub&gt;p&lt;/sub&gt;<span class="syntax-function">ool2d</span>(x, <span <span class="syntax-keyword">class</span>="syntax-number">2</span>)
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>># Temporal modeling</span>
+batch&lt;sub&gt;s&lt;/sub&gt;ize, channels, height, width = x.shape
+x = x.<span class="syntax-function">view</span>(batch&lt;sub&gt;s&lt;/sub&gt;ize, -<span <span class="syntax-keyword">class</span>="syntax-number">1</span>, height * width)
+x, _ = <span class="syntax-keyword">self</span>.<span class="syntax-function">lstm</span>(x)
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>># Attention mechanism</span>
+x, _ = <span class="syntax-keyword">self</span>.<span class="syntax-function">attention</span>(x, x, x)
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>># Final prediction</span>
+x = <span class="syntax-keyword">self</span>.<span class="syntax-function">fc</span>(x[:, -<span <span class="syntax-keyword">class</span>="syntax-number">1</span>, :])
+<span class="syntax-keyword">return</span> x
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>># Training loop example</span>
+<span class="syntax-keyword">def</span> train&lt;sub&gt;c&lt;/sub&gt;limate&lt;sub&gt;m&lt;/sub&gt;<span class="syntax-function">odel</span>(model, dataloader, epochs=<span <span class="syntax-keyword">class</span>="syntax-number">100</span>):
+criterion = nn.<span class="syntax-function">MSELoss</span>()
+optimizer = torch.optim.<span class="syntax-function">Adam</span>(model.<span class="syntax-function">parameters</span>(), lr=<span <span class="syntax-keyword">class</span>="syntax-number">0.001</span>)
+<span class="syntax-keyword">for</span> epoch <span class="syntax-keyword">in</span> <span class="syntax-function">range</span>(epochs):
+<span class="syntax-keyword">for</span> batch&lt;sub&gt;x&lt;/sub&gt;, batch&lt;sub&gt;y&lt;/sub&gt; <span class="syntax-keyword">in</span> dataloader:
+optimizer.zero&lt;sub&gt;g&lt;/sub&gt;<span class="syntax-function">rad</span>()
+predictions = <span class="syntax-function">model</span>(batch&lt;sub&gt;x&lt;/sub&gt;)
+loss = <span class="syntax-function">criterion</span>(predictions, batch&lt;sub&gt;y&lt;/sub&gt;)
+loss.<span class="syntax-function">backward</span>()
+optimizer.<span class="syntax-function">step</span>()
+<span class="syntax-keyword">if</span> (epoch + <span <span class="syntax-keyword">class</span>="syntax-number">1</span>) % <span <span class="syntax-keyword">class</span>="syntax-number">10</span> == <span <span class="syntax-keyword">class</span>="syntax-number">0</span>:</div></div><div id="code-javascript" class="code-pane "><div class="code-header"><span class="code-title">javascript</span><button class="copy-btn" title="Copy code"><span class="copy-icon">📋</span> Copy</button></div><div class="code-text"><span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>>// Climate data processing <span class="syntax-keyword">with</span> TensorFlow.js</span>
+<span class="syntax-keyword">import</span> * <span class="syntax-keyword">as</span> tf <span class="syntax-keyword">from</span> <span <span class="syntax-keyword">class</span>="syntax-string">'@tensorflow/tfjs'</span>;
+<span class="syntax-keyword">this</span>.scaler = null;
+<span class="syntax-keyword">this</span>.model = null;
+}
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>>// Preprocess climate data</span>
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>>// Normalize temperature data to [<span <span class="syntax-keyword">class</span>="syntax-number">0</span>, <span <span class="syntax-keyword">class</span>="syntax-number">1</span>]</span>
+<span class="syntax-keyword">const</span> temps = data.<span class="syntax-function">map</span>(d =&gt; d.temperature);
+<span class="syntax-keyword">const</span> minTemp = Math.<span class="syntax-function">min</span>(...temps);
+<span class="syntax-keyword">const</span> maxTemp = Math.<span class="syntax-function">max</span>(...temps);
+...d,
+temperature: (d.temperature - minTemp) / (maxTemp - minTemp),
+normalized: true
+}));
+}
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>>// Create sequences <span class="syntax-keyword">for</span> time series prediction</span>
+<span class="syntax-keyword">const</span> sequences = [];
+<span class="syntax-keyword">const</span> targets = [];
+sequences.<span class="syntax-function">push</span>(data.<span class="syntax-function">slice</span>(i, i + sequenceLength));
+targets.<span class="syntax-function">push</span>(data[i + sequenceLength].temperature);
+}
+}
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-comment"</span>>// Build LSTM model <span class="syntax-keyword">for</span> temperature prediction</span>
+layers: [
+units: <span <span class="syntax-keyword">class</span>="syntax-number">64</span>,
+returnSequences: true,
+inputShape: [sequenceLength, features]
+}),
+]
+});
+optimizer: tf.train.<span class="syntax-function">adam</span>(<span <span class="syntax-keyword">class</span>="syntax-number">0.001</span>),
+loss: <span <span class="syntax-keyword">class</span>="syntax-string">'meanSquaredError'</span>,
+metrics: [<span <span class="syntax-keyword">class</span>="syntax-string">'mae'</span>]
+});
+<span class="syntax-keyword">return</span> <span class="syntax-keyword">this</span>.model;
+}
+}</div></div></div></div>
+
+<h1 id="section-6">Results and Discussion</h1>
+
+Our analysis reveals several key findings:
+
+<h2 id="section-10-9">Performance Comparison</h2>
+Table <a href="#tab:performance" class="ref">[tab:performance]</a> compares the performance of different ML approaches across various climate prediction tasks.
+
+<div class="table" id="tab:performance">
+                <div class="table-content">[ht]
+\centering
+\caption{Performance Comparison of ML Approaches (RMSE)}
+\label{tab:performance}
+<table class="tabular"><tr><td>\toprule
+Method</td><td>Temperature</td><td>Precipitation</td><td>Sea Level</td></tr><tr><td>\midrule
+Traditional GCM</td><td>2.1°C</td><td>15.2mm</td><td>8.5cm</td></tr><tr><td>Random Forest</td><td>1.8°C</td><td>13.1mm</td><td>7.9cm</td></tr><tr><td>CNN</td><td>1.5°C</td><td>11.8mm</td><td>7.2cm</td></tr><tr><td>LSTM</td><td>1.3°C</td><td>10.5mm</td><td>6.8cm</td></tr><tr><td>Transformer</td><td>1.1°C</td><td>9.2mm</td><td>6.1cm</td></tr><tr><td>GNN</td><td>1.0°C</td><td>8.9mm</td><td>5.9cm</td></tr><tr><td>\bottomrule</td></tr></table>
+</div>
+                <div class="table-caption">Table 2: Performance Comparison of ML Approaches (RMSE)</div>
+            </div>
+
+<h2 id="section-10-10">Key Trends</h2>
+<ul class="itemize"><li>Deep learning approaches consistently outperform traditional methods</li>
+<li>Hybrid models combining physical constraints with ML show promise</li>
+<li>Transfer learning from weather to climate prediction improves performance</li></ul>
+
+<h1 id="section-7">Challenges and Limitations</h1>
+
+Despite significant progress, several challenges remain:
+
+<h2 id="section-10-11">Data Quality and Availability</h2>
+<ul class="itemize"><li>Heterogeneous data sources with varying quality</li>
+<li>Missing data in historical records</li></ul>
+
+<h2 id="section-10-12">Model Interpretability</h2>
+The "black box" nature of deep learning models poses challenges for climate science applications where understanding physical processes is crucial \cite{reichstein2019}.
+
+<h2 id="section-10-13">Computational Resources</h2>
+Training large-scale climate models requires significant computational resources, creating barriers for researchers in developing countries.
+
+<h1 id="section-8">Future Directions</h1>
+
+Based on our analysis, we identify several promising research directions:
+
+<h2 id="section-10-14">Physics-Informed Neural Networks</h2>
+Incorporating physical constraints directly into neural network architectures can improve both accuracy and interpretability \cite{raissi2019}.
+
+<h2 id="section-10-15">Multimodal Learning</h2>
+Integrating diverse data sources including satellite imagery, ground sensors, and social media data for comprehensive climate modeling.
+
+<h2 id="section-10-16">Uncertainty Quantification</h2>
+Developing methods to quantify and communicate uncertainty in climate predictions is essential for decision-making.
+
+<h1 id="section-9">Conclusion</h1>
+
+Machine learning has emerged as a powerful tool for climate change prediction, offering significant improvements over traditional methods in terms of accuracy and computational efficiency. Deep learning approaches, particularly transformers and graph neural networks, show the most promise for capturing complex climate system dynamics.
+
+However, challenges remain in data quality, model interpretability, and computational requirements. Future research should focus on physics-informed machine learning, multimodal integration, and uncertainty quantification.
+
+The collaboration between climate scientists and machine learning researchers will be crucial for addressing the urgent challenges of climate change. We hope this survey provides a valuable resource for researchers and practitioners working at the intersection of machine learning and climate science.
+
+<h1 id="section-10">Acknowledgments</h1>
+
+The authors would like to thank the anonymous reviewers for their valuable feedback. This work was supported by the National Science Foundation under Grant No. 123456 and the Climate Research Initiative.
+
+
+<div class="bibliography">
+                <h2>References</h2>
+                <div class="bibliography-content">
+
+<div class="bibitem" id="bib-ipcc2021">IPCC, 2021: Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change.</div><div class="bibitem" id="bib-reichstein2019">Reichstein, M., Camps-Valls, G., Stevens, B., Jung, M., Denzler, J., Carvalhais, N., ... and Prabhat, 2019: Deep learning and process understanding for data-driven Earth system science. Nature, 566, 195-204.</div><div class="bibitem" id="bib-flato2013">Flato, G., Marotzke, J., Abiodun, B., Braconnot, P., Chou, S.C., Collins, W., ... and Rummukainen, M., 2013: Evaluation of climate models. In: Climate Change 2013: The Physical Science Basis. Contribution of Working Group I to the Fifth Assessment Report of the IPCC.</div><div class="bibitem" id="bib-schneider2017">Schneider, P., 2017: Analysis of earth observation data using machine learning. In: Pattern Recognition and Image Analysis, 549-561.</div><div class="bibitem" id="bib-moher2009">Moher, D., Liberati, A., Tetzlaff, J., Altman, D.G., 2009: Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement. PLoS Medicine, 6(7).</div><div class="bibitem" id="bib-chen2023">Chen, L., Jia, K., Zhang, Y., 2023: Climate transformer: A novel approach to long-term climate prediction using attention mechanisms. Journal of Climate, 36(8), 2845-2862.</div><div class="bibitem" id="bib-jaeger2021">Jaeger, J., Ma, Z., Lin, J., 2021: Spatiotemporal graph neural networks for climate pattern recognition. Nature Machine Intelligence, 3, 763-771.</div>\bibitem{raissi2019}
+Raissi, M., Perdikaris, P., and Karniadakis, G.E., 2019: Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics, 378, 686-707.
+
+</div>
+            </div>
+
+</div>
+    <script>
+// ===== DEFAULT THEME JAVASCRIPT =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    entry.target.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, 100);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Observe elements for animation
+    document.querySelectorAll('h1, h2, .box, .code-box, .center').forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Code box tab switching
+    document.querySelectorAll('.code-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            const codeBox = this.closest('.code-box');
+            const targetId = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and panes
+            codeBox.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+            codeBox.querySelectorAll('.code-pane').forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding pane
+            this.classList.add('active');
+            const targetPane = codeBox.querySelector(`#${targetId}`);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        });
+    });
+    
+    // Copy functionality with animation
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const codeBox = this.closest('.code-box');
+            const activePane = codeBox.querySelector('.code-pane.active');
+            
+            if (activePane) {
+                const codeText = activePane.textContent;
+                
+                try {
+                    await navigator.clipboard.writeText(codeText);
+                    
+                    const icon = this.querySelector('.copy-icon');
+                    const originalHTML = icon.innerHTML;
+                    const originalText = this.innerHTML;
+                    
+                    // Show success state
+                    icon.innerHTML = '✓';
+                    this.classList.add('success');
+                    this.innerHTML = '<span class="copy-icon">✓</span> Copied!';
+                    
+                    // Revert after 2 seconds
+                    setTimeout(() => {
+                        icon.innerHTML = originalHTML;
+                        this.classList.remove('success');
+                        this.innerHTML = originalText;
+                    }, 2000);
+                    
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = codeText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Show success state
+                    this.classList.add('success');
+                    this.innerHTML = '<span class="copy-icon">✓</span> Copied!';
+                    
+                    setTimeout(() => {
+                        this.classList.remove('success');
+                        this.innerHTML = '<span class="copy-icon">Copy</span> Copy';
+                    }, 2000);
+                }
+            }
+        });
+    });
+    
+    // Generate table of contents if needed
+    const tocContent = document.querySelector('.toc-content');
+    if (tocContent && !tocContent.innerHTML.trim()) {
+        generateTableOfContents(tocContent);
+    }
+    
+    // Add print styles detection
+    window.addEventListener('beforeprint', function() {
+        document.body.classList.add('printing');
+    });
+    
+    window.addEventListener('afterprint', function() {
+        document.body.classList.remove('printing');
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Ctrl/Cmd + P for print
+        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            window.print();
+        }
+        
+        // Escape to clear focus
+        if (e.key === 'Escape') {
+            document.activeElement.blur();
+        }
+    });
+});
+
+// Table of Contents Generator
+function generateTableOfContents(container) {
+    const headings = document.querySelectorAll('h1, h2, h3, h4');
+    const toc = document.createElement('ul');
+    
+    headings.forEach((heading, index) => {
+        // Add ID if missing
+        if (!heading.id) {
+            heading.id = 'heading-' + index;
+        }
+        
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent;
+        
+        // Style based on heading level
+        link.style.paddingLeft = ((parseInt(heading.tagName.substring(1)) - 1) * 15) + 'px';
+        link.style.display = 'block';
+        
+        li.appendChild(link);
+        toc.appendChild(li);
+    });
+    
+    container.appendChild(toc);
+}
+
+// Utility function to check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Export for external use if needed
+window.DefaultTheme = {
+    generateTableOfContents,
+    isInViewport
+};
+</script>
+</body>
+</html>

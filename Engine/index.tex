@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\title{My First LaTeX Document}
+\author{Ibrahim Refat}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This is my first document written in \LaTeX.  
+LaTeX makes it easy to create beautifully formatted documents.
+
+\section{Code Example}
+Here's a demonstration of our advanced code block feature:
+
+\begin{code} {python:default} {bg-black border-1px border-black copy-enable}
+{python}
+def hello_world():
+    """A simple greeting function"""
+    name = "World"
+    print(f"Hello, {name}!")
+    return True
+
+# Call the function
+if __name__ == "__main__":
+    hello_world()
+{javascript}
+function helloWorld() {
+    // A simple greeting function
+    const name = "World";
+    console.log(`Hello, ${name}!`);
+    return true;
+}
+
+// Call the function
+helloWorld();
+\end{code}
+
+\section{Example Math}
+Here is a simple math equation:
+\[
+E = mc^2
+\]
+
+\section{Conclusion}
+That's it! I've created a clean, professional document with beautiful code blocks using just a few lines of LaTeX code.
+
+\end{document}
