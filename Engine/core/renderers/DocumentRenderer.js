@@ -4,6 +4,7 @@
  */
 
 const CodeParser = require('../parsers/CodeParser');
+const MathParser = require('../parsers/MathParser');
 
 class DocumentRenderer {
     constructor() {
@@ -14,6 +15,7 @@ class DocumentRenderer {
         this.content = '';
         this.theme = null;
         this.codeParser = new CodeParser();
+        this.mathParser = new MathParser();
     }
 
     /**
@@ -157,6 +159,14 @@ class DocumentRenderer {
     }
 
     /**
+     * Process mathematical content in the document
+     */
+    processMathematics(content) {
+        // Process mathematical expressions using MathParser
+        return this.mathParser.parse(content, 'document');
+    }
+
+    /**
      * Render environment - to be overridden by subclasses
      */
     renderEnvironment(envName, content) {
@@ -168,7 +178,9 @@ class DocumentRenderer {
             return this.codeParser.parseCustomCodeBlock(content, context);
         }
         
-        return `<div class="environment-${envName}">${content}</div>`;
+        // Process mathematical content
+        const processedContent = this.processMathematics(content);
+        return `<div class="environment-${envName}">${processedContent}</div>`;
     }
 
     /**

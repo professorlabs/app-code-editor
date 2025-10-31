@@ -1,36 +1,70 @@
-\\documentclass{portfolio}
-\\title{Professional Portfolio}
-\\author{John Doe}
+\documentclass[12pt, a4paper]{book}
 
-\\begin{document}
+% Packages
+\usepackage[utf8]{inputenc}    % UTF-8 encoding
+\usepackage[T1]{fontenc}       % Font encoding
+\usepackage{lipsum}            % Dummy text
+\usepackage{graphicx}          % Include images
+\usepackage{hyperref}          % Clickable links
 
-\\navbar{Home{index.html} | Projects{projects} | Blog{blog} | Contact{contact}}[bg-color:#2c3e50, shadow:true]
+% Document info
+\title{My Sample Book}
+\author{Ibrahim Refat}
+\date{\today}
 
-\\leftside{Table of Contents}[width:250px, height:100%, text-color:#333, background-color:#f8f9fa]
+\begin{document}
 
-\\rightside{Recent Posts}[width:300px, height:100%, text-color:#666, background-color:#ffffff]
+% Front matter
+\maketitle
+\tableofcontents
+\frontmatter
 
-\\section{About Me}
-This is a demonstration of the portfolio document class with advanced layout features.
+\chapter*{Preface}
+\lipsum[1]
 
-\\section{Projects}
-\\project{Data Analysis Dashboard}
-A comprehensive dashboard for data visualization and analytics built with modern web technologies.
+\mainmatter
 
-\\project{Machine Learning Pipeline}
-An end-to-end machine learning pipeline for text classification and sentiment analysis.
+\chapter{Introduction}
+\section{Motivation}
+\lipsum[2]
 
-\\section{Blog}
+\section{Objectives}
+\lipsum[3]
 
-\\blog{Introduction to Modular Architecture}
-An overview of building scalable, maintainable software systems using modular design principles.
+\chapter{Background}
+\section{History}
+\lipsum[4]
 
-\\blog{LaTeX to HTML Conversion Techniques}
-Deep dive into techniques for converting LaTeX documents to HTML with professional formatting.
+\section{Key Concepts}
+\lipsum[5]
 
-\\section{Contact}
-\\contact{john.doe@example.com}
+\chapter{Methodology}
+\section{Approach}
+\lipsum[6]
 
-\\footer{© 2024 Professional Portfolio. All rights reserved.}[width:100%, height:80px, bg-color:#2c3e50, text-color:#ffffff]
+\section{Tools}
+\lipsum[7]
 
-\\end{document}
+\chapter{Results}
+\section{Analysis}
+\lipsum[8]
+
+\section{Discussion}
+\lipsum[9]
+
+\chapter{Conclusion}
+\section{Summary}
+\lipsum[10]
+
+\section{Future Work}
+\lipsum[11]
+
+% Back matter
+\backmatter
+\chapter*{References}
+\begin{itemize}
+    \item Reference 1
+    \item Reference 2
+\end{itemize}
+
+\end{document}

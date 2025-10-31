@@ -470,6 +470,12 @@ class PortfolioRenderer extends DocumentRenderer {
             return this.generateContactInfo();
         }
         
+        // Process image inclusion
+        content = this.processLayoutImages(content);
+        
+        // Process lists in sidebars
+        content = this.processSidebarLists(content);
+        
         return content;
     }
 
@@ -538,6 +544,121 @@ class PortfolioRenderer extends DocumentRenderer {
     }
 
     /**
+     * Process layout images with shape and style options
+     */
+    processLayoutImages(content) {
+        // Process \image{src}[shape:round|square, size:small|medium|large, resize:true|false]
+        const imagePattern = /\\image\{([^}]+)\}(?:\[([^\]]+)\])?/g;
+        
+        return content.replace(imagePattern, (match, src, options) => {
+            const imageOptions = this.parseImageOptions(options);
+            return this.generateLayoutImage(src, imageOptions);
+        });
+    }
+
+    /**
+     * Parse image options for layout components
+     */
+    parseImageOptions(optionsString) {
+        if (!optionsString) return { shape: 'square', size: 'medium', resize: false };
+        
+        const options = { shape: 'square', size: 'medium', resize: false };
+        const pairs = optionsString.split(',').map(s => s.trim());
+        
+        pairs.forEach(pair => {
+            const [key, value] = pair.split(':').map(s => s.trim());
+            if (key && value) {
+                if (key === 'resize') {
+                    options[key] = value.toLowerCase() === 'true';
+                } else {
+                    options[key] = value;
+                }
+            }
+        });
+        
+        return options;
+    }
+
+    /**
+     * Generate layout image with styling
+     */
+    generateLayoutImage(src, options) {
+        const sizeClasses = {
+            small: 'img-small',
+            medium: 'img-medium', 
+            large: 'img-large'
+        };
+        
+        const shapeClasses = {
+            round: 'img-round',
+            square: 'img-square',
+            circle: 'img-circle'
+        };
+        
+        const sizeClass = sizeClasses[options.size] || 'img-medium';
+        const shapeClass = shapeClasses[options.shape] || 'img-square';
+        const resizeClass = options.resize ? 'img-resizable' : '';
+        
+        return `<img src="${src}" alt="Portfolio image" class="layout-image ${sizeClass} ${shapeClass} ${resizeClass}" />`;
+    }
+
+    /**
+     * Process sidebar lists with custom styling
+     */
+    processSidebarLists(content) {
+        // Process \sidebarlist{item1, item2, item3}[style:bullets|numbers]
+        const listPattern = /\\sidebarlist\{([^}]+)\}(?:\[([^\]]+)\])?/g;
+        
+        return content.replace(listPattern, (match, itemsString, options) => {
+            const items = itemsString.split(',').map(item => item.trim());
+            const listOptions = this.parseListOptions(options);
+            return this.generateSidebarList(items, listOptions);
+        });
+    }
+
+    /**
+     * Parse list options for sidebars
+     */
+    parseListOptions(optionsString) {
+        if (!optionsString) return { style: 'bullets' };
+        
+        const options = { style: 'bullets' };
+        const pairs = optionsString.split(',').map(s => s.trim());
+        
+        pairs.forEach(pair => {
+            const [key, value] = pair.split(':').map(s => s.trim());
+            if (key && value) {
+                options[key] = value;
+            }
+        });
+        
+        return options;
+    }
+
+    /**
+     * Generate sidebar list with styling
+     */
+    generateSidebarList(items, options) {
+        const listClass = options.style === 'numbers' ? 'sidebar-list-ordered' : 'sidebar-list-unordered';
+        const tag = options.style === 'numbers' ? 'ol' : 'ul';
+        
+        const listItems = items.map(item => {
+            // Check if item is a link
+            const linkMatch = item.match(/^(.+)\{(.+)\}$/);
+            if (linkMatch) {
+                return `<li><a href="#${linkMatch[2]}" class="sidebar-link">${linkMatch[1]}</a></li>`;
+            }
+            return `<li>${item}</li>`;
+        }).join('\n');
+        
+        return `<div class="sidebar-list-container">
+            <${tag} class="sidebar-list ${listClass}">
+                ${listItems}
+            </${tag}>
+        </div>`;
+    }
+
+    /**
      * Generate component styles from options
      */
     generateComponentStyles(options) {
@@ -545,6 +666,10 @@ class PortfolioRenderer extends DocumentRenderer {
         
         if (options['bg-color']) {
             styles.push(`background-color: ${options['bg-color']}`);
+        }
+        
+        if (options['background-color']) {
+            styles.push(`background-color: ${options['background-color']}`);
         }
         
         if (options['text-color']) {
@@ -559,7 +684,9 @@ class PortfolioRenderer extends DocumentRenderer {
             styles.push(`height: ${options.height}`);
         }
         
-        if (options.shadow !== false) {
+        if (options.shadow === true || options.shadow === 'true') {
+            styles.push('box-shadow: 0 4px 20px rgba(0,0,0,0.15)');
+        } else if (options.shadow !== false) {
             styles.push('box-shadow: 0 2px 10px rgba(0,0,0,0.1)');
         }
         

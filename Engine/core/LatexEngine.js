@@ -28,7 +28,9 @@ class LatexEngine {
             'ListParser',
             'TableParser',
             'FigureParser',
-            'StructureParser'
+            'StructureParser',
+            'TikZParser',
+            'NiceMatrixParser'
         ];
 
         parsers.forEach(parserName => {
@@ -43,7 +45,7 @@ class LatexEngine {
 
     loadCoreThemes() {
         // Load built-in themes
-        const themes = ['Default'];
+        const themes = ['Default', 'Portfolio', 'Book'];
         
         themes.forEach(themeName => {
             try {
@@ -78,12 +80,26 @@ class LatexEngine {
         };
 
         let html = latexContent;
+        
+        // Remove document class and packages
+        html = html.replace(/\\documentclass\{[^}]*\}/g, '');
+        html = html.replace(/\\usepackage\{[^}]*\}/g, '');
+        html = html.replace(/\\usepackage\[[^\]]*\]\{[^}]*\}/g, '');
+        
+        // Remove comments
+        html = html.replace(/%.*$/gm, '');
+        
+        // Extract and process metadata
+        const metadata = this.extractMetadata(html);
+        Object.assign(context.metadata, metadata);
 
         // Apply parsers in order
         const parserOrder = [
             'DocumentParser',
             'StructureParser', 
             'MathParser',
+            'NiceMatrixParser',
+            'TikZParser',
             'CodeParser',
             'TableParser',
             'FigureParser',
@@ -118,6 +134,8 @@ class LatexEngine {
     }
 
     detectTheme(latexContent) {
+        if (latexContent.includes('\\documentclass{book}')) return 'book';
+        if (latexContent.includes('\\documentclass{portfolio}')) return 'portfolio';
         if (latexContent.includes('\\usepackage[a4paper]')) return 'a4';
         if (latexContent.includes('\\usepackage[letterpaper]')) return 'letter';
         if (latexContent.includes('modern') || latexContent.includes('tufte')) return 'modern';

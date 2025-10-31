@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Block Testing</title>
-    <meta name="author" content="Test User">
+    <title>Advanced Web Development</title>
+    <meta name="author" content="John Doe">
     <meta name="description" content="">
     <meta name="keywords" content="">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Code Block Testing">
+    <meta property="og:title" content="Advanced Web Development">
     <meta property="og:description" content="">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Code Block Testing">
+    <meta property="twitter:title" content="Advanced Web Development">
     <meta property="twitter:description" content="">
     
     <!-- Custom syntax highlighting (no external dependencies) -->
@@ -873,229 +873,311 @@ img:hover {
 </style>
 </head>
 <body>
-    <h2 id="section-1-testing code improvements" class="section">Testing Code Improvements</h2>
+    <div class="book-container">
+<div class="book-header">
+            <div class="book-title">Advanced Web Development</div>
+            <div class="book-author">John Doe</div>
+        </div>
+<div class="book-layout">
+<aside class="book-sidebar">
+<div class="sidebar-content">
+<h3>Navigation</h3>
+<div class="sidebar-nav">
+<ul class="nav-list">
+<li><a href="#table-of-contents" class="nav-link">Table of Contents</a></li>
+<li><a href="#chapter-1" class="nav-link">Chapter 1: Introduction to Modern Web Development</a></li>
+<li><a href="#chapter-2" class="nav-link">Chapter 2: Core Concepts and Principles</a></li>
+<li><a href="#chapter-3" class="nav-link">Chapter 3: Development Best Practices</a></li>
+<li><a href="#chapter-4" class="nav-link">Chapter 4: Performance Optimization</a></li>
+<li><a href="#chapter-5" class="nav-link">Chapter 5: Security Considerations</a></li>
+<li><a href="#chapter-6" class="nav-link">Chapter 6: Additional Resources</a></li>
+</ul>
+</div>
+</div>
+</aside>
+<div class="book-main">
+<div class="page mainmatter" data-page="1">
+<div class="page-content">
+<div class="book-matter frontmatter">
+<div class="title-page">
+<h1 class="title-page-title">Advanced Web Development</h1>
+<div class="title-page-author">John Doe</div>
+<div class="title-page-date">October 2024</div>
+</div>
 
-<h3 id="section-2-single language code blocks" class="subsection">Single Language Code Blocks</h3>
+\begin{dedication}
+Dedicated to my family and all the aspiring developers who dream of creating something extraordinary.
+\end{dedication}
 
-<div class="code-box white-bg"><div id="code-python" class="code-pane active"><div class="code-header"><span class="code-title">Python</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-python">def fibonacci(n):
-    """Calculate Fibonacci sequence"""
-    if n &lt;= 1:
-        return n
-    return fibonacci(n-1) + fibonacci(n-2)
+\begin{thanks}
+Special thanks to the open-source community and everyone who contributed to making web development accessible and enjoyable.
+\end{thanks}
 
-print(fibonacci(10))
-</code></pre></div></div>
+<div class="table-of-contents">
+<h2 class="toc-title">Table of Contents</h2>
+<div class="toc-content">
+<div class="toc-item toc-part">
+                <a href="#part-1" class="toc-link">
+                    <span class="toc-number">Part 1</span>
+                    <span class="toc-title">Fundamentals</span>
+                </a>
+            </div>
+<div class="toc-item toc-part">
+                <a href="#part-2" class="toc-link">
+                    <span class="toc-number">Part 2</span>
+                    <span class="toc-title">Advanced Topics</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-1" class="toc-link">
+                    <span class="toc-number">Chapter 1</span>
+                    <span class="toc-title">Introduction to Modern Web Development</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-2" class="toc-link">
+                    <span class="toc-number">Chapter 2</span>
+                    <span class="toc-title">Core Concepts and Principles</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-3" class="toc-link">
+                    <span class="toc-number">Chapter 3</span>
+                    <span class="toc-title">Development Best Practices</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-4" class="toc-link">
+                    <span class="toc-number">Chapter 4</span>
+                    <span class="toc-title">Performance Optimization</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-5" class="toc-link">
+                    <span class="toc-number">Chapter 5</span>
+                    <span class="toc-title">Security Considerations</span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter">
+                <a href="#chapter-6" class="toc-link">
+                    <span class="toc-number">Chapter 6</span>
+                    <span class="toc-title">Additional Resources</span>
+                </a>
+            </div>
+</div>
+</div>
 
-<h3 id="section-2-multiple language code block with tabs" class="subsection">Multiple Language Code Block with Tabs</h3>
+</div>
+<div class="book-matter mainmatter">
+<div class="book-part" id="part-fundamentals">
+                <div class="part-title-page">
+                    <h1 class="part-title">Part 1</h1>
+                    <h2 class="part-subtitle">Fundamentals</h2>
+                </div>
+            </div>
 
-<div class="code-box gray-bg"><div class="code-box-title">Algorithm</div><div class="code-tabs"><button class="code-tab active" data-tab="code-python">Python</button><button class="code-tab " data-tab="code-javascript">Javascript</button><button class="code-tab " data-tab="code-html">Html</button></div><div id="code-python" class="code-pane active"><pre><code class="language-python">def quicksort(arr):
-    if len(arr) &lt;= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x &lt; pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x &gt; pivot]
-    return quicksort(left) + middle + quicksort(right)
-</code></pre></div><div id="code-javascript" class="code-pane "><pre><code class="language-javascript">function quicksort(arr) {
-    if (arr.length &lt;= 1) return arr;
-    const pivot = arr[Math.floor(arr.length / 2)];
-    const left = arr.filter(x =&gt; x &lt; pivot);
-    const middle = arr.filter(x =&gt; x === pivot);
-    const right = arr.filter(x =&gt; x &gt; pivot);
-    return [...quicksort(left), ...middle, ...quicksort(right)];
-}
-</code></pre></div><div id="code-html" class="code-pane "><pre><code class="language-html"><span class="syntax-entity">&lt;</span>!DOCTYPE html<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>html<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>head<span class="syntax-entity">&gt;</span>
-    <span class="syntax-entity">&lt;</span>title<span class="syntax-entity">&gt;</span>Quicksort Demo<span class="syntax-entity">&lt;</span>/title<span class="syntax-entity">&gt;</span>
-    <span class="syntax-entity">&lt;</span>style<span class="syntax-entity">&gt;</span>
-        .array { display: flex; gap: 5px; }
-        .element { padding: 10px; background: #007bff; color: white; }
-    <span class="syntax-entity">&lt;</span>/style<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>/head<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>body<span class="syntax-entity">&gt;</span>
-    <span class="syntax-entity">&lt;</span>div class="array" id="output"<span class="syntax-entity">&gt;</span><span class="syntax-entity">&lt;</span>/div<span class="syntax-entity">&gt;</span>
-    <span class="syntax-entity">&lt;</span>script src="quicksort.js"<span class="syntax-entity">&gt;</span><span class="syntax-entity">&lt;</span>/script<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>/body<span class="syntax-entity">&gt;</span>
-<span class="syntax-entity">&lt;</span>/html<span class="syntax-entity">&gt;</span>
-</code></pre></div></div>
+<div class="book-chapter" id="chapter-0" data-page="2" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Introduction to Modern Web Development</h1>
 
-<h3 id="section-2-black theme code block" class="subsection">Black Theme Code Block</h3>
+</div>
+            </div>
+<span class="command-label">chap:intro</span>
 
-<div class="code-box "><div id="code-java" class="code-pane active"><div class="code-header"><span class="code-title">Java</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-java"><span class="syntax-keyword">public</span> <span class="syntax-keyword">class</span> BinarySearch {
-    <span class="syntax-keyword">public</span> <span class="syntax-keyword">static</span> <span class="syntax-keyword">int</span> binarySearch(<span class="syntax-keyword">int</span>[] arr, <span class="syntax-keyword">int</span> target) {
-        <span class="syntax-keyword">int</span> left = <span <span class="syntax-keyword">class</span>="syntax-number">0</span>;
-        <span class="syntax-keyword">int</span> right = arr.length - <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
-        <span class="syntax-keyword">while</span> (left &lt;= right) {
-            <span class="syntax-keyword">int</span> mid = left + (right - left) / <span <span class="syntax-keyword">class</span>="syntax-number">2</span>;
-            <span class="syntax-keyword">if</span> (arr[mid] == target) {
-                <span class="syntax-keyword">return</span> mid;
-            }
-            <span class="syntax-keyword">if</span> (arr[mid] &lt; target) {
-                left = mid + <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
-            } <span class="syntax-keyword">else</span> {
-                right = mid - <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
-            }
-        }
-        <span class="syntax-keyword">return</span> -<span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
-    }
-}
-</code></pre></div></div>
+<p>Web development has evolved dramatically over the past decade. From simple static pages to complex, interactive applications, the landscape continues to transform with new technologies, frameworks, and paradigms emerging regularly.</p>
 
-<h3 id="section-2-c++ code with preprocessor" class="subsection">C++ Code with Preprocessor</h3>
+<h3 id="section-1-the evolution of web technologies" class="section">The Evolution of Web Technologies</h3>
 
-<div class="code-box white-bg"><div id="code-cpp" class="code-pane active"><div class="code-header"><span class="code-title">Cpp</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-cpp"><span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;iostream&gt;
-<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;vector&gt;
-<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;algorithm&gt;
+<p>The journey began with HTML 1.0, a simple markup language designed for basic document structure. Today, we have HTML5, CSS3, and ECMAScript 2023, providing developers with powerful tools for creating rich, interactive experiences.</p>
 
-<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#define</span> MAX_SIZE <span <span class="syntax-keyword">class</span>="syntax-number">100</span>
+<h4 id="section-2-from static to dynamic" class="subsection">From Static to Dynamic</h4>
 
-<span class="syntax-keyword">template</span>&lt;<span class="syntax-keyword">typename</span> T&gt;
-<span class="syntax-keyword">class</span> Stack {
-<span class="syntax-keyword">private</span>:
-    std::vector&lt;T&gt; data;
-<span class="syntax-keyword">public</span>:
-    <span class="syntax-keyword">void</span> push(<span class="syntax-keyword">const</span> T&amp; item) {
-        data.push_back(item);
-    }
-    T pop() {
-        <span class="syntax-keyword">if</span> (data.empty()) {
-            <span class="syntax-keyword">throw</span> std::runtime_error(<span <span class="syntax-keyword">class</span>="syntax-string">"Stack is empty"</span>);
-        }
-        T item = data.back();
-        data.pop_back();
-        <span class="syntax-keyword">return</span> item;
-    }
-    <span class="syntax-keyword">bool</span> empty() <span class="syntax-keyword">const</span> {
-        <span class="syntax-keyword">return</span> data.empty();
-    }
-};
+<p>Early websites were essentially digital brochures -- static documents with limited interactivity. The introduction of JavaScript transformed the web into a dynamic platform capable of handling complex applications and real-time interactions.</p>
 
-<span class="syntax-keyword">int</span> main() {
-    Stack&lt;<span class="syntax-keyword">int</span>&gt; stack;
-    stack.push(<span <span class="syntax-keyword">class</span>="syntax-number">42</span>);
-    stack.push(<span <span class="syntax-keyword">class</span>="syntax-number">24</span>);
-    <span class="syntax-keyword">while</span> (!stack.empty()) {
-        std::cout &lt;&lt; stack.pop() &lt;&lt; std::endl;
-    }
-    <span class="syntax-keyword">return</span> <span <span class="syntax-keyword">class</span>="syntax-number">0</span>;
-}
-</code></pre></div></div>
+<h4 id="section-2-the rise of frameworks" class="subsection">The Rise of Frameworks</h4>
 
-<h3 id="section-2-css code example" class="subsection">CSS Code Example</h3>
+<p>The complexity of modern web applications led to the development of frameworks like React, Vue, and Angular, which provide structured approaches to building scalable, maintainable applications.</p>
 
-<div class="code-box gray-bg"><div id="code-css" class="code-pane active"><div class="code-header"><span class="code-title">Css</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-css"><span class="syntax-comment">/* Modern CSS Grid Layout */</span>
-<span class="syntax-selector">.container</span>{
-    <span class="syntax-property">display</span>: <span class="syntax-value">grid</span>;
-    <span class="syntax-property">grid-template-columns</span>: <span class="syntax-value">repeat(auto-fit, minmax(300px, 1fr))</span>;
-    <span class="syntax-property">gap</span>: <span class="syntax-value">2rem</span>;
-    <span class="syntax-property">padding</span>: <span class="syntax-value">2rem</span>;
-}
+<div class="book-chapter" id="chapter-0" data-page="3" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Core Concepts and Principles</h1>
 
-<span class="syntax-selector">.card</span>{
-    <span class="syntax-property">background</span>: <span class="syntax-value">linear-gradient(135deg, #667eea 0
-    padding: 1.5rem</span>;
-    <span class="syntax-property">box-shadow</span>: <span class="syntax-value">0 10px 25px rgba(0, 0, 0, 0.1)</span>;
-    <span class="syntax-property">transition</span>: <span class="syntax-value">transform 0.3s ease</span>;
-}
+</div>
+            </div>
+<span class="command-label">chap:concepts</span>
 
-.<span class="syntax-property">card</span>:<span class="syntax-value"><span class="syntax-selector">hover</span>{
-    transform: translateY(-5px)</span>;
-    <span class="syntax-property">box-shadow</span>: <span class="syntax-value">0 20px 40px rgba(0, 0, 0, 0.2)</span>;
-}
+<h3 id="section-1-understanding the web stack" class="section">Understanding the Web Stack</h3>
 
-@media (<span class="syntax-property">max-width</span>: <span class="syntax-value">768px) {
-    <span class="syntax-selector">.container</span>{
-        grid-template-columns: 1fr</span>;
-        <span class="syntax-property">padding</span>: <span class="syntax-value">1rem</span>;
-    }
-}
-</code></pre></div></div>
+<p>Modern web development involves understanding multiple layers of technology, from the browser's rendering engine to server-side processing and database management.</p>
 
-<h3 id="section-2-sql query example" class="subsection">SQL Query Example</h3>
+<h4 id="section-2-frontend technologies" class="subsection">Frontend Technologies</h4>
 
-<div class="code-box "><div id="code-sql" class="code-pane active"><div class="code-header"><span class="code-title">Sql</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-sql"><span class="syntax-comment">-- Complex query with joins <span class="syntax-keyword">and</span> subqueries</span>
-<span class="syntax-keyword">SELECT</span> 
-    u.user_id,
-    u.username,
-    u.email,
-    <span class="syntax-keyword">COUNT</span>(o.order_id) <span class="syntax-keyword">as</span> total_orders,
-    <span class="syntax-keyword">SUM</span>(o.total_amount) <span class="syntax-keyword">as</span> total_spent,
-    <span class="syntax-keyword">AVG</span>(o.total_amount) <span class="syntax-keyword">as</span> avg_order_value
-<span class="syntax-keyword">FROM</span> users u
-<span class="syntax-keyword">LEFT</span> <span class="syntax-keyword">JOIN</span> orders o <span class="syntax-keyword">ON</span> u.user_id = o.user_id
-<span class="syntax-keyword">WHERE</span> u.created_at &gt;= <span class="syntax-string">'<span class="syntax-number">2023</span>-<span class="syntax-number">01</span>-<span class="syntax-number">01</span>'</span>
-    <span class="syntax-keyword">AND</span> o.status = <span class="syntax-string">'completed'</span>
-<span class="syntax-keyword">GROUP</span> <span class="syntax-keyword">BY</span> u.user_id, u.username, u.email
-<span class="syntax-keyword">HAVING</span> <span class="syntax-keyword">COUNT</span>(o.order_id) &gt;= <span class="syntax-number">5</span>
-<span class="syntax-keyword">ORDER</span> <span class="syntax-keyword">BY</span> total_spent DESC
-<span class="syntax-keyword">LIMIT</span> <span class="syntax-number">100</span>;
-</code></pre></div></div>
+Frontend development focuses on user interface and user experience. Key technologies include:
+<ul class="list-ul">
+<li>HTML5 for structure</li>
+<li>CSS3 for styling and layout</li>
+<li>JavaScript for interactivity</li>
+<li>Responsive design principles</li>
+</ul>
 
-<h3 id="section-2-bash script example" class="subsection">Bash Script Example</h3>
+<h4 id="section-2-backend technologies" class="subsection">Backend Technologies</h4>
 
-<div class="code-box white-bg"><div id="code-bash" class="code-pane active"><div class="code-header"><span class="code-title">Bash</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-bash"><span class=<span class="syntax-string">"syntax-comment"</span>>#!/bin/bash</span>
+<p>Backend development handles server-side logic, data processing, and application architecture. Common technologies include Node.js, Python, Ruby, and various database systems.</p>
 
-<span class=<span class="syntax-string">"syntax-comment"</span>># Backup script with error handling</span>
-<span class="syntax-keyword">set</span> -euo pipefail
-<span class="syntax-command">
-BACKUP_DIR</span>="/backup/$(date +
-<span class="syntax-command">SOURCE_DIR</span>=<span class="syntax-string">"/home/user/documents"</span>
-<span class="syntax-command">LOG_FILE</span>=<span class="syntax-string">"/var/log/backup.log"</span>
-<span class="syntax-command">
-log</span>() {
-    <span class="syntax-keyword">echo</span> "[$(date '+
-}
-<span class="syntax-command">
-create_backup</span>() {
-    <span class="syntax-keyword">if</span> [[ ! -d <span class="syntax-string">"<span class="syntax-variable">$SOURCE_DIR</span>"</span> ]]; <span class="syntax-keyword">then</span>
-<span class="syntax-command">        log</span> <span class="syntax-string">"ERROR: Source directory does not exist: <span class="syntax-variable">$SOURCE_DIR</span>"</span>
-        <span class="syntax-keyword">exit</span> 1
-    <span class="syntax-keyword">fi</span>
-    <span class="syntax-keyword">mkdir</span> -p <span class="syntax-string">"<span class="syntax-variable">$BACKUP_DIR</span>"</span>
-<span class="syntax-command">    log</span> <span class="syntax-string">"Starting backup to <span class="syntax-variable">$BACKUP_DIR</span>"</span>
-<span class="syntax-command">    tar</span> -czf <span class="syntax-string">"<span class="syntax-variable">$BACKUP_DIR</span>/backup.tar.gz"</span> -C <span class="syntax-string">"<span class="syntax-variable">$SOURCE_DIR</span>"</span> .
-<span class="syntax-command">    log</span> <span class="syntax-string">"Backup completed successfully"</span>
-}
-<span class="syntax-command">
-cleanup_old_backups</span>() {
-    <span class="syntax-keyword">find</span> /backup -type d -name <span class="syntax-string">"20*"</span> -mtime +7 -<span class="syntax-keyword">exec</span> <span class="syntax-keyword">rm</span> -rf {} +
-<span class="syntax-command">    log</span> <span class="syntax-string">"Cleaned up old backups"</span>
-}
+<div class="theorem theorem">
+                    <div class="theorem-header">
+                        <span class="theorem-label">Theorem 1</span>
+                    </div>
+                    <div class="theorem-content">[Fundamental Principle]
+The separation of concerns is a fundamental principle in software engineering that promotes modular, maintainable code by separating distinct functionalities into independent modules.
+</div>
+                    <div class="theorem-proof-marker">□</div>
+                </div>
 
-<span class=<span class="syntax-string">"syntax-comment"</span>># Main execution</span>
-<span class="syntax-command">create_backup</span>
-<span class="syntax-command">cleanup_old_backups</span>
-</code></pre></div></div>
+<div class="proof">
+                    <div class="proof-header">Proof.</div>
+                    <div class="proof-content">
+By separating concerns, we can modify one aspect of the system without affecting others, making the codebase more maintainable and scalable. Each module can be developed, tested, and deployed independently.
+</div>
+                    <div class="proof-end">□</div>
+                </div>
 
-<h3 id="section-2-json configuration" class="subsection">JSON Configuration</h3>
+<div class="book-chapter" id="chapter-0" data-page="4" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Development Best Practices</h1>
 
-<div class="code-box gray-bg"><div id="code-json" class="code-pane active"><div class="code-header"><span class="code-title">Json</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-json">{
-    <span class="syntax-string">"name"</span>: <span class="syntax-string">"latex2html-engine"</span>,
-    <span class="syntax-string">"version"</span>: <span class="syntax-string">"<span class="syntax-number">1.0</span>.<span class="syntax-number">0</span>"</span>,
-    <span class="syntax-string">"description"</span>: <span class="syntax-string">"Premium LaTeX to HTML conversion engine"</span>,
-    <span class="syntax-string">"main"</span>: <span class="syntax-string">"engine.js"</span>,
-    <span class="syntax-string">"scripts"</span>: {
-        <span class="syntax-string">"start"</span>: <span class="syntax-string">"node engine.js"</span>,
-        <span class="syntax-string">"test"</span>: <span class="syntax-string">"jest"</span>,
-        <span class="syntax-string">"build"</span>: <span class="syntax-string">"webpack --mode=production"</span>,
-        <span class="syntax-string">"dev"</span>: <span class="syntax-string">"webpack serve --mode=development"</span>
-    },
-    <span class="syntax-string">"dependencies"</span>: {
-        <span class="syntax-string">"express"</span>: <span class="syntax-string">"^<span class="syntax-number">4.18</span>.<span class="syntax-number">2</span>"</span>,
-        <span class="syntax-string">"katex"</span>: <span class="syntax-string">"^<span class="syntax-number">0.16</span>.<span class="syntax-number">8</span>"</span>,
-        <span class="syntax-string">"prismjs"</span>: <span class="syntax-string">"^<span class="syntax-number">1.29</span>.<span class="syntax-number">0</span>"</span>
-    },
-    <span class="syntax-string">"devDependencies"</span>: {
-        <span class="syntax-string">"@types/node"</span>: <span class="syntax-string">"^<span class="syntax-number">20.0</span>.<span class="syntax-number">0</span>"</span>,
-        <span class="syntax-string">"typescript"</span>: <span class="syntax-string">"^<span class="syntax-number">5.0</span>.<span class="syntax-number">0</span>"</span>,
-        <span class="syntax-string">"webpack"</span>: <span class="syntax-string">"^<span class="syntax-number">5.88</span>.<span class="syntax-number">0</span>"</span>
-    },
-    <span class="syntax-string">"engines"</span>: {
-        <span class="syntax-string">"node"</span>: <span class="syntax-string">"&gt;=<span class="syntax-number">16.0</span>.<span class="syntax-number">0</span>"</span>
-    }
-}
-</code></pre></div></div>
+</div>
+            </div>
+<span class="command-label">chap:practices</span>
+
+<h3 id="section-1-writing clean code" class="section">Writing Clean Code</h3>
+
+<p>Clean code is essential for long-term maintainability and collaboration. It follows clear conventions, is well-documented, and avoids unnecessary complexity.</p>
+
+<h4 id="section-2-code organization" class="subsection">Code Organization</h4>
+
+<p>Organize code logically with clear directory structures, meaningful file names, and consistent naming conventions. This makes the codebase easier to navigate and understand.</p>
+
+<h4 id="section-2-documentation practices" class="subsection">Documentation Practices</h4>
+
+<p>Good documentation serves as a roadmap for developers, explaining the architecture, design decisions, and usage patterns. It should be clear, concise, and kept up-to-date.</p>
+
+<div class="book-part" id="part-advanced topics">
+                <div class="part-title-page">
+                    <h1 class="part-title">Part 2</h1>
+                    <h2 class="part-subtitle">Advanced Topics</h2>
+                </div>
+            </div>
+
+<div class="book-chapter" id="chapter-0" data-page="5" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Performance Optimization</h1>
+
+</div>
+            </div>
+<span class="command-label">chap:performance</span>
+
+<p>Performance optimization is crucial for user experience and search engine rankings. It involves various techniques to make web applications faster and more efficient.</p>
+
+<h3 id="section-1-frontend optimization" class="section">Frontend Optimization</h3>
+
+<p>Frontend optimization focuses on reducing load times and improving rendering performance.</p>
+
+<h4 id="section-2-image optimization" class="subsection">Image Optimization</h4>
+
+Images often account for the majority of a web page's size. Techniques include:
+<ul class="list-ul">
+<li>Compressing images without significant quality loss</li>
+<li>Using appropriate image formats (WebP, AVIF)</li>
+<li>Implementing lazy loading for off-screen images</li>
+<li>Using responsive images with srcset</li>
+</ul>
+
+<h4 id="section-2-javascript performance" class="subsection">JavaScript Performance</h4>
+
+<p>Optimizing JavaScript involves minimizing parse time, reducing memory usage, and improving execution speed.</p>
+
+<div class="book-chapter" id="chapter-0" data-page="6" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Security Considerations</h1>
+
+</div>
+            </div>
+<span class="command-label">chap:security</span>
+
+<p>Web security is a critical aspect of development that must be addressed throughout the entire development lifecycle.</p>
+
+<h3 id="section-1-common vulnerabilities" class="section">Common Vulnerabilities</h3>
+
+<p>Understanding common vulnerabilities helps developers write more secure code.</p>
+
+<h4 id="section-2-cross-site scripting (xss)" class="subsection">Cross-Site Scripting (XSS)</h4>
+
+<p>XSS attacks occur when malicious scripts are injected into web applications, potentially compromising user data and session information.</p>
+
+<h4 id="section-2-sql injection" class="subsection">SQL Injection</h4>
+
+<p>SQL injection attacks target database-driven applications by manipulating SQL queries to access or modify unauthorized data.</p>
+
+<div class="theorem theorem">
+                    <div class="theorem-header">
+                        <span class="theorem-label">Theorem 2</span>
+                    </div>
+                    <div class="theorem-content">[Security Principle]
+The principle of least privilege states that users and applications should only have the minimum level of access necessary to perform their functions.
+</div>
+                    <div class="theorem-proof-marker">□</div>
+                </div>
+
+\appendix
+
+<div class="book-chapter" id="chapter-0" data-page="7" data-chapter="0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Additional Resources</h1>
+
+</div>
+            </div>
+<span class="command-label">chap:resources</span>
+
+<h3 id="section-1-recommended reading" class="section">Recommended Reading</h3>
+
+<ul class="list-ul">
+<li><span class="command-emph">Clean Code</span> by Robert C. Martin</li>
+<li><span class="command-emph">Design Patterns</span> by the Gang of Four</li>
+<li><span class="command-emph">The Pragmatic Programmer</span> by Andrew Hunt and David Thomas</li>
+</ul>
+
+<h3 id="section-1-online communities" class="section">Online Communities</h3>
+
+<ul class="list-ul">
+<li>Stack Overflow</li>
+<li>GitHub</li>
+<li>Developer forums and communities</li>
+<li>Open source projects</li>
+</ul>
+
+</div></div>
+<div class="page-footer">
+<span class="page-number">1</span>
+</div>
+</div>
+
+</div>
+</div>
+<div class="book-footer">
+            <div class="footer-content">
+                <p>© 2025 John Doe. All rights reserved.</p>
+                
+            </div>
+        </div>
+</div>
+
     <script>
 // ===== DEFAULT THEME JAVASCRIPT =====
 document.addEventListener('DOMContentLoaded', function() {

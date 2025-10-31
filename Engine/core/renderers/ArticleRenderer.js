@@ -99,13 +99,15 @@ class ArticleRenderer extends DocumentRenderer {
         // Process sections
         documentBody = this.processSections(documentBody);
         
+        // Process mathematical content - this handles equations, align, etc.
+        documentBody = this.processMathematics(documentBody);
+        
         // Process standard environments
         documentBody = this.processEnvironment(documentBody, 'itemize');
         documentBody = this.processEnvironment(documentBody, 'enumerate');
         documentBody = this.processEnvironment(documentBody, 'description');
         documentBody = this.processEnvironment(documentBody, 'figure');
         documentBody = this.processEnvironment(documentBody, 'table');
-        documentBody = this.processEnvironment(documentBody, 'equation');
         documentBody = this.processEnvironment(documentBody, 'code');
         
         // Process inline commands
