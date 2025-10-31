@@ -54,7 +54,7 @@ class CodeParser {
     }
 
     parseCustomCodeBlock(content, context) {
-        const lines = content.trim().split('\n');
+        const lines = content.split('\n');
         
         const codeBlocks = {};
         let currentLang = 'default';
@@ -63,35 +63,53 @@ class CodeParser {
         let copyEnabled = true;
         let title = '';
         let showLineNumbers = false;
+        let foundFirstCode = false;
+        let languageOverride = null; // For single language blocks
         
         for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
+            const line = lines[i];
+            const trimmedLine = line.trim();
             
-            // Parse styling options
-            if (line.includes('bg-white')) bgStyle = 'white';
-            if (line.includes('bg-black')) bgStyle = 'black';
-            if (line.includes('copy-disable')) copyEnabled = false;
-            if (line.includes('numbers')) showLineNumbers = true;
-            if (line.includes('title=')) {
-                const titleMatch = line.match(/title=([^\s]+)/);
-                if (titleMatch) title = titleMatch[1].replace(/[{}"']/g, '');
+            // Parse styling options (only before code starts)
+            if (!foundFirstCode) {
+                if (trimmedLine.includes('bg-white')) bgStyle = 'white';
+                else if (trimmedLine.includes('bg-gray')) bgStyle = 'gray';
+                else if (trimmedLine.includes('bg-black')) bgStyle = 'black';
+                if (trimmedLine.includes('copy-disable')) copyEnabled = false;
+                if (trimmedLine.includes('numbers')) showLineNumbers = true;
+                if (trimmedLine.includes('title=')) {
+                    const titleMatch = trimmedLine.match(/title=([^\s]+)/);
+                    if (titleMatch) title = titleMatch[1].replace(/[{}"']/g, '');
+                }
             }
             
             // Check for language block
-            const langMatch = line.match(/^\{(\w+)(?::(\w+))?\}$/);
+            const langMatch = trimmedLine.match(/^\{(\w+)(?::(\w+))?\}$/);
             if (langMatch) {
+                foundFirstCode = true;
+                // Save previous code block if exists
                 if (currentCode.length > 0) {
                     codeBlocks[currentLang] = {
                         code: currentCode.join('\n'),
                         language: currentLang,
-                        title: langMatch[2] || currentLang
+                        title: currentLang.charAt(0).toUpperCase() + currentLang.slice(1)
                     };
                 }
                 currentLang = langMatch[1].toLowerCase();
+                // For single language blocks, remember the language
+                if (!languageOverride && Object.keys(codeBlocks).length === 0) {
+                    languageOverride = currentLang;
+                }
                 currentCode = [];
-            } else if (line && !line.includes('{') && !line.includes('bg-') && 
-                      !line.includes('border-') && !line.includes('copy-') && 
-                      !line.includes('title=') && !line.includes('numbers')) {
+            } else if (trimmedLine && !trimmedLine.includes('bg-') && 
+                      !trimmedLine.includes('border-') && !trimmedLine.includes('copy-') && 
+                      !trimmedLine.includes('title=') && !trimmedLine.includes('numbers') &&
+                      !trimmedLine.match(/^\{.*\}$/)) { // Exclude language specifiers
+                foundFirstCode = true;
+                // Preserve original indentation and whitespace
+                currentCode.push(line);
+            } else if (foundFirstCode && line === '') {
+                // Preserve empty lines within code
                 currentCode.push(line);
             }
         }
@@ -101,8 +119,16 @@ class CodeParser {
             codeBlocks[currentLang] = {
                 code: currentCode.join('\n'),
                 language: currentLang,
-                title: currentLang
+                title: currentLang.charAt(0).toUpperCase() + currentLang.slice(1)
             };
+        }
+        
+        // For single language blocks, override the default language
+        if (languageOverride && codeBlocks.default) {
+            codeBlocks[languageOverride] = {...codeBlocks.default};
+            codeBlocks[languageOverride].language = languageOverride;
+            codeBlocks[languageOverride].title = languageOverride.charAt(0).toUpperCase() + languageOverride.slice(1);
+            delete codeBlocks.default;
         }
         
         return this.generateMultiTabCodeBlock(codeBlocks, {
@@ -122,10 +148,10 @@ class CodeParser {
     <div class="code-header">
         <span class="language-label">${language}</span>
         <button class="copy-btn" onclick="copyCode(this)">
-            <span class="copy-icon">📋</span> Copy
+            <span class="copy-icon">Copy</span>
         </button>
     </div>
-    <pre class="code-content"><code>${highlightedCode}</code></pre>
+    <div class="code-content"><pre><code class="language-${language}">${highlightedCode}</code></pre></div>
 </div>`;
     }
 
@@ -133,8 +159,8 @@ class CodeParser {
         const languages = Object.keys(codeBlocks);
         if (languages.length === 0) return '';
         
-        const firstLang = languages[0];
-        const themeClass = options.bgStyle === 'white' ? 'white-bg' : '';
+        const themeClass = options.bgStyle === 'white' ? 'white-bg' : 
+                          options.bgStyle === 'gray' ? 'gray-bg' : '';
         
         let html = `<div class="code-box ${themeClass}">`;
         
@@ -143,81 +169,60 @@ class CodeParser {
             html += `<div class="code-box-title">${options.title}</div>`;
         }
         
-        // Tab navigation
-        html += '<div class="code-tabs">';
-        languages.forEach((lang, index) => {
-            const isActive = index === 0 ? 'active' : '';
-            const displayName = codeBlocks[lang].title || lang;
-            html += `<button class="code-tab ${isActive}" data-tab="code-${lang}">${displayName}</button>`;
-        });
-        html += '</div>';
+        // Tab navigation - only show if multiple languages
+        if (languages.length > 1) {
+            html += '<div class="code-tabs">';
+            languages.forEach((lang, index) => {
+                const isActive = index === 0 ? 'active' : '';
+                const displayName = codeBlocks[lang].title || lang;
+                html += `<button class="code-tab ${isActive}" data-tab="code-${lang}">${displayName}</button>`;
+            });
+            html += '</div>';
+        }
         
-        // Code content
-        html += '<div class="code-content">';
+        // Code content - simplified structure
         languages.forEach((lang, index) => {
             const isActive = index === 0 ? 'active' : '';
             const highlighter = this.syntaxHighlighters[lang] || this.syntaxHighlighters.default;
             const highlightedCode = highlighter(codeBlocks[lang].code);
             
             html += `<div id="code-${lang}" class="code-pane ${isActive}">`;
-            html += '<div class="code-header">';
-            html += `<span class="code-title">${codeBlocks[lang].title}</span>`;
-            if (options.copyEnabled) {
-                html += `<button class="copy-btn" title="Copy code"><span class="copy-icon">📋</span> Copy</button>`;
+            // Show header for single language or when line numbers are enabled
+            if (languages.length === 1 || options.showLineNumbers) {
+                html += '<div class="code-header">';
+                html += `<span class="code-title">${codeBlocks[lang].title || lang}</span>`;
+                if (options.copyEnabled) {
+                    html += `<button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button>`;
+                }
+                html += '</div>';
             }
-            html += '</div>';
-            html += `<div class="code-text">${highlightedCode}</div>`;
+            html += `<pre><code class="language-${lang}">${highlightedCode}</code></pre>`;
             html += '</div>';
         });
-        html += '</div>';
         html += '</div>';
         
         return html;
     }
 
     createPythonHighlighter() {
-        const keywords = /\b(def|class|if|else|elif|for|while|import|from|as|return|try|except|with|lambda|yield|async|await|global|nonlocal|pass|break|continue|in|is|and|or|not|True|False|None|self|cls|finally|raise|assert|del)\b/g;
-        const strings = /(["'])((?:\\.|(?!\1)[^\\\r\n])*?)\1/g;
-        const comments = /(#.*$)/gm;
-        const numbers = /\b\d+\.?\d*\b/g;
-        const functions = /\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g;
-        const decorators = /@([a-zA-Z_][a-zA-Z0-9_]*)/g;
-        
         return (code) => {
+            // Escape HTML entities and preserve indentation
             return code
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
-                .replace(decorators, '<span class="syntax-decorator">@$1</span>')
-                .replace(comments, '<span class="syntax-comment">$1</span>')
-                .replace(strings, '<span class="syntax-string">$1$2$1</span>')
-                .replace(numbers, '<span class="syntax-number">$&</span>')
-                .replace(keywords, '<span class="syntax-keyword">$1</span>')
-                .replace(functions, '<span class="syntax-function">$1</span>');
+                .replace(/\n/g, '\n');
         };
     }
 
     createJavaScriptHighlighter() {
-        const keywords = /\b(const|let|var|function|if|else|for|while|do|switch|case|default|break|continue|return|try|catch|finally|throw|new|this|typeof|instanceof|in|of|class|extends|import|export|from|as|async|await|yield|debugger|with|delete|void|super|static|get|set)\b/g;
-        const strings = /(["'`])((?:\\.|(?!\1)[^\\\r\n])*?)\1/g;
-        const templateStrings = /`((?:\\.|[^`\\\r\n])*)`/g;
-        const comments = /\/\/.*$|\/\*[\s\S]*?\*\//gm;
-        const numbers = /\b\d+\.?\d*\b/g;
-        const functions = /\b([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?=\()/g;
-        const arrowFunctions = /([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>/g;
-        
         return (code) => {
+            // Escape HTML entities and preserve indentation
             return code
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
-                .replace(comments, '<span class="syntax-comment">$&</span>')
-                .replace(strings, '<span class="syntax-string">$1$2$1</span>')
-                .replace(templateStrings, '<span class="syntax-template">`$1`</span>')
-                .replace(numbers, '<span class="syntax-number">$&</span>')
-                .replace(keywords, '<span class="syntax-keyword">$1</span>')
-                .replace(arrowFunctions, '<span class="syntax-function">$1</span> =>')
-                .replace(functions, '<span class="syntax-function">$1</span>');
+                .replace(/\n/g, '\n');
         };
     }
 
@@ -233,6 +238,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(annotations, '<span class="syntax-annotation">$&</span>')
                 .replace(comments, '<span class="syntax-comment">$&</span>')
                 .replace(strings, '<span class="syntax-string">"$1"</span>')
@@ -253,6 +259,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(preprocessor, '<span class="syntax-preprocessor">$&</span>')
                 .replace(comments, '<span class="syntax-comment">$&</span>')
                 .replace(strings, '<span class="syntax-string">"$1"</span>')
@@ -265,6 +272,7 @@ class CodeParser {
         const tags = /(&lt;\/?)([a-zA-Z][a-zA-Z0-9]*)(.*?)(&gt;)/g;
         const attributes = /([a-zA-Z-]+)(=)(["'])(.*?)\3/g;
         const comments = /(&lt;!--[\s\S]*?--&gt;)/g;
+        const entities = /&[a-zA-Z]+;/g;
         
         return (code) => {
             return code
@@ -272,6 +280,7 @@ class CodeParser {
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(comments, '<span class="syntax-comment">$1</span>')
+                .replace(entities, '<span class="syntax-entity">$&</span>')
                 .replace(tags, (match, lt, tag, attrs, gt) => {
                     const attrHighlighted = attrs.replace(attributes, '<span class="syntax-attribute">$1</span>=<span class="syntax-string">"$4"</span>');
                     return `${lt}<span class="syntax-tag">${tag}</span>${attrHighlighted}${gt}`;
@@ -289,6 +298,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(comments, '<span class="syntax-comment">$&</span>')
                 .replace(selectors, '<span class="syntax-selector">$1</span>$2')
                 .replace(properties, '<span class="syntax-property">$1</span>$2<span class="syntax-value">$3</span>$4');
@@ -305,6 +315,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(strings, '<span class="syntax-string">"$1"</span>')
                 .replace(numbers, '<span class="syntax-number">$&</span>')
                 .replace(booleans, '<span class="syntax-keyword">$1</span>');
@@ -322,6 +333,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(comments, '<span class="syntax-comment">$&</span>')
                 .replace(strings, '<span class="syntax-string">\'$1\'</span>')
                 .replace(numbers, '<span class="syntax-number">$&</span>')
@@ -342,6 +354,7 @@ class CodeParser {
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
+                .replace(/\n/g, '\n')
                 .replace(comments, '<span class="syntax-comment">$&</span>')
                 .replace(strings, '<span class="syntax-string">"$1"</span>')
                 .replace(strings2, '<span class="syntax-string">\'$1\'</span>')

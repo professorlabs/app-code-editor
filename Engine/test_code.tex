@@ -1,0 +1,73 @@
+\documentclass{article}
+\title{Code Block Testing}
+\author{Professional Team}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Single Language Code Blocks}
+
+\begin{code}
+bg-white {python}
+def fibonacci(n):
+    """Calculate Fibonacci sequence"""
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(10))
+\end{code}
+
+\section{Multiple Language Code Block with Tabs}
+
+\begin{code}
+bg-gray title=Algorithm Examples
+{python:Python}
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+
+{javascript:JavaScript}
+function quicksort(arr) {
+    if (arr.length <= 1) return arr;
+    const pivot = arr[Math.floor(arr.length / 2)];
+    const left = arr.filter(x => x < pivot);
+    const middle = arr.filter(x => x === pivot);
+    const right = arr.filter(x => x > pivot);
+    return [...quicksort(left), ...middle, ...quicksort(right)];
+}
+
+{html:HTML}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quicksort Example</title>
+</head>
+<body>
+    <h1>Sorting Algorithm</h1>
+    <div id="result"></div>
+</body>
+</html>
+\end{code}
+
+\section{Additional Test Cases}
+
+\begin{code}
+bg-black copy-enable title=Basic JavaScript Example
+{javascript}
+function factorial(n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+console.log(factorial(5));
+\end{code}
+
+\end{document}

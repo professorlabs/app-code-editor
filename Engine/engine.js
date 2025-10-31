@@ -1,212 +1,434 @@
 #!/usr/bin/env node
 
 /**
- * Professional LaTeX to HTML Engine
- * Complete LaTeX feature support with modular architecture
- * Usage: node engine.js input.tex [output.html] [options]
+ * LaTeX to HTML Engine CLI
+ * Professional command-line interface for document conversion
  */
 
+const fs = require('fs');
 const path = require('path');
-const LatexEngine = require('./core/LatexEngine');
+const LatexEngine = require('./LatexEngine');
 
-function parseArguments() {
-    const args = process.argv.slice(2);
-    const options = {
-        theme: 'auto',
-        format: 'html',
-        minify: false,
-        watch: false,
-        verbose: false
-    };
-    
-    const files = [];
-    
-    for (let i = 0; i < args.length; i++) {
-        const arg = args[i];
-        
-        if (arg.startsWith('--')) {
-            const option = arg.substring(2);
-            const value = args[i + 1];
+class CLI {
+    constructor() {
+        this.engine = new LatexEngine();
+        this.version = '1.0.0';
+    }
+
+    /**
+     * Main entry point
+     */
+    async run(args) {
+        try {
+            // Parse command line arguments
+            const { command, options, filePaths } = this.parseArguments(args);
+            
+            // Handle different commands
+            switch (command) {
+                case 'convert':
+                case 'c':
+                    await this.handleConvert(filePaths, options);
+                    break;
+                    
+                case 'validate':
+                case 'v':
+                    await this.handleValidate(filePaths, options);
+                    break;
+                    
+                case 'preview':
+                case 'p':
+                    await this.handlePreview(filePaths, options);
+                    break;
+                    
+                case 'info':
+                case 'i':
+                    this.handleInfo(options);
+                    break;
+                    
+                case 'batch':
+                case 'b':
+                    await this.handleBatch(filePaths, options);
+                    break;
+                    
+                case 'help':
+                case 'h':
+                case '--help':
+                case '-h':
+                    this.showHelp();
+                    break;
+                    
+                case 'version':
+                case '--version':
+                    this.showVersion();
+                    break;
+                    
+                default:
+                    if (filePaths.length > 0) {
+                        // Default to convert if files are provided but no explicit command
+                        await this.handleConvert(filePaths, options);
+                    } else {
+                        console.error('Unknown command:', command);
+                        console.error('Use --help for usage information');
+                        process.exit(1);
+                    }
+            }
+            
+        } catch (error) {
+            console.error('Error:', error.message);
+            process.exit(1);
+        }
+    }
+
+    /**
+     * Parse command line arguments
+     */
+    parseArguments(args) {
+        const parsed = {
+            command: 'convert',
+            options: {},
+            filePaths: []
+        };
+
+        let i = 2; // Skip node and script path
+
+        // Check for command
+        if (args[i] && !args[i].startsWith('-')) {
+            parsed.command = args[i];
+            i++;
+        }
+
+        // Parse options
+        while (i < args.length && args[i].startsWith('-')) {
+            const option = args[i];
             
             switch (option) {
-                case 'theme':
-                    options.theme = value;
-                    i++; // Skip next argument
+                case '-o':
+                case '--output':
+                    parsed.options.outputPath = args[++i];
                     break;
-                case 'format':
-                    options.format = value;
-                    i++;
+                    
+                case '-d':
+                case '--output-dir':
+                    parsed.options.outputDirectory = args[++i];
                     break;
-                case 'minify':
-                    options.minify = true;
+                    
+                case '-t':
+                case '--theme':
+                    parsed.options.theme = args[++i];
                     break;
-                case 'watch':
-                    options.watch = true;
+                    
+                case '--minify':
+                    parsed.options.minify = true;
                     break;
-                case 'verbose':
-                    options.verbose = true;
+                    
+                case '--no-validate':
+                    parsed.options.validate = false;
                     break;
-                case 'help':
-                    showHelp();
-                    process.exit(0);
+                    
+                case '--preserve-comments':
+                    parsed.options.preserveComments = true;
                     break;
-                case 'version':
-                    console.log('LaTeX2HTML Professional v2.0.0');
-                    console.log('Complete LaTeX to HTML converter with premium features');
-                    process.exit(0);
+                    
+                case '-v':
+                case '--verbose':
+                    parsed.options.verbose = true;
                     break;
+                    
+                case '-q':
+                case '--quiet':
+                    parsed.options.quiet = true;
+                    break;
+                    
+                default:
+                    console.error('Unknown option:', option);
+                    process.exit(1);
             }
-        } else if (!arg.startsWith('-')) {
-            files.push(arg);
+            
+            i++;
+        }
+
+        // Remaining arguments are file paths
+        while (i < args.length) {
+            parsed.filePaths.push(args[i]);
+            i++;
+        }
+
+        return parsed;
+    }
+
+    /**
+     * Handle convert command
+     */
+    async handleConvert(filePaths, options) {
+        if (filePaths.length === 0) {
+            throw new Error('No input files specified');
+        }
+
+        // Configure engine based on options
+        this.configureEngine(options);
+
+        if (filePaths.length === 1) {
+            // Single file conversion
+            const filePath = filePaths[0];
+            const outputPath = options.outputPath;
+            
+            if (options.verbose) {
+                console.log(`Converting ${filePath}...`);
+            }
+            
+            const result = await this.engine.convertFile(filePath, outputPath);
+            
+            if (!options.quiet) {
+                console.log(`✓ Successfully converted ${path.basename(result.inputPath)}`);
+                console.log(`  Output: ${result.outputPath}`);
+                console.log(`  Document Class: ${result.documentClass}`);
+            }
+            
+        } else {
+            // Multiple files
+            if (options.verbose) {
+                console.log(`Converting ${filePaths.length} files...`);
+            }
+            
+            const outputDirectory = options.outputDirectory;
+            const results = await this.engine.convertBatch(filePaths, outputDirectory);
+            
+            const successful = results.filter(r => r.status === 'success');
+            const failed = results.filter(r => r.status === 'error');
+            
+            if (!options.quiet) {
+                console.log(`Conversion complete:`);
+                console.log(`  ✓ Successful: ${successful.length}`);
+                console.log(`  ✗ Failed: ${failed.length}`);
+                
+                if (failed.length > 0) {
+                    console.log('\nFailed conversions:');
+                    failed.forEach(result => {
+                        console.log(`  ✗ ${path.basename(result.inputPath)}: ${result.error}`);
+                    });
+                }
+                
+                if (successful.length > 0) {
+                    console.log('\nSuccessfully converted:');
+                    successful.forEach(result => {
+                        console.log(`  ✓ ${path.basename(result.outputPath)}`);
+                    });
+                }
+            }
+            
+            if (failed.length > 0) {
+                process.exit(1);
+            }
         }
     }
-    
-    return { files, options };
-}
 
-function showHelp() {
-    console.log(`
-LaTeX2HTML Professional - Complete LaTeX to HTML Converter
+    /**
+     * Handle validate command
+     */
+    async handleValidate(filePaths, options) {
+        if (filePaths.length === 0) {
+            throw new Error('No input files specified');
+        }
+
+        let hasErrors = false;
+
+        for (const filePath of filePaths) {
+            if (!fs.existsSync(filePath)) {
+                console.error(`File not found: ${filePath}`);
+                hasErrors = true;
+                continue;
+            }
+
+            const content = fs.readFileSync(filePath, 'utf8');
+            const validation = this.engine.validateDocument(content);
+            
+            console.log(`\nValidating ${path.basename(filePath)}:`);
+            
+            if (validation.isValid) {
+                console.log('  ✓ Document structure is valid');
+            } else {
+                console.log('  ✗ Document has errors:');
+                validation.errors.forEach(error => {
+                    console.log(`    - ${error}`);
+                });
+                hasErrors = true;
+            }
+        }
+
+        if (hasErrors) {
+            process.exit(1);
+        }
+    }
+
+    /**
+     * Handle preview command
+     */
+    async handlePreview(filePaths, options) {
+        if (filePaths.length === 0) {
+            throw new Error('No input files specified');
+        }
+
+        const filePath = filePaths[0];
+        
+        if (!fs.existsSync(filePath)) {
+            throw new Error(`File not found: ${filePath}`);
+        }
+
+        const content = fs.readFileSync(filePath, 'utf8');
+        const preview = this.engine.previewStructure(content);
+        
+        console.log(`\nDocument Preview: ${path.basename(filePath)}`);
+        console.log('='.repeat(50));
+        console.log(`Document Class: ${preview.documentClass}`);
+        console.log(`Options: ${JSON.stringify(preview.options, null, 2)}`);
+        
+        console.log('\nStructure:');
+        preview.structure.sections.forEach(section => {
+            const indent = '  '.repeat(section.level);
+            console.log(`${indent}${section.type}: ${section.title}`);
+        });
+        
+        console.log(`\nContent:`);
+        console.log(`  Figures: ${preview.structure.figures}`);
+        console.log(`  Tables: ${preview.structure.tables}`);
+        console.log(`  Abstract: ${preview.structure.hasAbstract ? 'Yes' : 'No'}`);
+        console.log(`  Bibliography: ${preview.structure.hasBibliography ? 'Yes' : 'No'}`);
+        console.log(`  Table of Contents: ${preview.structure.hasTableOfContents ? 'Yes' : 'No'}`);
+    }
+
+    /**
+     * Handle info command
+     */
+    handleInfo(options) {
+        const stats = this.engine.getStatistics();
+        
+        console.log('\nLaTeX to HTML Engine Information');
+        console.log('='.repeat(40));
+        console.log(`Version: ${this.version}`);
+        console.log(`\nSupported Document Classes: ${stats.rendererStats.totalRenderers}`);
+        
+        console.log('\nAvailable Renderers:');
+        for (const [docClass, info] of Object.entries(stats.rendererStats.rendererDetails)) {
+            console.log(`  ${docClass}: ${info.displayName} (${info.supportedCommands.length} commands)`);
+        }
+        
+        console.log(`\nCurrent Theme: ${stats.themeInfo.displayName}`);
+        console.log(`\nCurrent Options:`);
+        Object.entries(stats.options).forEach(([key, value]) => {
+            console.log(`  ${key}: ${value}`);
+        });
+    }
+
+    /**
+     * Handle batch command
+     */
+    async handleBatch(filePaths, options) {
+        // Alias for convert with multiple files
+        await this.handleConvert(filePaths, { ...options, batch: true });
+    }
+
+    /**
+     * Configure engine based on CLI options
+     */
+    configureEngine(options) {
+        if (options.minify) {
+            this.engine.setMinification(true);
+        }
+        
+        if (options.validate !== false) {
+            this.engine.setValidation(true);
+        }
+        
+        if (options.outputDirectory) {
+            this.engine.setOutputDirectory(options.outputDirectory);
+        }
+        
+        // Note: Theme customization would require implementing theme loading
+        if (options.theme) {
+            console.warn(`Warning: Theme '${options.theme}' not implemented. Using default theme.`);
+        }
+    }
+
+    /**
+     * Show help information
+     */
+    showHelp() {
+        console.log(`
+LaTeX to HTML Engine - Professional Document Converter
 
 USAGE:
-    node engine.js <input.tex> [output.html] [options]
+    node engine.js [command] [options] <files...>
 
-EXAMPLES:
-    node engine.js document.tex                    # Basic conversion
-    node engine.js resume.tex resume.html          # Specify output
-    node engine.js book.tex --theme academic       # Use academic theme
-    node engine.js slides.tex --format revealjs    # Export as reveal.js
-    node engine.js report.tex --watch              # Watch for changes
-    node engine.js thesis.tex --theme book --minify # Optimized output
-
-SUPPORTED THEMES:
-    auto     - Auto-detect from LaTeX document
-    default  - Clean, modern theme
-    a4       - A4 paper format
-    resume   - Professional resume theme
-    book     - Book/chapter layout
-    modern   - Modern minimalist design
-    academic - Academic paper style
-
-SUPPORTED FORMATS:
-    html     - Standard HTML (default)
-    pdf      - PDF via headless Chrome
-    revealjs - Reveal.js presentation
-    markdown - Markdown format
-
-DOCUMENT CLASSES:
-    article  - Articles and papers
-    report   - Technical reports
-    book     - Books and theses
-    letter   - Letters and correspondence
-    resume   - Resumes and CVs
-    beamer   - Presentations
-
-ADVANCED FEATURES:
-    Complete LaTeX command support
-    Mathematical equations (MathJax/KaTeX)
-    Multi-language syntax highlighting
-    Tables, figures, and floats
-    Bibliographies and citations
-    Cross-references and links
-    Professional themes
-    Responsive design
-    Code blocks with copy functionality
-    Table of contents generation
-    Index and glossary support
+COMMANDS:
+    convert, c      Convert LaTeX files to HTML (default)
+    validate, v    Validate LaTeX document structure
+    preview, p     Preview document structure without conversion
+    info, i        Show engine and renderer information
+    batch, b       Convert multiple files
+    help, h        Show this help message
+    version        Show version information
 
 OPTIONS:
-    --theme <name>      Set theme (auto, default, a4, resume, book, modern, academic)
-    --format <type>     Output format (html, pdf, revealjs, markdown)
-    --minify           Minify output CSS/JS
-    --watch            Watch file for changes
-    --verbose          Show detailed processing information
-    --help             Show this help message
-    --version          Show version information
+    -o, --output <path>          Output file path (for single file)
+    -d, --output-dir <path>      Output directory (for multiple files)
+    -t, --theme <name>           Theme to use (not yet implemented)
+    --minify                     Minify HTML output
+    --no-validate                Skip document validation
+    --preserve-comments          Preserve LaTeX comments
+    -v, --verbose                Verbose output
+    -q, --quiet                  Quiet mode
+    --format <format>            Output format (html only for now)
 
-For more information, visit: https://github.com/professorlab/latex2html-professional
-`);
-}
+EXAMPLES:
+    # Convert single file
+    node engine.js document.tex
+    
+    # Convert with custom output
+    node engine.js -o output.html document.tex
+    
+    # Convert multiple files to directory
+    node engine.js -d ./output/ *.tex
+    
+    # Validate document structure
+    node engine.js validate document.tex
+    
+    # Preview document without conversion
+    node engine.js preview document.tex
+    
+    # Show engine information
+    node engine.js info
+    
+    # Batch convert with verbose output
+    node engine.js convert -v --minify *.tex
 
-function main() {
-    const { files, options } = parseArguments();
-    
-    if (files.length === 0) {
-        console.error('Error: No input file specified');
-        console.log('Use --help for usage information');
-        process.exit(1);
+SUPPORTED DOCUMENT CLASSES:
+    article     Standard article format
+    report      Technical reports with chapters
+    book        Book format with parts and chapters
+    IEEEtran    IEEE transaction papers
+    memoir      Extended book format
+    portfolio   Custom portfolio website format
+
+For more information, see the documentation.
+        `);
     }
-    
-    const inputFile = files[0];
-    const outputFile = files[1];
-    
-    if (options.verbose) {
-        console.log(`LaTeX2HTML Professional v2.0.0`);
-        console.log(`Input: ${inputFile}`);
-        if (outputFile) console.log(`Output: ${outputFile}`);
-        console.log(`Theme: ${options.theme}`);
-        console.log(`Format: ${options.format}`);
-        console.log('');
-    }
-    
-    // Initialize engine
-    const engine = new LatexEngine();
-    
-    try {
-        // Convert the file
-        const result = engine.convert(inputFile, outputFile, options);
-        
-        if (options.verbose) {
-            console.log('Conversion completed successfully!');
-            console.log(`Tip: Open ${result} in your browser`);
-        }
-        
-        // Watch mode
-        if (options.watch) {
-            console.log(`Watching ${inputFile} for changes...`);
-            console.log('Press Ctrl+C to stop watching');
-            
-            const fs = require('fs');
-            let lastModified = fs.statSync(inputFile).mtime;
-            
-            setInterval(() => {
-                try {
-                    const currentModified = fs.statSync(inputFile).mtime;
-                    if (currentModified > lastModified) {
-                        lastModified = currentModified;
-                        console.log(`File changed, recompiling...`);
-                        engine.convert(inputFile, outputFile, options);
-                        console.log(`Recompilation complete!`);
-                    }
-                } catch (error) {
-                    console.error(`Error watching file: ${error.message}`);
-                }
-            }, 1000);
-        }
-        
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        if (options.verbose) {
-            console.error(error.stack);
-        }
-        process.exit(1);
+
+    /**
+     * Show version information
+     */
+    showVersion() {
+        console.log(`LaTeX to HTML Engine v${this.version}`);
+        console.log('Professional modular document converter');
     }
 }
 
-// Handle uncaught errors
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error.message);
-    process.exit(1);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection:', reason);
-    process.exit(1);
-});
-
-// Run main function
+// Entry point
 if (require.main === module) {
-    main();
+    const cli = new CLI();
+    cli.run(process.argv).catch(error => {
+        console.error('Fatal error:', error.message);
+        process.exit(1);
+    });
 }
 
-module.exports = require('./core/LatexEngine');
+module.exports = CLI;

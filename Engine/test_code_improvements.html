@@ -1,15 +1,26 @@
-/**
- * Default Theme - Clean, Modern, Professional
- * Suitable for articles, reports, and general documents
- */
-
-class DefaultTheme {
-    constructor() {
-        this.name = 'default';
-        this.displayName = 'Default Theme';
-        this.description = 'Clean, modern theme suitable for most documents';
-        
-        this.css = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Block Testing</title>
+    <meta name="author" content="Test User">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Code Block Testing">
+    <meta property="og:description" content="">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Code Block Testing">
+    <meta property="twitter:description" content="">
+    
+    <!-- Custom syntax highlighting (no external dependencies) -->
+    
+    <style>
 /* ===== DEFAULT THEME STYLES ===== */
 * {
     margin: 0;
@@ -859,9 +870,233 @@ img:hover {
 .slide-in {
     animation: slideIn 0.6s ease-out;
 }
-`;
+</style>
+</head>
+<body>
+    <h2 id="section-1-testing code improvements" class="section">Testing Code Improvements</h2>
 
-        this.javascript = `
+<h3 id="section-2-single language code blocks" class="subsection">Single Language Code Blocks</h3>
+
+<div class="code-box white-bg"><div id="code-python" class="code-pane active"><div class="code-header"><span class="code-title">Python</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-python">def fibonacci(n):
+    """Calculate Fibonacci sequence"""
+    if n &lt;= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(10))
+</code></pre></div></div>
+
+<h3 id="section-2-multiple language code block with tabs" class="subsection">Multiple Language Code Block with Tabs</h3>
+
+<div class="code-box gray-bg"><div class="code-box-title">Algorithm</div><div class="code-tabs"><button class="code-tab active" data-tab="code-python">Python</button><button class="code-tab " data-tab="code-javascript">Javascript</button><button class="code-tab " data-tab="code-html">Html</button></div><div id="code-python" class="code-pane active"><pre><code class="language-python">def quicksort(arr):
+    if len(arr) &lt;= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quicksort(left) + middle + quicksort(right)
+</code></pre></div><div id="code-javascript" class="code-pane "><pre><code class="language-javascript">function quicksort(arr) {
+    if (arr.length &lt;= 1) return arr;
+    const pivot = arr[Math.floor(arr.length / 2)];
+    const left = arr.filter(x =&gt; x &lt; pivot);
+    const middle = arr.filter(x =&gt; x === pivot);
+    const right = arr.filter(x =&gt; x &gt; pivot);
+    return [...quicksort(left), ...middle, ...quicksort(right)];
+}
+</code></pre></div><div id="code-html" class="code-pane "><pre><code class="language-html"><span class="syntax-entity">&lt;</span>!DOCTYPE html<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>html<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>head<span class="syntax-entity">&gt;</span>
+    <span class="syntax-entity">&lt;</span>title<span class="syntax-entity">&gt;</span>Quicksort Demo<span class="syntax-entity">&lt;</span>/title<span class="syntax-entity">&gt;</span>
+    <span class="syntax-entity">&lt;</span>style<span class="syntax-entity">&gt;</span>
+        .array { display: flex; gap: 5px; }
+        .element { padding: 10px; background: #007bff; color: white; }
+    <span class="syntax-entity">&lt;</span>/style<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>/head<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>body<span class="syntax-entity">&gt;</span>
+    <span class="syntax-entity">&lt;</span>div class="array" id="output"<span class="syntax-entity">&gt;</span><span class="syntax-entity">&lt;</span>/div<span class="syntax-entity">&gt;</span>
+    <span class="syntax-entity">&lt;</span>script src="quicksort.js"<span class="syntax-entity">&gt;</span><span class="syntax-entity">&lt;</span>/script<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>/body<span class="syntax-entity">&gt;</span>
+<span class="syntax-entity">&lt;</span>/html<span class="syntax-entity">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="section-2-black theme code block" class="subsection">Black Theme Code Block</h3>
+
+<div class="code-box "><div id="code-java" class="code-pane active"><div class="code-header"><span class="code-title">Java</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-java"><span class="syntax-keyword">public</span> <span class="syntax-keyword">class</span> BinarySearch {
+    <span class="syntax-keyword">public</span> <span class="syntax-keyword">static</span> <span class="syntax-keyword">int</span> binarySearch(<span class="syntax-keyword">int</span>[] arr, <span class="syntax-keyword">int</span> target) {
+        <span class="syntax-keyword">int</span> left = <span <span class="syntax-keyword">class</span>="syntax-number">0</span>;
+        <span class="syntax-keyword">int</span> right = arr.length - <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
+        <span class="syntax-keyword">while</span> (left &lt;= right) {
+            <span class="syntax-keyword">int</span> mid = left + (right - left) / <span <span class="syntax-keyword">class</span>="syntax-number">2</span>;
+            <span class="syntax-keyword">if</span> (arr[mid] == target) {
+                <span class="syntax-keyword">return</span> mid;
+            }
+            <span class="syntax-keyword">if</span> (arr[mid] &lt; target) {
+                left = mid + <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
+            } <span class="syntax-keyword">else</span> {
+                right = mid - <span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
+            }
+        }
+        <span class="syntax-keyword">return</span> -<span <span class="syntax-keyword">class</span>="syntax-number">1</span>;
+    }
+}
+</code></pre></div></div>
+
+<h3 id="section-2-c++ code with preprocessor" class="subsection">C++ Code with Preprocessor</h3>
+
+<div class="code-box white-bg"><div id="code-cpp" class="code-pane active"><div class="code-header"><span class="code-title">Cpp</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-cpp"><span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;iostream&gt;
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;vector&gt;
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#include</span> &lt;algorithm&gt;
+
+<span <span class="syntax-keyword">class</span>=<span <span class="syntax-keyword">class</span>="syntax-string">"syntax-preprocessor"</span>>#define</span> MAX_SIZE <span <span class="syntax-keyword">class</span>="syntax-number">100</span>
+
+<span class="syntax-keyword">template</span>&lt;<span class="syntax-keyword">typename</span> T&gt;
+<span class="syntax-keyword">class</span> Stack {
+<span class="syntax-keyword">private</span>:
+    std::vector&lt;T&gt; data;
+<span class="syntax-keyword">public</span>:
+    <span class="syntax-keyword">void</span> push(<span class="syntax-keyword">const</span> T&amp; item) {
+        data.push_back(item);
+    }
+    T pop() {
+        <span class="syntax-keyword">if</span> (data.empty()) {
+            <span class="syntax-keyword">throw</span> std::runtime_error(<span <span class="syntax-keyword">class</span>="syntax-string">"Stack is empty"</span>);
+        }
+        T item = data.back();
+        data.pop_back();
+        <span class="syntax-keyword">return</span> item;
+    }
+    <span class="syntax-keyword">bool</span> empty() <span class="syntax-keyword">const</span> {
+        <span class="syntax-keyword">return</span> data.empty();
+    }
+};
+
+<span class="syntax-keyword">int</span> main() {
+    Stack&lt;<span class="syntax-keyword">int</span>&gt; stack;
+    stack.push(<span <span class="syntax-keyword">class</span>="syntax-number">42</span>);
+    stack.push(<span <span class="syntax-keyword">class</span>="syntax-number">24</span>);
+    <span class="syntax-keyword">while</span> (!stack.empty()) {
+        std::cout &lt;&lt; stack.pop() &lt;&lt; std::endl;
+    }
+    <span class="syntax-keyword">return</span> <span <span class="syntax-keyword">class</span>="syntax-number">0</span>;
+}
+</code></pre></div></div>
+
+<h3 id="section-2-css code example" class="subsection">CSS Code Example</h3>
+
+<div class="code-box gray-bg"><div id="code-css" class="code-pane active"><div class="code-header"><span class="code-title">Css</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-css"><span class="syntax-comment">/* Modern CSS Grid Layout */</span>
+<span class="syntax-selector">.container</span>{
+    <span class="syntax-property">display</span>: <span class="syntax-value">grid</span>;
+    <span class="syntax-property">grid-template-columns</span>: <span class="syntax-value">repeat(auto-fit, minmax(300px, 1fr))</span>;
+    <span class="syntax-property">gap</span>: <span class="syntax-value">2rem</span>;
+    <span class="syntax-property">padding</span>: <span class="syntax-value">2rem</span>;
+}
+
+<span class="syntax-selector">.card</span>{
+    <span class="syntax-property">background</span>: <span class="syntax-value">linear-gradient(135deg, #667eea 0
+    padding: 1.5rem</span>;
+    <span class="syntax-property">box-shadow</span>: <span class="syntax-value">0 10px 25px rgba(0, 0, 0, 0.1)</span>;
+    <span class="syntax-property">transition</span>: <span class="syntax-value">transform 0.3s ease</span>;
+}
+
+.<span class="syntax-property">card</span>:<span class="syntax-value"><span class="syntax-selector">hover</span>{
+    transform: translateY(-5px)</span>;
+    <span class="syntax-property">box-shadow</span>: <span class="syntax-value">0 20px 40px rgba(0, 0, 0, 0.2)</span>;
+}
+
+@media (<span class="syntax-property">max-width</span>: <span class="syntax-value">768px) {
+    <span class="syntax-selector">.container</span>{
+        grid-template-columns: 1fr</span>;
+        <span class="syntax-property">padding</span>: <span class="syntax-value">1rem</span>;
+    }
+}
+</code></pre></div></div>
+
+<h3 id="section-2-sql query example" class="subsection">SQL Query Example</h3>
+
+<div class="code-box "><div id="code-sql" class="code-pane active"><div class="code-header"><span class="code-title">Sql</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-sql"><span class="syntax-comment">-- Complex query with joins <span class="syntax-keyword">and</span> subqueries</span>
+<span class="syntax-keyword">SELECT</span> 
+    u.user_id,
+    u.username,
+    u.email,
+    <span class="syntax-keyword">COUNT</span>(o.order_id) <span class="syntax-keyword">as</span> total_orders,
+    <span class="syntax-keyword">SUM</span>(o.total_amount) <span class="syntax-keyword">as</span> total_spent,
+    <span class="syntax-keyword">AVG</span>(o.total_amount) <span class="syntax-keyword">as</span> avg_order_value
+<span class="syntax-keyword">FROM</span> users u
+<span class="syntax-keyword">LEFT</span> <span class="syntax-keyword">JOIN</span> orders o <span class="syntax-keyword">ON</span> u.user_id = o.user_id
+<span class="syntax-keyword">WHERE</span> u.created_at &gt;= <span class="syntax-string">'<span class="syntax-number">2023</span>-<span class="syntax-number">01</span>-<span class="syntax-number">01</span>'</span>
+    <span class="syntax-keyword">AND</span> o.status = <span class="syntax-string">'completed'</span>
+<span class="syntax-keyword">GROUP</span> <span class="syntax-keyword">BY</span> u.user_id, u.username, u.email
+<span class="syntax-keyword">HAVING</span> <span class="syntax-keyword">COUNT</span>(o.order_id) &gt;= <span class="syntax-number">5</span>
+<span class="syntax-keyword">ORDER</span> <span class="syntax-keyword">BY</span> total_spent DESC
+<span class="syntax-keyword">LIMIT</span> <span class="syntax-number">100</span>;
+</code></pre></div></div>
+
+<h3 id="section-2-bash script example" class="subsection">Bash Script Example</h3>
+
+<div class="code-box white-bg"><div id="code-bash" class="code-pane active"><div class="code-header"><span class="code-title">Bash</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-bash"><span class=<span class="syntax-string">"syntax-comment"</span>>#!/bin/bash</span>
+
+<span class=<span class="syntax-string">"syntax-comment"</span>># Backup script with error handling</span>
+<span class="syntax-keyword">set</span> -euo pipefail
+<span class="syntax-command">
+BACKUP_DIR</span>="/backup/$(date +
+<span class="syntax-command">SOURCE_DIR</span>=<span class="syntax-string">"/home/user/documents"</span>
+<span class="syntax-command">LOG_FILE</span>=<span class="syntax-string">"/var/log/backup.log"</span>
+<span class="syntax-command">
+log</span>() {
+    <span class="syntax-keyword">echo</span> "[$(date '+
+}
+<span class="syntax-command">
+create_backup</span>() {
+    <span class="syntax-keyword">if</span> [[ ! -d <span class="syntax-string">"<span class="syntax-variable">$SOURCE_DIR</span>"</span> ]]; <span class="syntax-keyword">then</span>
+<span class="syntax-command">        log</span> <span class="syntax-string">"ERROR: Source directory does not exist: <span class="syntax-variable">$SOURCE_DIR</span>"</span>
+        <span class="syntax-keyword">exit</span> 1
+    <span class="syntax-keyword">fi</span>
+    <span class="syntax-keyword">mkdir</span> -p <span class="syntax-string">"<span class="syntax-variable">$BACKUP_DIR</span>"</span>
+<span class="syntax-command">    log</span> <span class="syntax-string">"Starting backup to <span class="syntax-variable">$BACKUP_DIR</span>"</span>
+<span class="syntax-command">    tar</span> -czf <span class="syntax-string">"<span class="syntax-variable">$BACKUP_DIR</span>/backup.tar.gz"</span> -C <span class="syntax-string">"<span class="syntax-variable">$SOURCE_DIR</span>"</span> .
+<span class="syntax-command">    log</span> <span class="syntax-string">"Backup completed successfully"</span>
+}
+<span class="syntax-command">
+cleanup_old_backups</span>() {
+    <span class="syntax-keyword">find</span> /backup -type d -name <span class="syntax-string">"20*"</span> -mtime +7 -<span class="syntax-keyword">exec</span> <span class="syntax-keyword">rm</span> -rf {} +
+<span class="syntax-command">    log</span> <span class="syntax-string">"Cleaned up old backups"</span>
+}
+
+<span class=<span class="syntax-string">"syntax-comment"</span>># Main execution</span>
+<span class="syntax-command">create_backup</span>
+<span class="syntax-command">cleanup_old_backups</span>
+</code></pre></div></div>
+
+<h3 id="section-2-json configuration" class="subsection">JSON Configuration</h3>
+
+<div class="code-box gray-bg"><div id="code-json" class="code-pane active"><div class="code-header"><span class="code-title">Json</span><button class="copy-btn" title="Copy code"><span class="copy-icon">Copy</span></button></div><pre><code class="language-json">{
+    <span class="syntax-string">"name"</span>: <span class="syntax-string">"latex2html-engine"</span>,
+    <span class="syntax-string">"version"</span>: <span class="syntax-string">"<span class="syntax-number">1.0</span>.<span class="syntax-number">0</span>"</span>,
+    <span class="syntax-string">"description"</span>: <span class="syntax-string">"Premium LaTeX to HTML conversion engine"</span>,
+    <span class="syntax-string">"main"</span>: <span class="syntax-string">"engine.js"</span>,
+    <span class="syntax-string">"scripts"</span>: {
+        <span class="syntax-string">"start"</span>: <span class="syntax-string">"node engine.js"</span>,
+        <span class="syntax-string">"test"</span>: <span class="syntax-string">"jest"</span>,
+        <span class="syntax-string">"build"</span>: <span class="syntax-string">"webpack --mode=production"</span>,
+        <span class="syntax-string">"dev"</span>: <span class="syntax-string">"webpack serve --mode=development"</span>
+    },
+    <span class="syntax-string">"dependencies"</span>: {
+        <span class="syntax-string">"express"</span>: <span class="syntax-string">"^<span class="syntax-number">4.18</span>.<span class="syntax-number">2</span>"</span>,
+        <span class="syntax-string">"katex"</span>: <span class="syntax-string">"^<span class="syntax-number">0.16</span>.<span class="syntax-number">8</span>"</span>,
+        <span class="syntax-string">"prismjs"</span>: <span class="syntax-string">"^<span class="syntax-number">1.29</span>.<span class="syntax-number">0</span>"</span>
+    },
+    <span class="syntax-string">"devDependencies"</span>: {
+        <span class="syntax-string">"@types/node"</span>: <span class="syntax-string">"^<span class="syntax-number">20.0</span>.<span class="syntax-number">0</span>"</span>,
+        <span class="syntax-string">"typescript"</span>: <span class="syntax-string">"^<span class="syntax-number">5.0</span>.<span class="syntax-number">0</span>"</span>,
+        <span class="syntax-string">"webpack"</span>: <span class="syntax-string">"^<span class="syntax-number">5.88</span>.<span class="syntax-number">0</span>"</span>
+    },
+    <span class="syntax-string">"engines"</span>: {
+        <span class="syntax-string">"node"</span>: <span class="syntax-string">"&gt;=<span class="syntax-number">16.0</span>.<span class="syntax-number">0</span>"</span>
+    }
+}
+</code></pre></div></div>
+    <script>
 // ===== DEFAULT THEME JAVASCRIPT =====
 document.addEventListener('DOMContentLoaded', function() {
     // Syntax highlighting is handled by the CodeParser
@@ -894,7 +1129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add active class to clicked tab and corresponding pane
             this.classList.add('active');
-            const targetPane = codeBox.querySelector(\`#\${targetId}\`);
+            const targetPane = codeBox.querySelector(`#${targetId}`);
             if (targetPane) {
                 targetPane.classList.add('active');
                 
@@ -1028,42 +1263,6 @@ window.DefaultTheme = {
     generateTableOfContents,
     isInViewport
 };
-`;
-    }
-
-    generateHTML(parsed) {
-        const { html, context, metadata } = parsed;
-        
-        return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${metadata.title || 'LaTeX Document'}</title>
-    <meta name="author" content="${metadata.author || ''}">
-    <meta name="description" content="${metadata.description || ''}">
-    <meta name="keywords" content="${(metadata.keywords || []).join(', ')}">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="${metadata.title || 'LaTeX Document'}">
-    <meta property="og:description" content="${metadata.description || ''}">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="${metadata.title || 'LaTeX Document'}">
-    <meta property="twitter:description" content="${metadata.description || ''}">
-    
-    <!-- Custom syntax highlighting (no external dependencies) -->
-    
-    <style>${this.css}</style>
-</head>
-<body>
-    ${html}
-    <script>${this.javascript}</script>
+</script>
 </body>
-</html>`;
-    }
-}
-
-module.exports = DefaultTheme;
+</html>

@@ -1,0 +1,5 @@
+Modular and scalable structure for long-term product growth.
+Each class renderer should be extendable.
+Code must have clear, descriptive function names.
+No emojis, no inline hacks.
+Fully maintainable for continuous improvement and large-team collaboration.
