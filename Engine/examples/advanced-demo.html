@@ -1086,71 +1086,249 @@ Block matrix:
 
 <h3 id="section-2-numerical methods" class="subsection">Numerical Methods</h3>
 
-\begin{algorithm}[h]
-     ∩tion{Gradient Descent Optimization}
-     \label{algo:gradient}
-     \begin{algorithmic}
-     \State \Input: Function <span class="math-inline">f(x)</span>, learning rate
-     <span class="math-inline">α</span>, tolerance <span class="math-inline">ε</span>
-     \State \Output: Local minimum <span class="math-inline">x^*</span>
-     \State <span class="math-inline">x \gets x<sub>0</sub></span> (initial guess)
-     \While{<span class="math-inline">\|∇ f(x)\| > ε</span>}
-         \State <span class="math-inline">g \gets ∇ f(x)</span> (compute gradient)
-         \State <span class="math-inline">x \gets x - α g</span> (update parameters)
-         \State <span class="math-inline">f<sub>new</sub> \gets f(x)</span>
-         \If{<span class="math-inline">|f<sub>new</sub> - f<sub>old</sub>| < ε</span>}
-             \State \Return <span class="math-inline">x</span>
-         \EndIf
-         \State <span class="math-inline">f<sub>old</sub> \gets f<sub>new</sub></span>
-     \EndWhile
-     \State \Return <span class="math-inline">x</span>
-     \end{algorithmic}
-     \end{algorithm}
+<div class="algorithm" id="algo:gradient">
+            <div class="algorithm-header">
+                Algorithm 1
+            </div>
+            <div class="algorithm-body">
+
+<div class="algorithm-line">
+                    <span class="line-number">1</span>
+                    <span class="line-content"><span class="algorithm-keyword">Input:</span> Function <span class="math-inline">f(x)</span>, learning rate</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">2</span>
+                    <span class="line-content"><span class="math-inline">α</span>, tolerance <span class="math-inline">ε</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">3</span>
+                    <span class="line-content"><span class="algorithm-keyword">Output:</span> Local minimum <span class="math-inline">x^*</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">4</span>
+                    <span class="line-content"><span class="math-inline">x ← x<sub>0</sub></span> (initial guess)</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">5</span>
+                    <span class="line-content"><span class="algorithm-keyword">while</span> (<span class="math-inline">\|∇ f(x)\| > ε</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">6</span>
+                    <span class="line-content"><span class="math-inline">g ← ∇ f(x)</span> (compute gradient)</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">7</span>
+                    <span class="line-content"><span class="math-inline">x ← x - α g</span> (update parameters)</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">8</span>
+                    <span class="line-content"><span class="math-inline">f<sub>new</sub> ← f(x)</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">9</span>
+                    <span class="line-content"><span class="algorithm-keyword">if</span> (<span class="math-inline">|f<sub>new</sub> - f<sub>old</sub>| < ε</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">10</span>
+                    <span class="line-content"><span class="algorithm-keyword">return</span> <span class="math-inline">x</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">11</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">12</span>
+                    <span class="line-content"><span class="math-inline">f<sub>old</sub> ← f<sub>new</sub></span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">13</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">14</span>
+                    <span class="line-content"><span class="algorithm-keyword">return</span> <span class="math-inline">x</span></span>
+                </div>
+
+</div>
+        </div>
 
 <h3 id="section-2-matrix operations" class="subsection">Matrix Operations</h3>
 
-\begin{algorithm}[h]
-     ∩tion{Gaussian Elimination}
-     \label{algo:gaussian}
-     \begin{algorithmic}
-     \State \Input: Matrix <span class="math-inline">A ∈ \mathbb{R}<sup>n × n</sup></span>,
-      vector <span class="math-inline">b ∈ \mathbb{R}<sup>n</sup></span>
-     \State \Output: Solution vector <span class="math-inline">x</span> to <span class="math-inline">Ax = b</span>
-     \State Create augmented matrix <span class="math-inline">[A|b]</span>
-     \For{<span class="math-inline">i = 1</span> to <span class="math-inline">n-1</span>}
-         \For{<span class="math-inline">j = i+1</span> to <span class="math-inline">n</span>}
-             \State <span class="math-inline">factor \gets A[j,i]/A[i,i]</span>
-             \For{<span class="math-inline">k = i</span> to <span class="math-inline">n</span>}
-                 \State $A[j,k] \gets A[j,k] - factor \cdot
-      A[i,k]$
-             \EndFor
-             \State <span class="math-inline">b[j] \gets b[j] - factor \cdot b[i]</span>
-         \EndFor
-     \EndFor
-     \State \Return Back substitution to find <span class="math-inline">x</span>
-     \end{algorithmic}
-     \end{algorithm}
+<div class="algorithm" id="algo:gaussian">
+            <div class="algorithm-header">
+                Algorithm 2
+            </div>
+            <div class="algorithm-body">
 
-\begin{algorithm}[h]
-     ∩tion{Matrix Multiplication}
-     \label{algo:matrix}
-     \begin{algorithmic}
-     \State \Input: Matrices $A ∈ \mathbb{R}<sup>m ×
-     p</sup><span class="math-inline">, </span>B ∈ \mathbb{R}<sup>p × n</sup>$
-     \State \Output: Matrix $C = AB ∈ \mathbb{R}<sup>m
-     × n</sup>$
-     \For{<span class="math-inline">i = 1</span> to <span class="math-inline">m</span>}
-         \For{<span class="math-inline">j = 1</span> to <span class="math-inline">n</span>}
-             \State <span class="math-inline">C[i,j] \gets 0</span>
-             \For{<span class="math-inline">k = 1</span> to <span class="math-inline">p</span>}
-                 \State $C[i,j] \gets C[i,j] + A[i,k] \cdot
-      B[k,j]$
-             \EndFor
-         \EndFor
-     \EndFor
-     \State \Return <span class="math-inline">C</span>
-     \end{algorithmic}
-     \end{algorithm}
+<div class="algorithm-line">
+                    <span class="line-number">1</span>
+                    <span class="line-content"><span class="algorithm-keyword">Input:</span> Matrix <span class="math-inline">A ∈ \mathbb{R}<sup>n × n</sup></span>,</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">2</span>
+                    <span class="line-content">vector <span class="math-inline">b ∈ \mathbb{R}<sup>n</sup></span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">3</span>
+                    <span class="line-content"><span class="algorithm-keyword">Output:</span> Solution vector <span class="math-inline">x</span> to <span class="math-inline">Ax = b</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">4</span>
+                    <span class="line-content">Create augmented matrix <span class="math-inline">[A|b]</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">5</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">i = 1</span> to <span class="math-inline">n-1</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">6</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">j = i+1</span> to <span class="math-inline">n</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">7</span>
+                    <span class="line-content"><span class="math-inline">factor ← A[j,i]/A[i,i]</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">8</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">k = i</span> to <span class="math-inline">n</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">9</span>
+                    <span class="line-content">$A[j,k] ← A[j,k] - factor \cdot</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">10</span>
+                    <span class="line-content">A[i,k]$</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">11</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">12</span>
+                    <span class="line-content"><span class="math-inline">b[j] ← b[j] - factor \cdot b[i]</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">13</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">14</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">15</span>
+                    <span class="line-content"><span class="algorithm-keyword">return</span> Back substitution to find <span class="math-inline">x</span></span>
+                </div>
+
+</div>
+        </div>
+
+<div class="algorithm" id="algo:matrix">
+            <div class="algorithm-header">
+                Algorithm 3
+            </div>
+            <div class="algorithm-body">
+
+<div class="algorithm-line">
+                    <span class="line-number">1</span>
+                    <span class="line-content"><span class="algorithm-keyword">Input:</span> Matrices $A ∈ \mathbb{R}<sup>m ×</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">2</span>
+                    <span class="line-content">p</sup><span class="math-inline">, </span>B ∈ \mathbb{R}<sup>p × n</sup>$</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">3</span>
+                    <span class="line-content"><span class="algorithm-keyword">Output:</span> Matrix $C = AB ∈ \mathbb{R}<sup>m</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">4</span>
+                    <span class="line-content">× n</sup>$</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">5</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">i = 1</span> to <span class="math-inline">m</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">6</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">j = 1</span> to <span class="math-inline">n</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">7</span>
+                    <span class="line-content"><span class="math-inline">C[i,j] ← 0</span></span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">8</span>
+                    <span class="line-content"><span class="algorithm-keyword">for</span> (<span class="math-inline">k = 1</span> to <span class="math-inline">p</span>) {</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">9</span>
+                    <span class="line-content">$C[i,j] ← C[i,j] + A[i,k] \cdot</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">10</span>
+                    <span class="line-content">B[k,j]$</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">11</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">12</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">13</span>
+                    <span class="line-content">}</span>
+                </div>
+
+<div class="algorithm-line">
+                    <span class="line-number">14</span>
+                    <span class="line-content"><span class="algorithm-keyword">return</span> <span class="math-inline">C</span></span>
+                </div>
+
+</div>
+        </div>
 
 <h2 id="section-1-tables" class="section">Tables</h2>
 

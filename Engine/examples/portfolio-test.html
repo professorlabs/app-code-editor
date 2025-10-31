@@ -1,15 +1,10 @@
-/**
- * Simple Portfolio Theme - Clean Scientist Portfolio
- * Simple, clean portfolio website for scientists with navbar, sidebar, and responsive design
- */
-
-class PortfolioTheme {
-    constructor() {
-        this.name = 'portfolio';
-        this.displayName = 'Simple Portfolio Theme';
-        this.description = 'Clean portfolio theme for scientists with simple layout';
-        
-        this.css = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Jane Smith</title>
+    <style>
 /* ===== SIMPLE PORTFOLIO THEME ===== */
 * {
     margin: 0;
@@ -299,103 +294,15 @@ body {
         flex-direction: column;
     }
 }
-`;
-        
-        this.js = `
-// Simple Portfolio JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('.navbar-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (this.getAttribute('href').startsWith('#')) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-    
-    // Add hover effects to achievement items
-    document.querySelectorAll('.achievement-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(5px)';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0)';
-        });
-    });
-    
-    // Responsive mobile menu toggle
-    const navbar = document.querySelector('.portfolio-navbar');
-    if (navbar) {
-        const mediaQuery = window.matchMedia('(max-width: 768px)');
-        
-        function handleMobileMenu() {
-            if (mediaQuery.matches) {
-                navbar.classList.add('mobile');
-            } else {
-                navbar.classList.remove('mobile');
-            }
-        }
-        
-        handleMobileMenu();
-        mediaQuery.addListener(handleMobileMenu);
-    }
-});
-`;
-    }
-
-    /**
-     * Generate HTML for portfolio documents
-     */
-    generateHTML(parsedData) {
-        const { html, context, metadata } = parsedData;
-        
-        // Extract content from parsed HTML
-        const processedContent = this.parsePortfolioContent(html);
-        
-        return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${metadata.title || 'Portfolio'}</title>
-    <style>${this.css}</style>
+</style>
 </head>
 <body>
-    ${processedContent}
-    <script>${this.js}</script>
-</body>
-</html>`;
-    }
-
-    /**
-     * Parse portfolio content into layout components
-     */
-    parsePortfolioContent(content) {
-        // Extract navigation links
-        const navLinks = this.extractNavigationLinks(content);
-        
-        // Extract sidebar content
-        const sidebarContent = this.extractSidebarContent(content);
-        
-        // Extract main content
-        const mainContent = this.extractMainContent(content);
-        
-        return `
+    
             <!-- Navigation Bar -->
             <nav class="portfolio-navbar">
                 <div class="navbar-content">
                     <ul class="navbar-links">
-                        ${navLinks.map(link => `<li><a href="${link.href}" class="navbar-link">${link.text}</a></li>`).join('')}
+                        <li><a href="#publications" class="navbar-link">Publications</a></li><li><a href="#blog" class="navbar-link">Blog</a></li><li><a href="#glossary" class="navbar-link">ML Glossary</a></li><li><a href="#cv" class="navbar-link">CV</a></li>
                     </ul>
                 </div>
             </nav>
@@ -404,174 +311,54 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="portfolio-layout">
                 <!-- Left Sidebar -->
                 <aside class="portfolio-sidebar">
-                    ${sidebarContent}
+                    
+            <div class="profile-container">
+                <div class="profile-picture">
+                    <span>👤</span>
+                </div>
+                <h2 class="profile-name">Dr. Jane Smith</h2>
+                <p class="profile-title">Senior Research Scientist</p>
+                <p class="profile-location">📍 MIT, Cambridge, MA</p>
+            </div>
+            
+            <ul class="social-links">
+                <li>
+                    <a href="mailto:email@example.com" class="social-link">
+                        <span class="social-icon">📧</span>
+                        <span>Email</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com" class="social-link">
+                        <span class="social-icon">🐦</span>
+                        <span>Twitter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://linkedin.com" class="social-link">
+                        <span class="social-icon">💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com" class="social-link">
+                        <span class="social-icon">💻</span>
+                        <span>GitHub</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://scholar.google.com" class="social-link">
+                        <span class="social-icon">🎓</span>
+                        <span>Google Scholar</span>
+                    </a>
+                </li>
+            </ul>
+        
                 </aside>
                 
                 <!-- Main Content -->
                 <main class="portfolio-main">
-                    ${mainContent}
-                </main>
-            </div>
-        `;
-    }
-
-    /**
-     * Extract navigation links from content
-     */
-    extractNavigationLinks(content) {
-        const links = [
-            { text: 'Publications', href: '#publications' },
-            { text: 'Blog', href: '#blog' },
-            { text: 'ML Glossary', href: '#glossary' },
-            { text: 'CV', href: '#cv' }
-        ];
-        
-        // Try to extract custom navigation from content
-        const navMatch = content.match(/\\navbar\{([^}]*)\}/);
-        if (navMatch) {
-            const customLinks = navMatch[1].split(',').map(link => link.trim());
-            return customLinks.map(link => ({
-                text: link,
-                href: `#${link.toLowerCase().replace(/\s+/g, '-')}`
-            }));
-        }
-        
-        return links;
-    }
-
-    /**
-     * Extract sidebar content
-     */
-    extractSidebarContent(content) {
-        // Look for sidebar section in content
-        const sidebarMatch = content.match(/\\sidebar\{([^}]*)\}/);
-        
-        if (sidebarMatch) {
-            return this.parseSidebarContent(sidebarMatch[1]);
-        }
-        
-        // Default sidebar content
-        return `
-            <div class="profile-container">
-                <div class="profile-picture">
-                    <span>👤</span>
-                </div>
-                <h2 class="profile-name">${metadata.author || 'Your Name'}</h2>
-                <p class="profile-title">Research Scientist</p>
-                <p class="profile-location">📍 City, Country</p>
-            </div>
-            
-            <ul class="social-links">
-                <li>
-                    <a href="mailto:email@example.com" class="social-link">
-                        <span class="social-icon">📧</span>
-                        <span>Email</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://twitter.com" class="social-link">
-                        <span class="social-icon">🐦</span>
-                        <span>Twitter</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://linkedin.com" class="social-link">
-                        <span class="social-icon">💼</span>
-                        <span>LinkedIn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com" class="social-link">
-                        <span class="social-icon">💻</span>
-                        <span>GitHub</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://scholar.google.com" class="social-link">
-                        <span class="social-icon">🎓</span>
-                        <span>Google Scholar</span>
-                    </a>
-                </li>
-            </ul>
-        `;
-    }
-
-    /**
-     * Parse custom sidebar content
-     */
-    parseSidebarContent(sidebarText) {
-        const parts = sidebarText.split('|').map(part => part.trim());
-        
-        let name = parts[0] || 'Your Name';
-        let title = parts[1] || 'Research Scientist';
-        let location = parts[2] || 'City, Country';
-        
-        return `
-            <div class="profile-container">
-                <div class="profile-picture">
-                    <span>👤</span>
-                </div>
-                <h2 class="profile-name">${name}</h2>
-                <p class="profile-title">${title}</p>
-                <p class="profile-location">📍 ${location}</p>
-            </div>
-            
-            <ul class="social-links">
-                <li>
-                    <a href="mailto:email@example.com" class="social-link">
-                        <span class="social-icon">📧</span>
-                        <span>Email</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://twitter.com" class="social-link">
-                        <span class="social-icon">🐦</span>
-                        <span>Twitter</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://linkedin.com" class="social-link">
-                        <span class="social-icon">💼</span>
-                        <span>LinkedIn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com" class="social-link">
-                        <span class="social-icon">💻</span>
-                        <span>GitHub</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://scholar.google.com" class="social-link">
-                        <span class="social-icon">🎓</span>
-                        <span>Google Scholar</span>
-                    </a>
-                </li>
-            </ul>
-        `;
-    }
-
-    /**
-     * Extract main content
-     */
-    extractMainContent(content) {
-        // Remove sidebar and navbar commands
-        let cleanContent = content.replace(/\\navbar\{[^}]*\}/g, '');
-        cleanContent = cleanContent.replace(/\\sidebar\{[^}]*\}/g, '');
-        
-        // Process LaTeX content
-        let mainContent = cleanContent
-            .replace(/\\title\{([^}]+)\}/g, '')
-            .replace(/\\author\{([^}]+)\}/g, '')
-            .replace(/\\date\{([^}]+)\}/g, '')
-            .replace(/\\maketitle/g, '')
-            .replace(/\\begin\{document\}([\s\S]*?)\\end\{document\}/g, '$1')
-            .trim();
-        
-        // Convert LaTeX sections to HTML
-        mainContent = this.convertLaTeXSections(mainContent);
-        
-        return `
+                    
             <h1 class="main-greeting">Hello!</h1>
             
             <section class="bio-section" id="about">
@@ -625,44 +412,76 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </section>
             
-            ${mainContent ? `<section id="additional-content">${mainContent}</section>` : ''}
-        `;
-    }
-
-    /**
-     * Convert LaTeX sections to HTML
-     */
-    convertLaTeXSections(content) {
-        let html = content;
+            <section id="additional-content"><p><div class="portfolio-container">
+<div class="portfolio-main">
+<div class="portfolio-content"></p>
+<p>
+\nabbar{Research, Publications, Blog, Contact}</p>
+<h2 id="section-1-research interests" class="section">Research Interests</h2>\n
+<p>I work on <span class="command-textbf">deep learning</span> and <span class="command-textbf">reinforcement learning</span> with applications to robotics and healthcare.</p>
+<h3 id="section-2-current projects" class="subsection">Current Projects</h3>\n
+<p><div class="environment-itemize">
+    \item Neural architecture search for computer vision
+    \item Federated learning for medical imaging
+    \item Autonomous navigation algorithms
+</div></p>
+<h2 id="section-1-education" class="section">Education</h2>\n
+<p><span class="command-textbf">Ph.D. in Computer Science</span> - Stanford University (2020)</p>
+<p><span class="command-textbf">M.S. in Mathematics</span> - MIT (2018)</p>
+<p><span class="command-textbf">B.S. in Physics</span> - UC Berkeley (2016)</div>\n</div>\n</div>\n</p></section>
         
-        // Convert section commands
-        html = html.replace(/\\section\{([^}]+)\}/g, '<h2>$1</h2>');
-        html = html.replace(/\\subsection\{([^}]+)\}/g, '<h3>$1</h3>');
-        html = html.replace(/\\subsubsection\{([^}]+)\}/g, '<h4>$1</h4>');
+                </main>
+            </div>
         
-        // Convert text formatting
-        html = html.replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>');
-        html = html.replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>');
-        html = html.replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>');
-        
-        // Convert itemize lists
-        html = html.replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, (match, items) => {
-            const itemLines = items.split('\\item').filter(item => item.trim());
-            const listItems = itemLines.map(item => `<li>${item.trim()}</li>`).join('');
-            return `<ul>${listItems}</ul>`;
+    <script>
+// Simple Portfolio JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.navbar-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Add hover effects to achievement items
+    document.querySelectorAll('.achievement-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+            this.style.transition = 'transform 0.3s ease';
         });
         
-        // Convert paragraphs (split by double newlines)
-        const paragraphs = html.split('\n\n').filter(p => p.trim());
-        html = paragraphs.map(p => {
-            if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol')) {
-                return p;
-            }
-            return `<p>${p}</p>`;
-        }).join('\n');
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
+    
+    // Responsive mobile menu toggle
+    const navbar = document.querySelector('.portfolio-navbar');
+    if (navbar) {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
         
-        return html;
+        function handleMobileMenu() {
+            if (mediaQuery.matches) {
+                navbar.classList.add('mobile');
+            } else {
+                navbar.classList.remove('mobile');
+            }
+        }
+        
+        handleMobileMenu();
+        mediaQuery.addListener(handleMobileMenu);
     }
-}
-
-module.exports = PortfolioTheme;
+});
+</script>
+</body>
+</html>

@@ -314,7 +314,9 @@ class MathParser {
     }
     
     parseMatrixEnvironment(content, environment) {
-        const rows = content.split('\\\\').filter(row => row.trim());
+        // Handle multiline matrices by cleaning up whitespace and newlines
+        const cleanContent = content.replace(/\s*\n\s*/g, ' ').trim();
+        const rows = cleanContent.split('\\\\').filter(row => row.trim());
         const matrixHtml = [];
         
         // Determine delimiter based on environment
@@ -329,7 +331,9 @@ class MathParser {
         }
         
         rows.forEach((row, rowIndex) => {
-            const cells = row.split('&').map(cell => cell.trim());
+            // Clean up each row
+            const cleanRow = row.replace(/\s+/g, ' ').trim();
+            const cells = cleanRow.split('&').map(cell => cell.trim());
             const cellsHtml = cells.map(cell => 
                 `<td class="matrix-cell">${this.convertMath(cell)}</td>`
             ).join('');

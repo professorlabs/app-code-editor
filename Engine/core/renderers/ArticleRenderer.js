@@ -102,6 +102,9 @@ class ArticleRenderer extends DocumentRenderer {
         // Process mathematical content - this handles equations, align, etc.
         documentBody = this.processMathematics(documentBody);
         
+        // Process algorithm environments
+        documentBody = this.processAlgorithmEnvironments(documentBody);
+        
         // Process standard environments
         documentBody = this.processEnvironment(documentBody, 'itemize');
         documentBody = this.processEnvironment(documentBody, 'enumerate');
@@ -362,6 +365,94 @@ class ArticleRenderer extends DocumentRenderer {
             return `<img src="${filename}" alt="${filename}" class="included-image" ${this.parseGraphicsOptions(options)}>`;
         }
         return '<!-- Figure content -->';
+    }
+
+    /**
+     * Process algorithm environments
+     */
+    processAlgorithmEnvironments(content) {
+        // Process algorithm environments with optional placement and labels
+        content = content.replace(/\\begin\{algorithm\}(?:\[[^\]]*\])?([\s\S]*?)\\end\{algorithm\}/g, (match, algorithmContent) => {
+            return this.processAlgorithmEnvironment(algorithmContent);
+        });
+        
+        return content;
+    }
+
+    /**
+     * Process individual algorithm environment
+     */
+    processAlgorithmEnvironment(content) {
+        const captionMatch = content.match(/\\caption\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/);
+        const labelMatch = content.match(/\\label\{([^}]+)\}/);
+        const algorithmicMatch = content.match(/\\begin\{algorithmic\}([\s\S]*?)\\end\{algorithmic\}/);
+        
+        const caption = captionMatch ? this.processMathematics(captionMatch[1]) : '';
+        const label = labelMatch ? labelMatch[1] : '';
+        const algorithmicContent = algorithmicMatch ? algorithmicMatch[1] : content;
+        
+        // Process algorithmic content
+        const processedContent = this.processAlgorithmicContent(algorithmicContent);
+        
+        const algorithmNumber = this.algorithmCounter || 1;
+        this.algorithmCounter = (this.algorithmCounter || 1) + 1;
+        
+        return `<div class="algorithm" ${label ? `id="${label}"` : ''}>
+            <div class="algorithm-header">
+                Algorithm ${algorithmNumber}${caption ? ': ' + caption : ''}
+            </div>
+            <div class="algorithm-body">
+                ${processedContent}
+            </div>
+        </div>`;
+    }
+
+    /**
+     * Process algorithmic content
+     */
+    processAlgorithmicContent(content) {
+        let processedLines = [];
+        const lines = content.split('\n').filter(line => line.trim());
+        
+        let lineNumber = 1;
+        
+        for (let line of lines) {
+            line = line.trim();
+            if (!line) continue;
+            
+            // Process algorithmic commands
+            let processedLine = line
+                .replace(/\\State\s+/g, '')
+                .replace(/\\Input\s*:\s*/g, '<span class="algorithm-keyword">Input:</span> ')
+                .replace(/\\Output\s*:\s*/g, '<span class="algorithm-keyword">Output:</span> ')
+                .replace(/\\While\s*\{([^}]+)\}/g, '<span class="algorithm-keyword">while</span> ($1) {')
+                .replace(/\\If\s*\{([^}]+)\}/g, '<span class="algorithm-keyword">if</span> ($1) {')
+                .replace(/\\Else\s*/g, '} <span class="algorithm-keyword">else</span> {')
+                .replace(/\\EndIf\s*/g, '}')
+                .replace(/\\For\s*\{([^}]+)\}/g, '<span class="algorithm-keyword">for</span> ($1) {')
+                .replace(/\\EndFor\s*/g, '}')
+                .replace(/\\EndWhile\s*/g, '}')
+                .replace(/\\Return\s+/g, '<span class="algorithm-keyword">return</span> ')
+                .replace(/\\gets\s+/g, ' ← ')
+                .replace(/\\to\s+/g, ' → ');
+            
+            // Process inline math within algorithm
+            processedLine = this.processMathematics(processedLine);
+            
+            // Clean up braces and formatting
+            processedLine = processedLine.replace(/\{}/g, '').replace(/\s+/g, ' ').trim();
+            
+            processedLines.push(`
+                <div class="algorithm-line">
+                    <span class="line-number">${lineNumber}</span>
+                    <span class="line-content">${processedLine}</span>
+                </div>
+            `);
+            
+            lineNumber++;
+        }
+        
+        return processedLines.join('');
     }
 
     /**

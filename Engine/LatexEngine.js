@@ -83,11 +83,14 @@ class LatexEngine {
             // Create appropriate renderer
             const { renderer, documentClass, options } = this.rendererFactory.createRenderer(latexContent);
             
+            // Select appropriate theme based on document class
+            const theme = this.selectTheme(documentClass);
+            
             // Initialize renderer with content
             renderer.initialize(latexContent);
             
             // Set theme
-            renderer.setTheme(this.theme);
+            renderer.setTheme(theme);
             
             // Apply custom options
             this.applyEngineOptions(renderer);
@@ -113,6 +116,27 @@ class LatexEngine {
      */
     extractDocumentClass(latexContent) {
         return this.rendererFactory.extractDocumentClass(latexContent);
+    }
+
+    /**
+     * Select appropriate theme based on document class
+     */
+    selectTheme(documentClass) {
+        // Import themes dynamically
+        const DefaultTheme = require('./core/themes/DefaultTheme');
+        const PortfolioTheme = require('./core/themes/PortfolioTheme');
+        
+        switch (documentClass.toLowerCase()) {
+            case 'portfolio':
+                return new PortfolioTheme();
+            case 'article':
+            case 'report':
+            case 'book':
+            case 'ieeetran':
+            case 'memoir':
+            default:
+                return new DefaultTheme();
+        }
     }
 
     /**

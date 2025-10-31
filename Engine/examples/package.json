@@ -1,0 +1,23 @@
+{
+  "name": "latex2html-engine",
+  "version": "1.0.0",
+  "description": "Lightweight LaTeX to HTML converter",
+  "main": "dist/engine.js",
+  "bin": {
+    "latex2html": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsx src/cli.ts",
+    "test": "node dist/cli.js index.tex"
+  },
+  "keywords": ["latex", "html", "converter", "lightweight"],
+  "author": "Professor Lab",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

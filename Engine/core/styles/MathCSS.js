@@ -93,24 +93,27 @@ const MathCSS = `
 }
 
 .matrix-content, .nice-matrix-table {
-    display: inline-table;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
     vertical-align: middle;
-    border-collapse: separate;
-    border-spacing: 2px;
 }
 
 .matrix-row {
+    display: table-row;
     vertical-align: middle;
 }
 
 .matrix-cell, .nice-matrix-cell {
+    display: table-cell;
     padding: 0.3em 0.5em;
     text-align: center;
     vertical-align: middle;
     font-size: 0.9em;
-    border: 1px solid transparent;
-    background: #fff;
+    border: none;
+    background: transparent;
     min-width: 1.5em;
+    white-space: nowrap;
 }
 
 /* Matrix delimiters */
