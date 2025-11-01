@@ -90,16 +90,10 @@ body {
 }
 
 .profile-picture {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: #ddd;
     margin: 0 auto 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: #666;
     overflow: hidden;
 }
 
@@ -384,6 +378,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Extract navigation links
         const navLinks = this.extractNavigationLinks(content);
         
+        // Extract navigation logo
+        const navLogo = this.extractNavigationLogo(content);
+        
         // Extract sidebar content
         const sidebarContent = this.extractSidebarContent(content);
         
@@ -394,6 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Navigation Bar -->
             <nav class="portfolio-navbar">
                 <div class="navbar-content">
+                    ${navLogo ? `<div class="navbar-logo"><img src="${navLogo}" alt="Logo" style="height: 40px; margin-right: 2rem;"></div>` : ''}
                     <ul class="navbar-links">
                         ${navLinks.map(link => `<li><a href="${link.href}" class="navbar-link">${link.text}</a></li>`).join('')}
                     </ul>
@@ -440,14 +438,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
+     * Extract navigation logo from content
+     */
+    extractNavigationLogo(content) {
+        // Look for navlogo command
+        const navLogoMatch = content.match(/\\navlogo\{([^}]+)\}/);
+        return navLogoMatch ? navLogoMatch[1] : null;
+    }
+
+    /**
      * Extract sidebar content
      */
     extractSidebarContent(content) {
-        // Look for sidebar section in content
-        const sidebarMatch = content.match(/\\sidebar\{([^}]*)\}/);
+        // Look for sidebar section in content - use function to handle nested braces properly
+        const sidebarContent = this.extractBracedContent(content, 'sidebar');
         
-        if (sidebarMatch) {
-            return this.parseSidebarContent(sidebarMatch[1]);
+        if (sidebarContent) {
+            return this.parseSidebarContent(sidebarContent);
         }
         
         // Default sidebar content
@@ -497,19 +504,89 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
+     * Extract content from braces, handling nested braces properly
+     */
+    extractBracedContent(content, command) {
+        const pattern = `\\${command}{`;
+        const startIndex = content.indexOf(pattern);
+        
+        if (startIndex === -1) return null;
+        
+        const contentStart = startIndex + pattern.length;
+        let braceCount = 1;
+        let currentIndex = contentStart;
+        
+        while (currentIndex < content.length && braceCount > 0) {
+            const char = content[currentIndex];
+            if (char === '{') {
+                braceCount++;
+            } else if (char === '}') {
+                braceCount--;
+            }
+            currentIndex++;
+        }
+        
+        if (braceCount === 0) {
+            return content.substring(contentStart, currentIndex - 1);
+        }
+        
+        return null;
+    }
+
+    /**
      * Parse custom sidebar content
      */
     parseSidebarContent(sidebarText) {
-        const parts = sidebarText.split('|').map(part => part.trim());
+        // Extract profile image with options - more robust regex
+        let profileImage = null;
+        let imageShape = 'circle'; // default shape
+        
+        // Try with options first: \profileimage[shape=circle]{image.png}
+        const withOptionsMatch = sidebarText.match(/\\profileimage\[(.*?)\]\{([^}]+)\}/);
+        if (withOptionsMatch) {
+            profileImage = withOptionsMatch[2];
+            const options = withOptionsMatch[1];
+            const shapeMatch = options.match(/shape=([^,\]]+)/);
+            if (shapeMatch) {
+                imageShape = shapeMatch[1].trim();
+            }
+        } else {
+            // Try without options: \profileimage{image.png}
+            const withoutOptionsMatch = sidebarText.match(/\\profileimage\{([^}]+)\}/);
+            if (withoutOptionsMatch) {
+                profileImage = withoutOptionsMatch[1];
+            }
+        }
+        
+        // Remove the profileimage command from text before parsing
+        let cleanText = sidebarText.replace(/\\profileimage(\[[^\]]*\])?\{[^}]*\}/g, '').trim();
+        
+        const parts = cleanText.split('|').map(part => part.trim());
         
         let name = parts[0] || 'Your Name';
         let title = parts[1] || 'Research Scientist';
         let location = parts[2] || 'City, Country';
         
+        // Generate shape styles
+        let shapeStyle = '';
+        if (imageShape === 'circle') {
+            shapeStyle = 'border-radius: 50%; width: 120px; height: 120px;';
+        } else if (imageShape === 'rectangle') {
+            shapeStyle = 'border-radius: 8px; width: 120px; height: 120px;';
+        } else { // default
+            shapeStyle = 'border-radius: 4px; width: 120px; height: 120px;';
+        }
+        
+        // Remove gray background when image is present
+        const backgroundStyle = profileImage ? '' : 'background: #f0f0f0;';
+        
         return `
             <div class="profile-container">
-                <div class="profile-picture">
-                    <span>👤</span>
+                <div class="profile-picture" style="${shapeStyle} ${backgroundStyle} overflow: hidden;">
+                    ${profileImage ? 
+                        `<img src="${profileImage}" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: block;">` : 
+                        ''
+                    }
                 </div>
                 <h2 class="profile-name">${name}</h2>
                 <p class="profile-title">${title}</p>
@@ -640,10 +717,42 @@ document.addEventListener('DOMContentLoaded', function() {
         html = html.replace(/\\subsection\{([^}]+)\}/g, '<h3>$1</h3>');
         html = html.replace(/\\subsubsection\{([^}]+)\}/g, '<h4>$1</h4>');
         
+        // Remove extra \n patterns that are showing in the output
+        html = html.replace(/\\n/g, '');
+        html = html.replace(/\\\\n/g, '');
+        html = html.replace(/\\\\/g, '');
+        
         // Convert text formatting
         html = html.replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>');
         html = html.replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>');
         html = html.replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>');
+        
+        // Convert image commands
+        html = html.replace(/\\includegraphics\[(.*?)\]\{([^}]+)\}/g, (match, options, path) => {
+            const optionStyle = this.parseImageOptions(options);
+            return `<img src="${path}" alt="Image" style="${optionStyle}">`;
+        });
+        
+        html = html.replace(/\\includegraphics\{([^}]+)\}/g, (match, path) => {
+            return `<img src="${path}" alt="Image" style="max-width: 100%; height: auto;">`;
+        });
+        
+        // Convert figure environments
+        html = html.replace(/\\begin\{figure\}([\s\S]*?)\\end\{figure\}/g, (match, content) => {
+            const imgMatch = content.match(/\\includegraphics\[(.*?)\]\{([^}]+)\}/) || 
+                             content.match(/\\includegraphics\{([^}]+)\}/);
+            const captionMatch = content.match(/\\caption\{([^}]+)\}/);
+            
+            if (imgMatch) {
+                const img = imgMatch[0].replace(/\\includegraphics/, '<img').replace(/\}/, '>')
+                    .replace(/([^\[]+)\[([^\]]+)\]\{([^}]+)\}/, '<img src="$3" alt="Image" style="$2">')
+                    .replace(/\\includegraphics\{([^}]+)\}/, '<img src="$1" alt="Image" style="max-width: 100%; height: auto;">');
+                
+                const caption = captionMatch ? `<figcaption>${captionMatch[1]}</figcaption>` : '';
+                return `<figure style="margin: 2rem 0; text-align: center;">${img}${caption}</figure>`;
+            }
+            return match;
+        });
         
         // Convert itemize lists
         html = html.replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, (match, items) => {
@@ -655,13 +764,70 @@ document.addEventListener('DOMContentLoaded', function() {
         // Convert paragraphs (split by double newlines)
         const paragraphs = html.split('\n\n').filter(p => p.trim());
         html = paragraphs.map(p => {
-            if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol')) {
+            if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<img') || p.startsWith('<figure')) {
                 return p;
             }
             return `<p>${p}</p>`;
         }).join('\n');
         
         return html;
+    }
+
+    /**
+     * Parse image options to CSS style
+     */
+    parseImageOptions(options) {
+        let style = 'max-width: 100%; height: auto;';
+        
+        // Parse width option
+        const widthMatch = options.match(/width=([^,]+)/);
+        if (widthMatch) {
+            const width = widthMatch[1].trim();
+            if (width.includes('\\textwidth')) {
+                style = 'width: 100%; height: auto;';
+            } else if (width.includes('cm')) {
+                const cmValue = parseFloat(width);
+                style = `width: ${cmValue * 37.8}px; height: auto;`;
+            } else if (width.match(/\d+px/)) {
+                style = `width: ${width}; height: auto;`;
+            } else if (width.match(/\d+%$/)) {
+                style = `width: ${width}; height: auto;`;
+            } else if (width.match(/\d+mm/)) {
+                const mmValue = parseFloat(width);
+                style = `width: ${mmValue * 3.78}px; height: auto;`;
+            } else {
+                // Assume pixels if just a number
+                const pixelValue = parseFloat(width);
+                if (!isNaN(pixelValue)) {
+                    style = `width: ${pixelValue}px; height: auto;`;
+                }
+            }
+        }
+        
+        // Parse height option
+        const heightMatch = options.match(/height=([^,]+)/);
+        if (heightMatch) {
+            const height = heightMatch[1].trim();
+            if (height.includes('cm')) {
+                const cmValue = parseFloat(height);
+                style += ` max-height: ${cmValue * 37.8}px;`;
+            } else if (height.match(/\d+px/)) {
+                style += ` max-height: ${height};`;
+            } else if (height.match(/\d+%$/)) {
+                style += ` max-height: ${height};`;
+            } else if (height.match(/\d+mm/)) {
+                const mmValue = parseFloat(height);
+                style += ` max-height: ${mmValue * 3.78}px;`;
+            } else {
+                // Assume pixels if just a number
+                const pixelValue = parseFloat(height);
+                if (!isNaN(pixelValue)) {
+                    style += ` max-height: ${pixelValue}px;`;
+                }
+            }
+        }
+        
+        return style;
     }
 }
 

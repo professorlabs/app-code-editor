@@ -9,11 +9,21 @@
 
 \maketitle
 
+% Custom navigation logo (optional)
+\navlogo{profile_photo.png}
+
 % Custom navigation links (optional)
 \nabbar{Research, Publications, Blog, Contact}
 
-% Custom sidebar content (optional)
-\sidebar{Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
+% Custom sidebar content with profile image (optional)
+% Circle shape (default)
+\sidebar{\profileimage[shape=circle]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
+
+% Uncomment below to try different shapes:
+% Rectangle shape:
+% \sidebar{\profileimage[shape=rectangle]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
+% Default shape (rounded square):
+% \sidebar{\profileimage[shape=default]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
 
 % Additional LaTeX content for the portfolio
 \section{Research Interests}
@@ -27,6 +37,30 @@ I work on \textbf{deep learning} and \textbf{reinforcement learning} with applic
     \item Federated learning for medical imaging
     \item Autonomous navigation algorithms
 \end{itemize}
+
+\section{Featured Work}
+
+Here are some examples of my recent work:
+
+% Image in main content with width 80% of text width
+\includegraphics[width=0.8\textwidth]{profile_photo.png}
+
+\subsection{Research Images}
+
+% Simple image without options (default size)
+\includegraphics{profile_photo.png}
+
+% Image with specific width in pixels
+\includegraphics[width=200px]{profile_photo.png}
+
+% Image with both width and height
+\includegraphics[width=150px,height=100px]{profile_photo.png}
+
+% Image with figure environment
+\begin{figure}
+\includegraphics[width=5cm]{profile_photo.png}
+\caption{Research visualization showing deep learning model performance}
+\end{figure}
 
 \section{Education}
 
