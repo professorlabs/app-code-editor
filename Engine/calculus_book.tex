@@ -1,0 +1,174 @@
+% \documentclass[12pt, oneside]{book}
+\documentclass{book}
+% ==== PACKAGES ====
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{titlesec, xcolor, graphicx, amsmath, amssymb, tikz}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\usepackage{tocloft}
+
+% ==== COLORS & STYLE ====
+\definecolor{mlblue}{HTML}{1B4965}
+\definecolor{mlgold}{HTML}{FFD166}
+\definecolor{mllight}{HTML}{F0F0F0}
+\definecolor{mldark}{HTML}{0B2027}
+
+\pagecolor{mllight}
+\color{mldark}
+
+\setstretch{1.2}
+
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries\color{mlblue}}
+  {\chaptername\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+\renewcommand{\cftchapfont}{\bfseries\color{mlblue}}
+\renewcommand{\cftsecfont}{\color{mldark}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{Calculus for Machine Learning}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{mlgold}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==== TITLE PAGE ====
+\begin{document}
+
+\begin{titlepage}
+\newgeometry{top=3cm,bottom=2cm,left=2.5cm,right=2.5cm}
+\begin{center}
+\vspace*{3cm}
+
+{\Huge\bfseries\color{mlblue} Calculus for Machine Learning}\\[1.2cm]
+{\Large A Modern Mathematical Foundation}\\[1.2cm]
+\includegraphics[width=0.6\textwidth]{example-image}\\[1.2cm]
+{\Large\itshape Prof. Ibrahim Refat}\\[0.5cm]
+{\large Department of Computer Science and Engineering}\\
+{\large Green University of Bangladesh}\\[3cm]
+\textcolor{mlgold}{\rule{0.8\textwidth}{1pt}}\\[0.3cm]
+{\large \textbf{Edition: 2025}}\\
+\textcolor{mlgold}{\rule{0.8\textwidth}{1pt}}
+\vfill
+\textcolor{mldark}{Published by Furqanix Academic Press}\\
+\textcolor{mlblue}{Dhaka, Bangladesh}
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+% ==== PREFACE ====
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This book is written to bridge the gap between classical calculus and modern machine learning techniques.
+It introduces mathematical rigor with intuition, guiding students from foundational differentiation
+to advanced gradient-based optimization methods.
+
+\textbf{Why this book?}  
+Machine learning relies heavily on continuous mathematics. This text blends practical
+computation with theory — showing how calculus shapes algorithms like backpropagation and gradient descent.
+
+\vspace{0.5cm}
+\begin{tcolorbox}[colback=white,colframe=mlblue,title=Core Topics]
+\begin{itemize}
+\item Limits and Continuity in Neural Computation
+\item Multivariable Derivatives and Jacobians
+\item Gradient Descent and Optimization
+\item Vector Calculus for Deep Learning
+\item Integration and Probability Density
+\end{itemize}
+\end{tcolorbox}
+
+% ==== TABLE OF CONTENTS ====
+\tableofcontents
+\newpage
+
+% ==== CHAPTER 1 ====
+\chapter{Introduction to Calculus for ML}
+\section{Motivation}
+Calculus forms the backbone of every learning algorithm. It allows us to compute change and update weights efficiently.
+
+\section{Example}
+\begin{equation}
+    \frac{d}{dx}(x^2 + 3x + 5) = 2x + 3
+\end{equation}
+
+\section{Diagram}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (-3,0)--(3,0) node[right]{$x$};
+\draw[->] (0,-1)--(4,4) node[above]{$y$};
+\draw[domain=-2:2,smooth,variable=\x,mlblue,thick] plot ({\x},{\x*\x/2});
+\node at (2,2.3) {\small $y=\frac{1}{2}x^2$};
+\end{tikzpicture}
+\end{center}
+
+% ==== CHAPTER 2 ====
+\chapter{Limits and Continuity}
+\section{Concept of Limit}
+\begin{equation}
+    \lim_{x \to a} f(x) = L
+\end{equation}
+Intuitively, this expresses stability of function behavior near $x=a$.
+
+\lipsum[2]
+
+% ==== CHAPTER 3 ====
+\chapter{Derivatives and Gradient}
+\section{Partial Derivatives}
+For $f(x,y) = x^2y + 3y$,  
+\[
+\frac{\partial f}{\partial x} = 2xy, \quad \frac{\partial f}{\partial y} = x^2 + 3
+\]
+
+\section{Vector Form}
+\[
+\nabla f(x,y) = 
+\begin{bmatrix}
+2xy\\
+x^2 + 3
+\end{bmatrix}
+\]
+
+\section{Machine Learning Relevance}
+This is used in gradient-based optimization.
+
+% ==== CHAPTER 4 ====
+\chapter{Integration and Probability}
+\section{Continuous Probability}
+If $f(x)$ is a PDF, then:
+\[
+\int_{-\infty}^{\infty} f(x) dx = 1
+\]
+
+\section{Example: Gaussian Distribution}
+\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+
+% ==== CHAPTER 5 ====
+\chapter{Optimization in Neural Networks}
+\section{Gradient Descent}
+The update rule:
+\[
+\theta = \theta - \eta \nabla_\theta J(\theta)
+\]
+where $\eta$ is the learning rate.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[->] (-1,0)--(5,0) node[right]{$\theta$};
+\draw[->] (0,-1)--(0,5) node[above]{$J(\theta)$};
+\draw[domain=0:4,smooth,variable=\x,mlblue,thick] plot ({\x},{(\x-2)^2+1});
+\filldraw[mlgold] (2,1) circle (2pt) node[below right]{Min};
+\end{tikzpicture}
+\end{center}
+
+\section{Backpropagation}
+Derivatives enable weight updates layer by layer — the soul of deep learning.
+
+% ==== END ====
+\end{document}

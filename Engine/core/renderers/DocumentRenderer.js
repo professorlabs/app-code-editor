@@ -16,6 +16,11 @@ class DocumentRenderer {
         this.theme = null;
         this.codeParser = new CodeParser();
         this.mathParser = new MathParser();
+        this.options = {
+            minify: false,
+            preserveComments: false,
+            debugMode: false
+        };
     }
 
     /**
@@ -23,6 +28,29 @@ class DocumentRenderer {
      */
     setTheme(theme) {
         this.theme = theme;
+        return this;
+    }
+
+    /**
+     * Set renderer option
+     */
+    setOption(option, value) {
+        this.options[option] = value;
+        return this;
+    }
+
+    /**
+     * Get renderer option
+     */
+    getOption(option) {
+        return this.options[option];
+    }
+
+    /**
+     * Set multiple renderer options
+     */
+    setOptions(options) {
+        this.options = { ...this.options, ...options };
         return this;
     }
 

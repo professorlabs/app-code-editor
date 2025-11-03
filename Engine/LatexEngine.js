@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const RendererFactory = require('./core/renderers/RendererFactory');
+const RendererFactory = require('./core/factories/RendererFactory');
 const DefaultTheme = require('./core/themes/DefaultTheme');
 
 class LatexEngine {
@@ -125,13 +125,15 @@ class LatexEngine {
         // Import themes dynamically
         const DefaultTheme = require('./core/themes/DefaultTheme');
         const PortfolioTheme = require('./core/themes/PortfolioTheme');
+        const BookTheme = require('./core/themes/BookTheme');
         
         switch (documentClass.toLowerCase()) {
             case 'portfolio':
                 return new PortfolioTheme();
+            case 'book':
+                return new BookTheme();
             case 'article':
             case 'report':
-            case 'book':
             case 'ieeetran':
             case 'memoir':
             default:

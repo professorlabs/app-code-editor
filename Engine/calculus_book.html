@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled Document</title>
+    <meta name="author" content="Unknown Author">
+    <meta name="description" content="Professional book generated from LaTeX">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="book">
+    <meta property="og:title" content="Untitled Document">
+    <meta property="og:description" content="Professional book generated from LaTeX">
+    <meta property="og:author" content="Unknown Author">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Untitled Document">
+    <meta property="twitter:description" content="Professional book generated from LaTeX">
+    <meta property="twitter:author" content="Unknown Author">
+    
+    <!-- Security headers -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <style>
+
+/* Base Theme Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: #ffffff;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.5em; color: #1a1a1a; }
+h2 { font-size: 2em; color: #2c3e50; }
+h3 { font-size: 1.5em; color: #34495e; }
+h4 { font-size: 1.2em; color: #495057; }
+h5 { font-size: 1em; color: #6c757d; }
+h6 { font-size: 0.9em; color: #6c757d; }
+
+p {
+    margin: 1em 0;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+em {
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background: #f8f9fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #e74c3c;
+}
+
+/* Lists */
+ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin: 0.5em 0;
+    line-height: 1.6;
+}
+
+/* Block Elements */
+blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid #3498db;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #6c757d;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #e9ecef;
+    margin: 2em 0;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+th, td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+th {
+    font-weight: 600;
+    color: #2c3e50;
+    background: #f8f9fa;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+/* Figures */
+figure {
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+figcaption {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.small-caps {
+    font-variant: small-caps;
+    text-transform: lowercase;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+
+/* Spacing */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25em; }
+.mt-2 { margin-top: 0.5em; }
+.mt-3 { margin-top: 1em; }
+.mt-4 { margin-top: 1.5em; }
+.mt-5 { margin-top: 2em; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25em; }
+.mb-2 { margin-bottom: 0.5em; }
+.mb-3 { margin-bottom: 1em; }
+.mb-4 { margin-bottom: 1.5em; }
+.mb-5 { margin-bottom: 2em; }
+
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: 0.25em; }
+.pt-2 { padding-top: 0.5em; }
+.pt-3 { padding-top: 1em; }
+.pt-4 { padding-top: 1.5em; }
+.pt-5 { padding-top: 2em; }
+
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: 0.25em; }
+.pb-2 { padding-bottom: 0.5em; }
+.pb-3 { padding-bottom: 1em; }
+.pb-4 { padding-bottom: 1.5em; }
+.pb-5 { padding-bottom: 2em; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+    
+    p {
+        font-size: 0.95em;
+        line-height: 1.6;
+    }
+    
+    table {
+        font-size: 0.8em;
+    }
+    
+    th, td {
+        padding: 0.5em;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+    }
+    
+    a {
+        color: black;
+        text-decoration: none;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+
+/* Book Theme Specific Styles */
+body {
+    background: #f5f5f5;
+    overflow-x: hidden;
+}
+
+/* Book Container */
+.book-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+/* Book Header */
+.book-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ffffff;
+    padding: 1rem 2rem;
+    text-align: center;
+    border-bottom: 3px solid #e74c3c;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.book-author {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Book Layout */
+.book-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    flex: 1;
+    min-height: calc(100vh - 120px);
+}
+
+/* Book Main Content */
+.book-main {
+    padding: 0;
+    background: #f5f5f5;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+}
+
+/* Book Footer */
+.book-footer {
+    background: #2c3e50;
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    border-top: 3px solid #e74c3c;
+}
+
+.footer-content p {
+    margin: 0.5rem 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Demo Mode Watermark */
+.demo-watermark {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Responsive Book Layout */
+@media (max-width: 1024px) {
+    .book-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .book-sidebar {
+        position: relative !important;
+        height: auto !important;
+        margin-bottom: 1rem;
+        border-right: none !important;
+        border-bottom: 3px solid #e74c3c !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-container {
+        margin: 0;
+    }
+    
+    .book-header {
+        padding: 1rem;
+    }
+    
+    .book-title {
+        font-size: 1.2rem;
+    }
+    
+    .book-layout {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .book-sidebar {
+        order: 2;
+        margin-bottom: 0;
+        border-bottom: none !important;
+    }
+    
+    .book-main {
+        order: 1;
+        padding: 1rem;
+    }
+}
+
+
+/* Two Column Layout */
+.book-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* Simple A4 Page Layout */
+.a4-page {
+    width: 100%;
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Simple Page Header */
+.a4-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12mm 20mm 6mm 20mm;
+    border-bottom: 1px solid #e0e0e0;
+    min-height: 25px;
+}
+
+.page-header-left {
+    font-size: 11px;
+    font-weight: 600;
+    color: #333333;
+    text-transform: uppercase;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-header-right {
+    font-size: 11px;
+    color: #666666;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Book Content Container */
+.book-content {
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Page Content */
+.a4-page-content {
+    flex: 1;
+    padding: 10mm 20mm;
+    min-height: calc(297mm - 65mm);
+}
+
+.content-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #333333;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Page Footer */
+.a4-page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8mm 20mm 12mm 20mm;
+    border-top: 1px solid #e0e0e0;
+    min-height: 20px;
+}
+
+.page-footer-left {
+    font-size: 10px;
+    color: #666666;
+}
+
+.page-footer-right {
+    font-size: 10px;
+    color: #666666;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Page Type Styles */
+.a4-page.title-page .content-wrapper {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(297mm - 65mm);
+}
+
+.a4-page.toc-page .content-wrapper {
+    font-size: 10pt;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    border: 1px solid #333333;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sidebar-toggle.collapsed {
+    left: 20px;
+}
+
+/* Sidebar States */
+.book-sidebar {
+    transition: transform 0.3s ease;
+}
+
+.book-sidebar.collapsed {
+    transform: translateX(-100%);
+    margin-left: -280px;
+}
+
+.book-content.expanded {
+    margin-left: 0;
+    grid-column: 1 / -1;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .book-layout {
+        grid-template-columns: 250px 1fr;
+    }
+    
+    .a4-page {
+        max-width: 190mm;
+        margin: 8px auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .book-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .book-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 999;
+        transform: translateX(-100%);
+    }
+    
+    .book-sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .book-sidebar.collapsed {
+        transform: translateX(-100%);
+        margin-left: 0;
+    }
+    
+    .book-content {
+        grid-column: 1 / -1;
+        margin-left: 0;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .a4-page {
+        max-width: 100%;
+        margin: 5px auto;
+        min-height: auto;
+    }
+    
+    .a4-page-header {
+        padding: 12mm 15mm 6mm 15mm;
+    }
+    
+    .a4-page-content {
+        padding: 8mm 15mm;
+        min-height: auto;
+    }
+    
+    .a4-page-footer {
+        padding: 6mm 15mm 10mm 15mm;
+    }
+    
+    .content-wrapper {
+        font-size: 10pt;
+    }
+}
+
+@media (max-width: 768px) {
+    .a4-page {
+        margin: 3px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .a4-page-header,
+    .a4-page-content,
+    .a4-page-footer {
+        padding: 5mm 10mm;
+    }
+    
+    .page-header-left {
+        font-size: 10px;
+    }
+    
+    .content-wrapper {
+        font-size: 9pt;
+        line-height: 1.5;
+    }
+    
+    .sidebar-toggle {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .a4-page {
+        margin: 2px;
+    }
+    
+    .a4-page-header,
+    .a4-page-content,
+    .a4-page-footer {
+        padding: 4mm 8mm;
+    }
+    
+    .page-header-left {
+        font-size: 9px;
+    }
+    
+    .content-wrapper {
+        font-size: 8pt;
+        line-height: 1.4;
+    }
+    
+    .sidebar-toggle {
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .a4-page {
+        max-width: 100%;
+        margin: 0;
+        border: 1px solid #000;
+        box-shadow: none;
+        page-break-inside: avoid;
+        padding: 0;
+    }
+    
+    .a4-page-header,
+    .a4-page-footer {
+        background: transparent;
+        color: black;
+    }
+}
+
+/* Simple Sidebar Navigation */
+.book-sidebar {
+    padding: 0;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 100;
+}
+
+.sticky-sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 320px;
+    height: calc(100vh - 60px);
+    transition: transform 0.3s ease;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem 1rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-toggle {
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+    padding: 1rem;
+    color: #374151;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+}
+
+/* Navigation Sections */
+.nav-section {
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.nav-section-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+
+/* Navigation Lists */
+.nav-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.nav-list li {
+    margin-bottom: 0.25rem;
+}
+
+/* Navigation Links */
+.nav-link {
+    color: #666666;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+    color: #333333;
+    border-left-color: #333333;
+}
+
+.nav-link.active {
+    color: #333333;
+    border-left-color: #333333;
+    font-weight: 700;
+}
+
+/* Chapter-specific styling */
+.chapter-link {
+    position: relative;
+}
+
+.chapter-number {
+    border: 1px solid #333333;
+    color: #333333;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.chapter-title {
+    flex: 1;
+    margin-left: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+.chapter-progress {
+    height: 2px;
+    background: #333333;
+    border-radius: 1px;
+    margin-left: 0.5rem;
+}
+
+/* Progress Indicators */
+.chapters-progress {
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #333333;
+    border-radius: 3px;
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    color: #666666;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Reading Position Indicator */
+.reading-position {
+    margin-top: 0.5rem;
+}
+
+.position-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.current-page {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+.scroll-progress {
+    width: 40px;
+    height: 60px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #333333;
+    border-radius: 20px;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.toc-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 1rem;
+}
+
+.toc-navigation {
+    line-height: 1.8;
+}
+
+.toc-section {
+    margin-bottom: 1rem;
+}
+
+.toc-item {
+    margin: 0.5rem 0;
+}
+
+.toc-link {
+    display: flex;
+    align-items: center;
+    color: #495057;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.toc-link:hover {
+    background: #333333;
+    color: #ffffff;
+}
+
+.toc-number {
+    font-weight: 600;
+    margin-right: 1rem;
+    min-width: 120px;
+}
+
+.toc-title-text {
+    flex: 1;
+}
+
+.toc-progress {
+    height: 2px;
+    background: #333333;
+    border-radius: 1px;
+    margin-left: 0.5rem;
+}
+
+.toc-indicator {
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toc-link:hover .toc-indicator {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* TOC Level Styling */
+.toc-part .toc-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-left-color: #333333;
+}
+
+.toc-chapter .toc-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-left-color: #555555;
+}
+
+.toc-section .toc-link {
+    font-size: 1rem;
+    font-weight: 500;
+    border-left-color: #777777;
+    margin-left: 2rem;
+}
+
+.toc-subsection .toc-link {
+    font-size: 0.9rem;
+    font-weight: 400;
+    border-left-color: #999999;
+    margin-left: 4rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-list li {
+    margin-right: 0.5rem;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.5rem;
+    color: #6c757d;
+}
+
+.breadcrumb-list li.current {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Sidebar Scrollbar */
+.book-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.book-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.book-sidebar::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 3px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 1024px) {
+    .book-sidebar {
+        position: relative;
+        height: auto;
+        margin-bottom: 2rem;
+        border-right: none;
+        border-bottom: 3px solid #e74c3c;
+    }
+    
+    .sidebar-content {
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-sidebar {
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .sidebar-header {
+        padding: 1rem;
+    }
+    
+    .sidebar-content {
+        padding: 0.5rem;
+    }
+    
+    .nav-section {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-link {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+    
+    .table-of-contents {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+}
+
+/* Professional Typography */
+body {
+    font-family: Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.8;
+    color: #1f2937;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Paragraphs with LaTeX Styling */
+.content-wrapper p,
+.book-main p {
+    margin: 1.2em 0;
+    text-align: justify;
+    text-align-last: justify;
+    hyphens: auto;
+    line-height: 1.8;
+    color: #1f2937;
+    text-indent: 1.5em;
+    widows: 2;
+    orphans: 2;
+    word-spacing: 0.05em;
+    font-variant-ligatures: common-ligatures;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.content-wrapper p:first-of-type,
+.book-main p:first-of-type {
+    text-indent: 0;
+}
+
+.content-wrapper p:first-child,
+.book-main p:first-child {
+    text-indent: 0;
+}
+
+/* Chapter opening paragraph special styling */
+.book-main .book-chapter p:first-of-type,
+.content-wrapper .book-chapter p:first-of-type {
+    text-indent: 0;
+    font-size: 1.1em;
+    font-weight: 300;
+    color: #374151;
+    border-left: 3px solid #e74c3c;
+    padding-left: 1rem;
+    margin-left: -1rem;
+}
+
+/* Section anchor links */
+.section-anchor {
+    opacity: 0;
+    margin-left: 0.5rem;
+    text-decoration: none;
+    color: #e74c3c;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+h1:hover .section-anchor,
+h2:hover .section-anchor,
+h3:hover .section-anchor,
+h4:hover .section-anchor,
+h5:hover .section-anchor,
+h6:hover .section-anchor {
+    opacity: 1;
+}
+
+.section-anchor:hover {
+    color: #dc2626;
+    transform: scale(1.2);
+}
+
+/* Enhanced paragraph spacing for different content types */
+.content-wrapper .abstract p {
+    font-style: italic;
+    color: #6b7280;
+    text-indent: 0;
+    padding: 0 1rem;
+    border-left: 2px solid #d1d5db;
+}
+
+.content-wrapper .dedication-content p {
+    text-align: center;
+    font-style: italic;
+    text-indent: 0;
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+.content-wrapper .theorem-content p,
+.content-wrapper .proof-content p {
+    text-align: left;
+    text-indent: 0;
+    margin: 0.8em 0;
+}
+
+/* Headings */
+.book-main h1,
+.content-wrapper h1 {
+    font-size: 2.2em;
+    margin: 50px 0 25px 0;
+    color: #1a1a1a;
+    border-bottom: 3px solid #e74c3c;
+    padding-bottom: 15px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-main h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #e74c3c, transparent);
+    transition: width 0.5s ease;
+}
+
+.book-main h1:hover::after {
+    width: 100%;
+}
+
+.book-main h2,
+.content-wrapper h2 {
+    font-size: 1.8em;
+    margin: 40px 0 20px 0;
+    color: #2c3e50;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-main h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #3498db, transparent);
+    transition: width 0.5s ease;
+}
+
+.book-main h2:hover::after {
+    width: 100%;
+}
+
+.book-main h3,
+.content-wrapper h3 {
+    font-size: 1.4em;
+    margin: 30px 0 15px 0;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.book-main h4,
+.content-wrapper h4 {
+    font-size: 1.2em;
+    margin: 25px 0 12px 0;
+    color: #495057;
+    font-weight: 500;
+}
+
+.book-main h5,
+.content-wrapper h5 {
+    font-size: 1.1em;
+    margin: 20px 0 10px 0;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.book-main h6,
+.content-wrapper h6 {
+    font-size: 1em;
+    margin: 15px 0 8px 0;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Text Formatting */
+.textbf {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.textit {
+    font-style: italic;
+    color: #6b758d;
+}
+
+.texttt {
+    font-family: Courier New, monospace;
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #d63384;
+}
+
+.emph {
+    font-style: italic;
+    color: #e74c3c;
+}
+
+.underline {
+    text-decoration: underline;
+    text-decoration-color: #e74c3c;
+    text-underline-offset: 4px;
+}
+
+.small-caps {
+    font-variant: small-caps;
+    color: #495057;
+}
+
+.sans-serif {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.roman {
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Size Classes */
+.size-tiny { font-size: 0.7em; }
+.size-scriptsize { font-size: 0.8em; }
+.size-footnotesize { font-size: 0.9em; }
+.size-small { font-size: 0.95em; }
+.size-normalsize { font-size: 1em; }
+.size-large { font-size: 1.2em; }
+.size-Large { font-size: 1.44em; }
+.size-LARGE { font-size: 1.728em; }
+.size-huge { font-size: 2.074em; }
+.size-Huge { font-size: 2.488em; }
+
+/* Lists */
+.book-main ul,
+.content-wrapper ul {
+    margin: 20px 0 20px 30px;
+    padding-left: 20px;
+}
+
+.book-main ol,
+.content-wrapper ol {
+    margin: 20px 0 20px 30px;
+    padding-left: 20px;
+}
+
+.book-main li,
+.content-wrapper li {
+    margin: 10px 0;
+    color: #495057;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.book-main ul li::marker,
+.content-wrapper ul li::marker {
+    color: #e74c3c;
+    font-size: 1.2em;
+}
+
+.book-main ol li::marker,
+.content-wrapper ol li::marker {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Item Lists */
+.item-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.item-list li {
+    margin: 0.8em 0;
+    padding-left: 1.5em;
+    position: relative;
+}
+
+.item-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Numbered Lists */
+.numbered-list {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: item;
+}
+
+.numbered-list li {
+    margin: 0.8em 0;
+    padding-left: 2em;
+    position: relative;
+    counter-increment: item;
+}
+
+.numbered-list li::before {
+    content: counter(item) + '.';
+    position: absolute;
+    left: 0;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Description Lists */
+.description-list dt {
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1em 0 0.5em 0;
+}
+
+.description-list dd {
+    margin: 0 0 1em 1.5em;
+    color: #495057;
+    line-height: 1.6;
+}
+
+/* Enhanced Block Quotes */
+.book-main blockquote,
+.content-wrapper blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid #e74c3c;
+    background: linear-gradient(90deg, #fef2f2 0%, #ffffff 100%);
+    font-style: italic;
+    color: #6b7280;
+    text-align: justify;
+    text-indent: 0;
+}
+
+.book-main blockquote p,
+.content-wrapper blockquote p {
+    text-indent: 0;
+    margin: 0;
+}
+
+/* Tables */
+.table-content {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
+    background: #ffffff;
+}
+
+.table-content th,
+.table-content td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-content th {
+    font-weight: 600;
+    color: #2c3e50;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.table-content tr:hover {
+    background: #f8f9fa;
+}
+
+.table-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: #6b757d;
+    font-style: italic;
+    margin: 0.5em 0 1em 0;
+}
+
+/* Figures */
+.figure {
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+.figure-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 0.5em;
+}
+
+.figure-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.figcaption {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Equations */
+.equation {
+    margin: 1.5em 0;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.equation-content {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+/* Theorems */
+.theorem {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.theorem-content {
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Proofs */
+.proof {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-left: 4px solid #27ae60;
+    background: #f8f9fa;
+}
+
+.proof-content {
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.proof-end {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #27ae60;
+    font-weight: 700;
+}
+
+/* Interactive content highlighting */
+.content-wrapper p:hover {
+    background: linear-gradient(90deg, transparent 0%, rgba(231, 76, 60, 0.02) 50%, transparent 100%);
+    transition: background 0.3s ease;
+}
+
+/* Code Blocks */
+code {
+    font-family: Courier New, monospace;
+    background: #f8f9fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #e74c3c;
+    border: 1px solid #e9ecef;
+}
+
+pre {
+    background: #f8f9fa;
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid #e9ecef;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    body {
+        font-size: 10pt;
+    }
+    
+    .book-main h1,
+    .content-wrapper h1 {
+        font-size: 1.8em;
+    }
+    
+    .book-main h2,
+    .content-wrapper h2 {
+        font-size: 1.5em;
+    }
+    
+    .book-main h3,
+    .content-wrapper h3 {
+        font-size: 1.3em;
+    }
+    
+    .content-wrapper p,
+    .book-main p {
+        font-size: 10pt;
+        line-height: 1.6;
+        text-indent: 1.2em;
+    }
+}
+
+/* Print Typography */
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: black;
+    }
+    
+    .content-wrapper p,
+    .book-main p {
+        text-align: justify;
+        hyphens: auto;
+        page-break-inside: avoid;
+        widows: 2;
+        orphans: 2;
+    }
+    
+    .book-main h1,
+    .book-main h2 {
+        page-break-after: avoid;
+    }
+    
+    .figure,
+    .table,
+    .equation {
+        page-break-inside: avoid;
+    }
+}
+
+/* Premium Animations and Transitions */
+
+/* Page entrance animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pageTurn {
+    0% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: rotateY(90deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes slideAcross {
+    0%, 100% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pageReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Enhanced page animations */
+.a4-page {
+    animation: fadeInUp 0.8s ease-out;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+}
+
+.a4-page:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+.a4-page:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.a4-page:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 35px rgba(0, 0, 0, 0.15),
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Premium sidebar animations */
+.book-sidebar {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+/* Navigation link animations */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #e74c3c, #dc2626);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Enhanced chapter title animations */
+.chapter-title-page {
+    animation: fadeInUp 1s ease-out;
+}
+
+.part-title-page {
+    animation: fadeInUp 1.2s ease-out;
+}
+
+/* Reading progress indicator enhancements */
+.reading-position {
+    position: relative;
+    overflow: hidden;
+}
+
+.reading-position::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #10b981, #059669, #10b981);
+    border-radius: 8px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    animation: shimmer 2s infinite;
+}
+
+.reading-position:hover::before {
+    opacity: 0.3;
+}
+
+/* Premium book container effects */
+.book-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.book-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #e74c3c, #dc2626, #e74c3c);
+    animation: slideAcross 3s ease-in-out infinite;
+}
+
+/* Enhanced hover effects for interactive elements */
+.toc-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.toc-link:hover {
+    transform: translateX(8px) scale(1.02);
+}
+
+.toc-indicator {
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.toc-link:hover .toc-indicator {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* Premium page transitions */
+.a4-page.in-view {
+    animation: pageReveal 0.8s ease-out;
+}
+
+/* Enhanced scrollbar styling */
+.book-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.book-sidebar::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, #f1f3f4 0%, #e8eaed 100%);
+    border-radius: 3px;
+}
+
+.book-sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e74c3c 0%, #dc2626 100%);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.book-sidebar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+    transform: scaleY(1.2);
+}
+
+.book-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.book-main::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+    border-radius: 4px;
+}
+
+.book-main::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #9ca3af 0%, #6b7280 100%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.book-main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #6b7280 0%, #4b5563 100%);
+}
+
+/* Premium print-like shadows */
+.a4-page {
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 4px 8px rgba(0, 0, 0, 0.04),
+        0 8px 16px rgba(0, 0, 0, 0.04),
+        0 16px 32px rgba(0, 0, 0, 0.04),
+        0 32px 64px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.a4-page:hover {
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.06),
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 16px 32px rgba(0, 0, 0, 0.06),
+        0 32px 64px rgba(0, 0, 0, 0.06),
+        0 64px 128px rgba(0, 0, 0, 0.06);
+}
+
+/* Interactive content highlighting */
+.content-wrapper p:hover {
+    background: linear-gradient(90deg, transparent 0%, rgba(231, 76, 60, 0.02) 50%, transparent 100%);
+    transition: background 0.3s ease;
+}
+
+/* Premium loading animation */
+.book-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.book-loading::after {
+    content: 'Loading Premium eBook...';
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 300;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Enhanced focus states for accessibility */
+.nav-link:focus,
+.toc-link:focus,
+.section-anchor:focus {
+    outline: 3px solid #e74c3c;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Premium typography enhancements */
+.book-main h1,
+.book-main h2,
+.book-main h3,
+.book-main h4,
+.book-main h5,
+.book-main h6 {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Interactive chapter markers */
+.chapter-number,
+.part-header {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.chapter-number:hover,
+.part-header:hover {
+    transform: scale(1.1);
+    color: #dc2626;
+}
+
+/* Premium table of contents enhancements */
+.table-of-contents {
+    position: relative;
+    overflow: hidden;
+}
+
+.table-of-contents::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.02) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* Content animation on scroll */
+.book-main > * {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.book-main > *:nth-child(1) { animation-delay: 0.1s; }
+.book-main > *:nth-child(2) { animation-delay: 0.2s; }
+.book-main > *:nth-child(3) { animation-delay: 0.3s; }
+.book-main > *:nth-child(4) { animation-delay: 0.4s; }
+.book-main > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Smooth transitions for all interactive elements */
+button, a, .nav-link, .toc-link {
+    transition: all 0.3s ease;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .a4-page,
+    .book-sidebar,
+    .chapter-title-page,
+    .part-title-page {
+        animation: none;
+    }
+    
+    .book-container::before {
+        animation: none;
+    }
+    
+    .reading-position::before {
+        animation: none;
+    }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .a4-page {
+        animation-duration: 0.4s;
+    }
+    
+    .toc-link:hover {
+        transform: translateX(5px) scale(1.01);
+    }
+    
+    .nav-link:hover {
+        transform: translateX(3px);
+    }
+    
+    .a4-page:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* Performance optimizations */
+.a4-page {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.nav-link,
+.toc-link {
+    will-change: transform;
+}
+
+/* Loading skeleton animation */
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+/* Progress bar animations */
+.progress-fill {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chapter-progress {
+    transition: width 0.3s ease;
+}
+
+.scroll-fill {
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    </style>
+</head>
+<body>
+    <div class="book-layout">
+            <aside class="book-sidebar">
+                <aside class="book-sidebar sticky-sidebar">
+<div class="sidebar-header">
+<div class="sidebar-title">Navigation</div>
+<button class="sidebar-toggle">Menu</button>
+</div>
+<div class="sidebar-content">
+<div class="sidebar-nav">
+<div class="nav-section quick-nav">
+<h4 class="nav-section-title">Quick Access</h4>
+<ul class="nav-list">
+<li><a href="#table-of-contents" class="nav-link">Table of Contents</a></li>
+</ul>
+</div>
+<div class="nav-section chapters-nav">
+<h4 class="nav-section-title">Chapters</h4>
+<div class="chapters-progress">
+<div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+<div class="progress-text">0% Complete</div>
+</div>
+<ul class="nav-list">
+<li>
+                <a href="#chapter-1" class="nav-link chapter-link" data-chapter="1" data-progress="20">
+                    <span class="chapter-number">1</span>
+                    <span class="chapter-title">Introduction to Calculus for ML</span>
+                    <span class="chapter-progress" style="width: 20%"></span>
+                </a>
+            </li>
+<li>
+                <a href="#chapter-2" class="nav-link chapter-link" data-chapter="2" data-progress="40">
+                    <span class="chapter-number">2</span>
+                    <span class="chapter-title">Limits and Continuity</span>
+                    <span class="chapter-progress" style="width: 40%"></span>
+                </a>
+            </li>
+<li>
+                <a href="#chapter-3" class="nav-link chapter-link" data-chapter="3" data-progress="60">
+                    <span class="chapter-number">3</span>
+                    <span class="chapter-title">Derivatives and Gradient</span>
+                    <span class="chapter-progress" style="width: 60%"></span>
+                </a>
+            </li>
+<li>
+                <a href="#chapter-4" class="nav-link chapter-link" data-chapter="4" data-progress="80">
+                    <span class="chapter-number">4</span>
+                    <span class="chapter-title">Integration and Probability</span>
+                    <span class="chapter-progress" style="width: 80%"></span>
+                </a>
+            </li>
+<li>
+                <a href="#chapter-5" class="nav-link chapter-link" data-chapter="5" data-progress="100">
+                    <span class="chapter-number">5</span>
+                    <span class="chapter-title">Optimization in Neural Networks</span>
+                    <span class="chapter-progress" style="width: 100%"></span>
+                </a>
+            </li>
+</ul>
+</div>
+<div class="nav-section reading-position">
+<h4 class="nav-section-title">Reading Position</h4>
+<div class="position-indicator">
+<div class="current-page">Page 1</div>
+<div class="scroll-progress">
+<div class="scroll-fill" style="height: 0%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+
+            </aside>
+            <main class="book-content">
+                <div class="a4-page frontmatter title-page" data-page="1" data-total="1">
+<div class="a4-page-header">
+<div class="page-header-left">Title</div>
+<div class="page-header-right">1</div>
+</div>
+<div class="a4-page-content">
+<div class="content-wrapper">
+<div class="title-page">
+</div>
+
+
+% ==== PREFACE ====
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This book is written to bridge the gap between classical calculus and modern machine learning techniques.
+It introduces mathematical rigor with intuition, guiding students from foundational differentiation
+to advanced gradient-based optimization methods.
+
+<strong>Why this book?</strong>  
+Machine learning relies heavily on continuous mathematics. This text blends practical
+computation with theory — showing how calculus shapes algorithms like backpropagation and gradient descent.
+
+\vspace{0.5cm}
+\begin{tcolorbox}[colback=white,colframe=mlblue,title=Core Topics]
+<ul class="item-list"><li>Limits and Continuity in Neural Computation</li>
+<li>Multivariable Derivatives and Jacobians</li>
+<li>Gradient Descent and Optimization</li>
+<li>Vector Calculus for Deep Learning</li>
+<li>Integration and Probability Density</li></ul>
+\end{tcolorbox}
+
+% ==== TABLE OF CONTENTS ====
+<div class="table-of-contents" id="table-of-contents">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-navigation">
+<div class="toc-section toc-chapters">
+<div class="toc-item toc-chapter" data-progress="20">
+                <a href="#chapter-1" class="toc-link">
+                    <span class="toc-number">Chapter 1</span>
+                    <span class="toc-title">Introduction to Calculus for ML</span>
+                    <span class="toc-progress" style="width: 20%"></span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter" data-progress="40">
+                <a href="#chapter-2" class="toc-link">
+                    <span class="toc-number">Chapter 2</span>
+                    <span class="toc-title">Limits and Continuity</span>
+                    <span class="toc-progress" style="width: 40%"></span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter" data-progress="60">
+                <a href="#chapter-3" class="toc-link">
+                    <span class="toc-number">Chapter 3</span>
+                    <span class="toc-title">Derivatives and Gradient</span>
+                    <span class="toc-progress" style="width: 60%"></span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter" data-progress="80">
+                <a href="#chapter-4" class="toc-link">
+                    <span class="toc-number">Chapter 4</span>
+                    <span class="toc-title">Integration and Probability</span>
+                    <span class="toc-progress" style="width: 80%"></span>
+                </a>
+            </div>
+<div class="toc-item toc-chapter" data-progress="100">
+                <a href="#chapter-5" class="toc-link">
+                    <span class="toc-number">Chapter 5</span>
+                    <span class="toc-title">Optimization in Neural Networks</span>
+                    <span class="toc-progress" style="width: 100%"></span>
+                </a>
+            </div>
+</div>
+</nav>
+</div>
+\newpage
+
+% ==== CHAPTER 1 ====
+<div class="book-chapter" id="chapter-0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Introduction to Calculus for ML</h1>
+                    
+                </div>
+            </div>
+<h3 id="chapter-section-1" class="section">
+                    Motivation
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+Calculus forms the backbone of every learning algorithm. It allows us to compute change and update weights efficiently.
+
+<h3 id="chapter-section-1" class="section">
+                    Example
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+<div class="equation">
+            <div class="equation-content">\frac{d}{dx}(x^2 + 3x + 5) = 2x + 3</div>
+        </div>
+
+<h3 id="chapter-section-1" class="section">
+                    Diagram
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (-3,0)--(3,0) node[right]{$x$};
+\draw[->] (0,-1)--(4,4) node[above]{$y$};
+\draw[domain=-2:2,smooth,variable=\x,mlblue,thick] plot ({\x},{\x*\x/2});
+\node at (2,2.3) {\small $y=\frac{1}{2}x^2$};
+\end{tikzpicture}
+\end{center}
+
+% ==== CHAPTER 2 ====
+<div class="book-chapter" id="chapter-0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Limits and Continuity</h1>
+                    
+                </div>
+            </div>
+<h3 id="chapter-section-1" class="section">
+                    Concept of Limit
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+<div class="equation">
+            <div class="equation-content">\lim_{x \to a} f(x) = L</div>
+        </div>
+Intuitively, this expresses stability of function behavior near $x=a$.
+
+\lipsum[2]
+
+% ==== CHAPTER 3 ====
+<div class="book-chapter" id="chapter-0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Derivatives and Gradient</h1>
+                    
+                </div>
+            </div>
+<h3 id="chapter-section-1" class="section">
+                    Partial Derivatives
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+For $f(x,y) = x^2y + 3y$,  
+\[
+\frac{\partial f}{\partial x} = 2xy, \quad \frac{\partial f}{\partial y} = x^2 + 3
+\]
+
+<h3 id="chapter-section-1" class="section">
+                    Vector Form
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+\[
+\nabla f(x,y) = 
+\begin{bmatrix}
+2xy\\
+x^2 + 3
+\end{bmatrix}
+\]
+
+<h3 id="chapter-section-1" class="section">
+                    Machine Learning Relevance
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+This is used in gradient-based optimization.
+
+% ==== CHAPTER 4 ====
+<div class="book-chapter" id="chapter-0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Integration and Probability</h1>
+                    
+                </div>
+            </div>
+<h3 id="chapter-section-1" class="section">
+                    Continuous Probability
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+If $f(x)$ is a PDF, then:
+\[
+\int_{-\infty}^{\infty} f(x) dx = 1
+\]
+
+<h3 id="chapter-section-1" class="section">
+                    Example: Gaussian Distribution
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+
+% ==== CHAPTER 5 ====
+<div class="book-chapter" id="chapter-0">
+                <div class="chapter-title-page">
+                    <div class="chapter-number">Chapter 0</div>
+                    <h1 class="chapter-title">Optimization in Neural Networks</h1>
+                    
+                </div>
+            </div>
+<h3 id="chapter-section-1" class="section">
+                    Gradient Descent
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+The update rule:
+\[
+\theta = \theta - \eta \nabla_\theta J(\theta)
+\]
+where $\eta$ is the learning rate.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[->] (-1,0)--(5,0) node[right]{$\theta$};
+\draw[->] (0,-1)--(0,5) node[above]{$J(\theta)$};
+\draw[domain=0:4,smooth,variable=\x,mlblue,thick] plot ({\x},{(\x-2)^2+1});
+\filldraw[mlgold] (2,1) circle (2pt) node[below right]{Min};
+\end{tikzpicture}
+\end{center}
+
+<h3 id="chapter-section-1" class="section">
+                    Backpropagation
+                    <a href="#chapter-section-1" class="section-anchor">Link</a>
+                </h3>
+Derivatives enable weight updates layer by layer — the soul of deep learning.
+
+% ==== END ====
+</div></div>
+</div>
+<div class="a4-page-footer">
+<div class="page-footer-left">Professional eBook</div>
+<div class="page-footer-right">Page 1 of 1</div>
+</div>
+</div>
+
+
+            </main>
+        </div>
+    
+    <script>
+
+// Base Theme Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document loaded successfully');
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add copy link functionality for headers
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+        if (header.id) {
+            const link = document.createElement('a');
+            link.href = '#' + header.id;
+            link.className = 'header-link';
+            link.textContent = 'Link';
+            link.style.fontSize = '0.7em';
+            link.style.opacity = '0';
+            link.style.marginLeft = '0.5em';
+            link.style.transition = 'opacity 0.3s';
+            
+            header.appendChild(link);
+            
+            header.addEventListener('mouseenter', () => {
+                link.style.opacity = '0.7';
+            });
+            
+            header.addEventListener('mouseleave', () => {
+                link.style.opacity = '0';
+            });
+        }
+    });
+});
+
+
+// Enhanced Navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    function initAdvancedNavigation() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('.book-part, .book-chapter, .a4-page');
+        const sidebar = document.querySelector('.book-sidebar');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        
+        // Sidebar toggle functionality
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                this.textContent = sidebar.classList.contains('collapsed') ? 'Menu' : 'Close';
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        function setupSmoothScrolling() {
+            [...navLinks, ...tocLinks].forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = 80;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        history.pushState(null, null, targetId);
+                        
+                        // Flash effect
+                        targetSection.style.transition = 'background-color 0.3s ease';
+                        targetSection.style.backgroundColor = '#fef2f2';
+                        setTimeout(() => {
+                            targetSection.style.backgroundColor = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+        
+        // Update progress indicators
+        function updateProgressIndicators(currentSection, progress) {
+            const chapterLinks = document.querySelectorAll('.chapter-link');
+            chapterLinks.forEach(link => {
+                const linkSection = link.getAttribute('href');
+                if (linkSection && currentSection.id.includes(linkSection.replace('#', ''))) {
+                    const progressBar = link.querySelector('.chapter-progress');
+                    if (progressBar) {
+                        progressBar.style.width = progress + '%';
+                    }
+                }
+            });
+        }
+        
+        // Intersection Observer for scroll animations
+        function setupIntersectionObserver() {
+            const observerOptions = {
+                threshold: [0.1, 0.5, 0.9],
+                rootMargin: '-100px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        
+                        // Update active navigation
+                        const navLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (navLink) {
+                            navLinks.forEach(link => link.classList.remove('active'));
+                            navLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => observer.observe(section));
+        }
+        
+        // Keyboard navigation
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                if (e.altKey) {
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            navigateToPreviousSection();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            navigateToNextSection();
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            break;
+                    }
+                }
+            });
+        }
+        
+        function navigateToPreviousSection() {
+            const currentSection = [...sections].find(section => 
+                window.scrollY >= section.offsetTop - 100 && 
+                window.scrollY < section.offsetTop + section.offsetHeight - 100
+            );
+            
+            if (currentSection) {
+                const currentIndex = [...sections].indexOf(currentSection);
+                if (currentIndex > 0) {
+                    const prevSection = sections[currentIndex - 1];
+                    prevSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        function navigateToNextSection() {
+            const currentSection = [...sections].find(section => 
+                window.scrollY >= section.offsetTop - 100 && 
+                window.scrollY < section.offsetTop + section.offsetHeight - 100
+            );
+            
+            if (currentSection) {
+                const currentIndex = [...sections].indexOf(currentSection);
+                if (currentIndex < sections.length - 1) {
+                    const nextSection = sections[currentIndex + 1];
+                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        // Initialize all navigation features
+        setupSmoothScrolling();
+        setupIntersectionObserver();
+        setupKeyboardNavigation();
+        
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY + 150;
+            
+            let currentSection = null;
+            let currentProgress = 0;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.id;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section;
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (href === `#${sectionId}` || href.includes(sectionId)) {
+                            link.classList.add('active');
+                        }
+                    });
+                    
+                    tocLinks.forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (href === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                    
+                    const sectionProgress = ((scrollPosition - sectionTop) / sectionHeight) * 100;
+                    currentProgress = Math.min(sectionProgress, 100);
+                }
+            });
+            
+            updateProgressIndicators(currentSection, currentProgress);
+        });
+    }
+    
+    initAdvancedNavigation();
+});
+
+// Simple layout functionality with sidebar toggle
+document.addEventListener('DOMContentLoaded', function() {
+    function initSidebarToggle() {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'sidebar-toggle';
+        toggleBtn.innerHTML = '☰';
+        toggleBtn.setAttribute('aria-label', 'Toggle sidebar');
+        
+        const sidebar = document.querySelector('.book-sidebar');
+        const bookContent = document.querySelector('.book-content');
+        
+        if (!sidebar || !bookContent) return;
+        
+        document.body.appendChild(toggleBtn);
+        
+        function toggleSidebar() {
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            
+            if (window.innerWidth <= 1024) {
+                // Mobile behavior
+                sidebar.classList.toggle('active');
+                toggleBtn.innerHTML = isCollapsed ? '☰' : '✕';
+            } else {
+                // Desktop behavior
+                sidebar.classList.toggle('collapsed');
+                bookContent.classList.toggle('expanded');
+                toggleBtn.innerHTML = isCollapsed ? '☰' : '✕';
+            }
+        }
+        
+        toggleBtn.addEventListener('click', toggleSidebar);
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                sidebar.classList.remove('active');
+                sidebar.classList.add('collapsed');
+                bookContent.classList.add('expanded');
+                toggleBtn.innerHTML = '☰';
+            }
+        });
+        
+        // Initial state for desktop
+        if (window.innerWidth > 1024) {
+            sidebar.classList.add('collapsed');
+            bookContent.classList.add('expanded');
+        }
+    }
+    
+    function initPagination() {
+        const pages = document.querySelectorAll('.a4-page');
+        const currentPageDisplay = document.querySelector('.current-page');
+        
+        function updateCurrentPage() {
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            pages.forEach((page, index) => {
+                const pageTop = page.offsetTop;
+                const pageBottom = pageTop + page.offsetHeight;
+                
+                if (scrollPosition >= pageTop && scrollPosition < pageBottom) {
+                    const pageNumber = page.dataset.page;
+                    
+                    if (currentPageDisplay) {
+                        currentPageDisplay.textContent = `Page ${pageNumber}`;
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateCurrentPage);
+        updateCurrentPage();
+    }
+    
+    initSidebarToggle();
+    initPagination();
+});
+
+// Animation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    function setupScrollAnimations() {
+        const observerOptions = {
+            threshold: [0.1, 0.5, 0.9],
+            rootMargin: '-50px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    
+                    // Animate progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-fill, .chapter-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width || '0%';
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all major elements
+        const elementsToObserve = document.querySelectorAll('.a4-page, .book-chapter, .book-part');
+        elementsToObserve.forEach(el => observer.observe(el));
+    }
+    
+    // Page turn effect simulation
+    function addPageTurnEffect() {
+        const pages = document.querySelectorAll('.a4-page');
+        let currentPage = 0;
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                currentPage = Math.min(currentPage + 1, pages.length - 1);
+                pages[currentPage].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowLeft') {
+                currentPage = Math.max(currentPage - 1, 0);
+                pages[currentPage].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+    
+    // Smooth scroll enhancement
+    function enhanceSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80; // Account for sticky header
+                    const targetPosition = target.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Add brief highlight effect
+                    target.style.transition = 'background-color 0.3s ease';
+                    target.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+                    setTimeout(() => {
+                        target.style.backgroundColor = '';
+                    }, 1000);
+                }
+            });
+        });
+    }
+    
+    // Loading animation
+    function showLoadingAnimation() {
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'book-loading';
+        document.body.appendChild(loadingDiv);
+        
+        setTimeout(() => {
+            loadingDiv.style.opacity = '0';
+            setTimeout(() => {
+                loadingDiv.remove();
+            }, 500);
+        }, 1000);
+    }
+    
+    // Parallax effect for headers
+    function addParallaxEffect() {
+        const headers = document.querySelectorAll('.book-header, .a4-page-header');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            headers.forEach(header => {
+                const rate = scrolled * -0.5;
+                header.style.transform = `translateY(${rate}px)`;
+            });
+        });
+    }
+    
+    // Initialize animations based on user preferences
+    function initAnimations() {
+        // Respect prefers-reduced-motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        if (!prefersReducedMotion.matches) {
+            setupScrollAnimations();
+            addPageTurnEffect();
+            addParallaxEffect();
+        }
+        
+        enhanceSmoothScroll();
+        // showLoadingAnimation(); // Uncomment if loading screen is desired
+    }
+    
+    initAnimations();
+});
+
+    </script>
+</body>
+</html>

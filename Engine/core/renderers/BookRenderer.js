@@ -752,53 +752,103 @@ class BookRenderer extends DocumentRenderer {
     }
 
     /**
-     * Generate comprehensive table of contents
+     * Generate comprehensive table of contents with enhanced navigation
      */
     generateAdvancedTableOfContents() {
-        let tocHTML = '<div class="table-of-contents">\n';
+        let tocHTML = '<div class="table-of-contents" id="table-of-contents">\n';
         tocHTML += '<h2 class="toc-title">Table of Contents</h2>\n';
         tocHTML += '<div class="toc-content">\n';
+        tocHTML += '<nav class="toc-navigation">\n';
         
-        // Add parts
-        this.bookStructure.parts.forEach(part => {
-            tocHTML += `<div class="toc-item toc-part">
-                <a href="#part-${part.number}" class="toc-link">
-                    <span class="toc-number">Part ${part.number}</span>
-                    <span class="toc-title">${part.title}</span>
-                </a>
-            </div>\n`;
-        });
-        
-        // Add chapters
-        this.bookStructure.chapters.forEach(chapter => {
-            tocHTML += `<div class="toc-item toc-chapter">
-                <a href="#${chapter.id}" class="toc-link">
-                    <span class="toc-number">Chapter ${chapter.number}</span>
-                    <span class="toc-title">${chapter.title}</span>
-                </a>
-            </div>\n`;
-            
-            // Add sections for this chapter
-            const chapterSections = this.bookStructure.tocEntries.filter(entry => 
-                entry.level === 'section' && entry.title.includes(chapter.title)
-            );
-            chapterSections.forEach(section => {
-                tocHTML += `<div class="toc-item toc-section">
-                    <a href="#${section.id}" class="toc-link">
-                        <span class="toc-number">${section.page}</span>
-                        <span class="toc-title">${section.title}</span>
+        // Add parts with enhanced navigation
+        if (this.bookStructure.parts.length > 0) {
+            tocHTML += '<div class="toc-section toc-parts">\n';
+            this.bookStructure.parts.forEach(part => {
+                tocHTML += `<div class="toc-item toc-part" data-level="part">
+                    <a href="#part-${part.number}" class="toc-link" data-target="part-${part.number}">
+                        <span class="toc-number">Part ${part.number}</span>
+                        <span class="toc-title">${part.title}</span>
+                        <span class="toc-indicator">→</span>
                     </a>
                 </div>\n`;
             });
-        });
+            tocHTML += '</div>\n';
+        }
         
-        tocHTML += '</div>\n</div>\n\n';
+        // Add chapters with progress indicators
+        tocHTML += '<div class="toc-section toc-chapters">\n';
+        this.bookStructure.chapters.forEach((chapter, index) => {
+            const progress = this.calculateChapterProgress(chapter);
+            tocHTML += `<div class="toc-item toc-chapter" data-level="chapter" data-progress="${progress}">
+                <a href="#${chapter.id}" class="toc-link" data-target="${chapter.id}">
+                    <span class="toc-number">Chapter ${chapter.number}</span>
+                    <span class="toc-title">${chapter.title}</span>
+                    <span class="toc-progress" style="width: ${progress}%"></span>
+                    <span class="toc-indicator">→</span>
+                </a>
+            </div>\n`;
+            
+            // Add sections for this chapter with smooth scroll
+            const chapterSections = this.getSectionsInChapter(chapter);
+            if (chapterSections.length > 0) {
+                tocHTML += '<div class="toc-subsections">\n';
+                chapterSections.forEach((section, sectionIndex) => {
+                    const sectionId = `${chapter.id}-section-${sectionIndex + 1}`;
+                    tocHTML += `<div class="toc-item toc-section" data-level="section">
+                        <a href="#${sectionId}" class="toc-link" data-target="${sectionId}">
+                            <span class="toc-number">${sectionIndex + 1}</span>
+                            <span class="toc-title">${section.title}</span>
+                            <span class="toc-indicator">→</span>
+                        </a>
+                    </div>\n`;
+                });
+                tocHTML += '</div>\n';
+            }
+        });
+        tocHTML += '</div>\n';
+        
+        tocHTML += '</nav>\n</div>\n</div>\n\n';
         
         return tocHTML;
     }
 
     /**
-     * Wrap content in pages with page numbering
+     * Calculate reading progress for a chapter
+     */
+    calculateChapterProgress(chapter) {
+        // Simple progress calculation based on chapter order
+        const totalChapters = this.bookStructure.chapters.length;
+        const currentIndex = this.bookStructure.chapters.indexOf(chapter);
+        return Math.round(((currentIndex + 1) / totalChapters) * 100);
+    }
+
+    /**
+     * Get sections within a chapter
+     */
+    getSectionsInChapter(chapter) {
+        const sectionPattern = new RegExp(`\\\\section\\{([^}]+)\\}`, 'g');
+        const sections = [];
+        let match;
+        
+        // Find sections that belong to this chapter
+        const chapterStartIndex = this.content.indexOf(chapter.title);
+        const nextChapterIndex = this.content.indexOf('\\chapter{', chapterStartIndex + 1);
+        const chapterContent = nextChapterIndex > -1 
+            ? this.content.substring(chapterStartIndex, nextChapterIndex)
+            : this.content.substring(chapterStartIndex);
+        
+        while ((match = sectionPattern.exec(chapterContent)) !== null) {
+            sections.push({
+                title: match[1],
+                id: `${chapter.id}-section-${sections.length + 1}`
+            });
+        }
+        
+        return sections;
+    }
+
+    /**
+     * Wrap content in A4-style responsive pages with enhanced layout
      */
     wrapInPages(content) {
         // Split content by page breaks
@@ -808,18 +858,74 @@ class BookRenderer extends DocumentRenderer {
         pages.forEach((page, index) => {
             const pageNumber = index + 1;
             const matterClass = this.determineMatterClass(pageNumber);
+            const pageType = this.determinePageType(page, pageNumber);
             
-            pageHTML += `<div class="page ${matterClass}" data-page="${pageNumber}">\n`;
-            pageHTML += `<div class="page-content">\n`;
+            pageHTML += `<div class="a4-page ${matterClass} ${pageType}" data-page="${pageNumber}" data-total="${pages.length}">\n`;
+            
+            // Page header with book title and chapter info
+            pageHTML += '<div class="a4-page-header">\n';
+            pageHTML += `<div class="page-header-left">${this.getHeaderInfo(pageNumber)}</div>\n`;
+            pageHTML += `<div class="page-header-right">${this.formatPageNumber(pageNumber, matterClass)}</div>\n`;
+            pageHTML += '</div>\n';
+            
+            // Main content area with proper A4 aspect ratio
+            pageHTML += '<div class="a4-page-content">\n';
+            pageHTML += '<div class="content-wrapper">\n';
             pageHTML += page.trim();
             pageHTML += '</div>\n';
-            pageHTML += `<div class="page-footer">\n`;
-            pageHTML += `<span class="page-number">${this.formatPageNumber(pageNumber, matterClass)}</span>\n`;
             pageHTML += '</div>\n';
+            
+            // Page footer with copyright and page number
+            pageHTML += '<div class="a4-page-footer">\n';
+            pageHTML += `<div class="page-footer-left">${this.metadata.title || 'Professional eBook'}</div>\n`;
+            pageHTML += `<div class="page-footer-right">Page ${this.formatPageNumber(pageNumber, matterClass)} of ${this.formatPageNumber(pages.length, matterClass)}</div>\n`;
+            pageHTML += '</div>\n';
+            
             pageHTML += '</div>\n\n';
         });
         
         return pageHTML;
+    }
+
+    /**
+     * Determine page type based on content
+     */
+    determinePageType(page, pageNumber) {
+        if (page.includes('title-page')) return 'title-page';
+        if (page.includes('table-of-contents')) return 'toc-page';
+        if (page.includes('part-title-page')) return 'part-page';
+        if (page.includes('chapter-title-page')) return 'chapter-page';
+        if (page.includes('dedication-page')) return 'dedication-page';
+        if (page.includes('abstract')) return 'abstract-page';
+        if (pageNumber === 1) return 'first-page';
+        return 'content-page';
+    }
+
+    /**
+     * Get header information for page
+     */
+    getHeaderInfo(pageNumber) {
+        // Determine current chapter/part for header
+        if (pageNumber === 1) return 'Title';
+        
+        // Find current chapter based on page number
+        const chaptersPerPage = 3; // Estimate
+        const currentChapterIndex = Math.floor((pageNumber - 2) / chaptersPerPage);
+        
+        if (currentChapterIndex < this.bookStructure.chapters.length) {
+            const chapter = this.bookStructure.chapters[currentChapterIndex];
+            return `Chapter ${chapter.number}: ${chapter.title}`;
+        }
+        
+        if (currentChapterIndex < this.bookStructure.parts.length + this.bookStructure.chapters.length) {
+            const partIndex = currentChapterIndex - this.bookStructure.chapters.length;
+            if (partIndex < this.bookStructure.parts.length) {
+                const part = this.bookStructure.parts[partIndex];
+                return `Part ${part.number}: ${part.title}`;
+            }
+        }
+        
+        return 'Contents';
     }
 
     /**
@@ -900,24 +1006,79 @@ class BookRenderer extends DocumentRenderer {
     }
 
     /**
-     * Generate sidebar navigation
+     * Generate sticky sidebar navigation with enhanced features
      */
     generateSidebar() {
-        let sidebarHTML = '<aside class="book-sidebar">\n';
+        let sidebarHTML = '<aside class="book-sidebar sticky-sidebar">\n';
+        sidebarHTML += '<div class="sidebar-header">\n';
+        sidebarHTML += '<div class="sidebar-title">Navigation</div>\n';
+        sidebarHTML += '<button class="sidebar-toggle" title="Toggle sidebar">Menu</button>\n';
+        sidebarHTML += '</div>\n';
+        
         sidebarHTML += '<div class="sidebar-content">\n';
-        sidebarHTML += '<h3>Navigation</h3>\n';
         sidebarHTML += '<div class="sidebar-nav">\n';
+        
+        // Quick navigation
+        sidebarHTML += '<div class="nav-section quick-nav">\n';
+        sidebarHTML += '<h4 class="nav-section-title">Quick Access</h4>\n';
+        sidebarHTML += '<ul class="nav-list">\n';
+        sidebarHTML += '<li><a href="#table-of-contents" class="nav-link toc-link">Table of Contents</a></li>\n';
+        
+        // Add title page link if exists
+        if (this.content.includes('\\begin{titlepage}') || this.content.includes('\\maketitle')) {
+            sidebarHTML += '<li><a href="#title-page" class="nav-link">Title Page</a></li>\n';
+        }
+        
+        sidebarHTML += '</ul>\n';
+        sidebarHTML += '</div>\n';
+        
+        // Parts navigation
+        if (this.bookStructure.parts.length > 0) {
+            sidebarHTML += '<div class="nav-section parts-nav">\n';
+            sidebarHTML += '<h4 class="nav-section-title">Parts</h4>\n';
+            sidebarHTML += '<ul class="nav-list">\n';
+            this.bookStructure.parts.forEach(part => {
+                sidebarHTML += `<li><a href="#part-${part.number}" class="nav-link part-link">Part ${part.number}: ${part.title}</a></li>\n`;
+            });
+            sidebarHTML += '</ul>\n';
+            sidebarHTML += '</div>\n';
+        }
+        
+        // Chapters navigation with progress indicators
+        sidebarHTML += '<div class="nav-section chapters-nav">\n';
+        sidebarHTML += '<h4 class="nav-section-title">Chapters</h4>\n';
+        sidebarHTML += '<div class="chapters-progress">\n';
+        sidebarHTML += `<div class="progress-bar">
+            <div class="progress-fill" style="width: 0%"></div>
+        </div>\        <div class="progress-text">0% Complete</div>
+        </div>\n`;
         sidebarHTML += '<ul class="nav-list">\n';
         
-        // Add table of contents
-        sidebarHTML += '<li><a href="#table-of-contents" class="nav-link">Table of Contents</a></li>\n';
-        
-        // Add chapters
-        this.bookStructure.chapters.forEach(chapter => {
-            sidebarHTML += `<li><a href="#${chapter.id}" class="nav-link">Chapter ${chapter.number}: ${chapter.title}</a></li>\n`;
+        this.bookStructure.chapters.forEach((chapter, index) => {
+            const progress = Math.round(((index + 1) / this.bookStructure.chapters.length) * 100);
+            sidebarHTML += `<li>
+                <a href="#${chapter.id}" class="nav-link chapter-link" data-chapter="${chapter.number}" data-progress="${progress}">
+                    <span class="chapter-number">${chapter.number}</span>
+                    <span class="chapter-title">${chapter.title}</span>
+                    <span class="chapter-progress" style="width: ${progress}%"></span>
+                </a>
+            </li>\n`;
         });
         
         sidebarHTML += '</ul>\n';
+        sidebarHTML += '</div>\n';
+        
+        // Reading position indicator
+        sidebarHTML += '<div class="nav-section reading-position">\n';
+        sidebarHTML += '<h4 class="nav-section-title">Reading Position</h4>\n';
+        sidebarHTML += '<div class="position-indicator">\n';
+        sidebarHTML += '<div class="current-page">Page 1</div>\n';
+        sidebarHTML += '<div class="scroll-progress">\n';
+        sidebarHTML += '<div class="scroll-fill" style="height: 0%"></div>\n';
+        sidebarHTML += '</div>\n';
+        sidebarHTML += '</div>\n';
+        sidebarHTML += '</div>\n';
+        
         sidebarHTML += '</div>\n';
         sidebarHTML += '</div>\n';
         sidebarHTML += '</aside>\n';
@@ -1288,7 +1449,7 @@ class BookRenderer extends DocumentRenderer {
     }
 
     /**
-     * Process sections (within chapters)
+     * Process sections (within chapters) with enhanced navigation
      */
     processSections(content) {
         const sectionCommands = [
@@ -1300,16 +1461,44 @@ class BookRenderer extends DocumentRenderer {
         ];
 
         let processedContent = content;
+        let currentChapter = null;
 
         sectionCommands.forEach(({ command, level, tag }) => {
             const pattern = new RegExp(`\\\\${command}\\{([^}]+)\\}`, 'g');
             processedContent = processedContent.replace(pattern, (match, title) => {
-                const sectionId = `section-${level}-${title.toLowerCase().replace(/\\s+/g, '-')}`;
-                return `<${tag} id="${sectionId}" class="${command}">${this.processTextFormatting(title)}</${tag}>\n`;
+                // Find current chapter context
+                const chapterMatch = content.substring(0, content.indexOf(match)).match(/\\chapter\{([^}]+)\}/);
+                if (chapterMatch) {
+                    currentChapter = chapterMatch[1].toLowerCase().replace(/\\s+/g, '-');
+                }
+                
+                // Create unique section ID
+                const sectionNumber = this.getSectionNumber(command, title);
+                const chapterPrefix = currentChapter || 'chapter-unknown';
+                const sectionId = `${chapterPrefix}-${command}-${sectionNumber}`;
+                
+                // Enhanced section header with navigation attributes
+                return `<${tag} id="${sectionId}" class="${command}" data-level="${level}" data-nav-title="${title}">
+                    ${this.processTextFormatting(title)}
+                    <a href="#${sectionId}" class="section-anchor" title="Link to this section">Link</a>
+                </${tag}>\n`;
             });
         });
 
         return processedContent;
+    }
+
+    /**
+     * Get section number for consistent numbering
+     */
+    getSectionNumber(command, title) {
+        if (!this.sectionCounters) {
+            this.sectionCounters = {};
+        }
+        
+        const key = `${command}-${title}`;
+        this.sectionCounters[key] = (this.sectionCounters[key] || 0) + 1;
+        return this.sectionCounters[key];
     }
 
     /**
