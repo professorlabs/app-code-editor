@@ -48,7 +48,7 @@ class PortfolioDocumentRenderer extends BaseDocumentRenderer {
         // Process portfolio-specific commands
         processedContent = this.processPortfolioCommands(processedContent);
         
-        // Process standard LaTeX
+        // Process standard LaTeX using common components
         processedContent = this.processStandardCommands(processedContent);
         processedContent = this.processEnvironments(processedContent);
         
@@ -114,71 +114,19 @@ class PortfolioDocumentRenderer extends BaseDocumentRenderer {
     }
 
     /**
-     * Process standard LaTeX commands
+     * Process standard LaTeX commands (using common components)
      */
     processStandardCommands(content) {
-        let processed = content;
-        
-        // Bold text
-        processed = processed.replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>');
-        
-        // Italic text
-        processed = processed.replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>');
-        
-        // Monospace text
-        processed = processed.replace(/\\texttt\{([^}]+)\}/g, '<code>$1</code>');
-        
-        // Emphasis
-        processed = processed.replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>');
-        
-        // Underline
-        processed = processed.replace(/\\underline\{([^}]+)\}/g, '<u>$1</u>');
-        
-        // Sections
-        processed = processed.replace(/\\section\{([^}]+)\}/g, '<h2 class="section">$1</h2>');
-        processed = processed.replace(/\\subsection\{([^}]+)\}/g, '<h3 class="subsection">$1</h3>');
-        processed = processed.replace(/\\subsubsection\{([^}]+)\}/g, '<h4 class="subsubsection">$1</h4>');
-        
-        // Images
-        processed = processed.replace(/\\includegraphics(?:\[([^\]]+)\])?\{([^}]+)\}/g, (match, options, src) => {
-            const attrs = options ? ` style="${options}"` : '';
-            return `<img src="${src}" alt="Image"${attrs} />`;
-        });
-        
-        return processed;
+        // Use common components for standard LaTeX processing
+        return super.processStandardCommands(content);
     }
 
     /**
-     * Process LaTeX environments
+     * Process LaTeX environments (using common components)
      */
     processEnvironments(content) {
-        let processed = content;
-        
-        // Itemize environment
-        processed = processed.replace(/\\begin\{itemize\}([\s\S]*?)\\end\{itemize\}/g, (match, envContent) => {
-            const items = envContent.split('\\item').filter(item => item.trim());
-            const listItems = items.map(item => `<li>${this.processStandardCommands(item.trim())}</li>`).join('\n');
-            return `<ul class="itemize">${listItems}</ul>`;
-        });
-        
-        // Figure environment
-        processed = processed.replace(/\\begin\{figure\}([\s\S]*?)\\end\{figure\}/g, (match, envContent) => {
-            const captionMatch = envContent.match(/\\caption\{([^}]+)\}/);
-            const imgMatch = envContent.match(/\\includegraphics\{([^}]+)\}/);
-            
-            let figureContent = '';
-            if (imgMatch) {
-                figureContent += `<img src="${imgMatch[1]}" alt="Figure" />`;
-            }
-            
-            if (captionMatch) {
-                figureContent += `<figcaption>${captionMatch[1]}</figcaption>`;
-            }
-            
-            return `<figure class="figure">${figureContent}</figure>`;
-        });
-        
-        return processed;
+        // Use common components for environment processing
+        return super.processEnvironments(content);
     }
 }
 

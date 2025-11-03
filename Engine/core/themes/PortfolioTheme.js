@@ -23,6 +23,9 @@ body {
     color: #000000;
     background: #ffffff;
     min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== NAVIGATION BAR ===== */
@@ -70,18 +73,21 @@ body {
 .portfolio-layout {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
     margin-top: 60px;
     gap: 2rem;
     padding: 0 2rem;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 .portfolio-content {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 /* ===== LEFT SIDEBAR ===== */
@@ -134,6 +140,41 @@ body {
     max-width: 100%;
     word-wrap: break-word;
     overflow-x: hidden;
+    min-width: 0; /* Prevent flex item overflow */
+}
+
+.portfolio-main p {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.portfolio-main strong {
+    display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.portfolio-main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+}
+
+.portfolio-main figure {
+    max-width: 100%;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.portfolio-main figcaption {
+    max-width: 100%;
+    word-wrap: break-word;
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
 }
 
 .main-greeting {
@@ -330,19 +371,24 @@ body {
 @media (max-width: 768px) {
     .portfolio-layout {
         gap: 1rem;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-content {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         gap: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-sidebar {
         width: 100%;
-        max-width: 400px;
+        max-width: none;
         padding: 1.5rem;
+        order: 1; /* Sidebar comes first */
     }
     
     .portfolio-navbar {
@@ -357,6 +403,15 @@ body {
     
     .portfolio-main {
         padding: 1.5rem;
+        order: 2; /* Main content comes second */
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .portfolio-footer {
+        order: 3; /* Footer comes last */
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .main-greeting {
@@ -365,12 +420,30 @@ body {
 }
 
 @media (max-width: 480px) {
+    .portfolio-layout {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+        margin-top: 50px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .portfolio-content {
+        gap: 0.5rem;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
     .portfolio-sidebar {
         padding: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-main {
         padding: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-navbar {
@@ -454,6 +527,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Store metadata for use in other methods
         this.metadata = metadata || {};
         
+        // Get common components CSS
+        const CommonComponents = require('../components/CommonComponents');
+        const commonComponents = new CommonComponents();
+        const commonCSS = commonComponents.getDefaultCSS();
+        
         // Extract content from parsed HTML
         const processedContent = this.parsePortfolioContent(html);
         
@@ -463,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${this.metadata.title || 'Portfolio'}</title>
-    <style>${this.css}</style>
+    <style>${this.css}\n${commonCSS}</style>
 </head>
 <body>
     ${processedContent}
@@ -864,7 +942,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         html = html.replace(/\\includegraphics\{([^}]+)\}/g, (match, path) => {
-            return `<img src="${path}" alt="Image" style="max-width: 100%; height: auto;">`;
+            return `<img src="${path}" alt="Image">`;
         });
         
         // Convert figure environments
@@ -914,22 +992,27 @@ document.addEventListener('DOMContentLoaded', function() {
         if (widthMatch) {
             const width = widthMatch[1].trim();
             if (width.includes('\\textwidth')) {
-                style = 'width: 100%; height: auto;';
+                style = 'width: 100%; height: auto; max-width: 100%;';
             } else if (width.includes('cm')) {
                 const cmValue = parseFloat(width);
-                style = `width: ${cmValue * 37.8}px; height: auto;`;
+                const pixelWidth = Math.min(cmValue * 37.8, 800); // Cap at 800px
+                style = `width: ${pixelWidth}px; height: auto; max-width: 100%;`;
             } else if (width.match(/\d+px/)) {
-                style = `width: ${width}; height: auto;`;
+                const pixelWidth = Math.min(parseInt(width), 800); // Cap at 800px
+                style = `width: ${pixelWidth}px; height: auto; max-width: 100%;`;
             } else if (width.match(/\d+%$/)) {
-                style = `width: ${width}; height: auto;`;
+                const percentWidth = Math.min(parseInt(width), 100); // Cap at 100%
+                style = `width: ${percentWidth}%; height: auto; max-width: 100%;`;
             } else if (width.match(/\d+mm/)) {
                 const mmValue = parseFloat(width);
-                style = `width: ${mmValue * 3.78}px; height: auto;`;
+                const pixelWidth = Math.min(mmValue * 3.78, 800); // Cap at 800px
+                style = `width: ${pixelWidth}px; height: auto; max-width: 100%;`;
             } else {
                 // Assume pixels if just a number
                 const pixelValue = parseFloat(width);
                 if (!isNaN(pixelValue)) {
-                    style = `width: ${pixelValue}px; height: auto;`;
+                    const cappedWidth = Math.min(pixelValue, 800); // Cap at 800px
+                    style = `width: ${cappedWidth}px; height: auto; max-width: 100%;`;
                 }
             }
         }
@@ -940,19 +1023,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const height = heightMatch[1].trim();
             if (height.includes('cm')) {
                 const cmValue = parseFloat(height);
-                style += ` max-height: ${cmValue * 37.8}px;`;
+                style += ` max-height: ${Math.min(cmValue * 37.8, 600)}px;`; // Cap at 600px
             } else if (height.match(/\d+px/)) {
-                style += ` max-height: ${height};`;
+                style += ` max-height: ${Math.min(parseInt(height), 600)}px;`; // Cap at 600px
             } else if (height.match(/\d+%$/)) {
-                style += ` max-height: ${height};`;
+                style += ` max-height: ${Math.min(parseInt(height), 100)}%;`; // Cap at 100%
             } else if (height.match(/\d+mm/)) {
                 const mmValue = parseFloat(height);
-                style += ` max-height: ${mmValue * 3.78}px;`;
+                style += ` max-height: ${Math.min(mmValue * 3.78, 600)}px;`; // Cap at 600px
             } else {
                 // Assume pixels if just a number
                 const pixelValue = parseFloat(height);
                 if (!isNaN(pixelValue)) {
-                    style += ` max-height: ${pixelValue}px;`;
+                    style += ` max-height: ${Math.min(pixelValue, 600)}px;`; // Cap at 600px
                 }
             }
         }

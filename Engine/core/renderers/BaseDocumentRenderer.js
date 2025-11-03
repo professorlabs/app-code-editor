@@ -4,6 +4,8 @@
  * Handles common functionality and provides template methods
  */
 
+const CommonComponents = require('../components/CommonComponents');
+
 class BaseDocumentRenderer {
     constructor() {
         this.name = 'base';
@@ -17,6 +19,9 @@ class BaseDocumentRenderer {
             preserveComments: false,
             debugMode: false
         };
+        
+        // Initialize common components
+        this.commonComponents = new CommonComponents();
         
         this.initializeDefaultCommands();
     }
@@ -191,8 +196,98 @@ class BaseDocumentRenderer {
             name: this.name,
             displayName: this.displayName,
             supportedCommands: this.getSupportedCommands().length,
+            commonComponents: this.getCommonComponents().length,
             metadata: this.metadata
         };
+    }
+
+    /**
+     * Get default CSS for common components
+     */
+    getDefaultCSS() {
+        return this.commonComponents.getDefaultCSS();
+    }
+
+    /**
+     * Process content using common components
+     */
+    processContent(content, options = {}) {
+        return this.commonComponents.processContent(content, options);
+    }
+
+    /**
+     * Get available common components
+     */
+    getCommonComponents() {
+        return Array.from(this.commonComponents.components.keys());
+    }
+
+    /**
+     * Use specific common component
+     */
+    useComponent(name, content, options = {}) {
+        const component = this.commonComponents.getComponent(name);
+        if (component) {
+            return component(content, options);
+        }
+        return content;
+    }
+
+    /**
+     * Process standard LaTeX commands using common components
+     */
+    processStandardCommands(content) {
+        return this.processContent(content, {
+            // Enable all common components by default
+            textbf: true,
+            textit: true,
+            texttt: true,
+            emph: true,
+            underline: true,
+            section: true,
+            subsection: true,
+            subsubsection: true,
+            itemize: true,
+            enumerate: true,
+            description: true,
+            table: true,
+            tabular: true,
+            equation: true,
+            align: true,
+            figure: true,
+            verbatim: true,
+            ref: true,
+            cite: true,
+            columns: true,
+            minipage: true
+        });
+    }
+
+    /**
+     * Process LaTeX environments using common components
+     */
+    processEnvironments(content) {
+        return this.processContent(content, {
+            // Environment processing
+            table: true,
+            tabular: true,
+            longtable: true,
+            equation: true,
+            align: true,
+            gather: true,
+            multline: true,
+            itemize: true,
+            enumerate: true,
+            description: true,
+            figure: true,
+            wrapfigure: true,
+            columns: true,
+            column: true,
+            minipage: true,
+            verbatim: true,
+            lstlisting: true,
+            minted: true
+        });
     }
 }
 

@@ -62,6 +62,62 @@ Here are some examples of my recent work:
 \caption{Research visualization showing deep learning model performance}
 \end{figure}
 
+\section{Publications and Data}
+
+\subsection{Recent Publications Table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|p{6cm}|}
+\hline
+\textbf{Year} & \textbf{Venue} & \textbf{Title} \\
+\hline
+2024 & ICML & Deep Learning for Scientific Discovery \\
+\hline
+2024 & NeurIPS & Efficient Training of Large Language Models \\
+\hline
+2023 & CVPR & Neural Architecture Search for Computer Vision \\
+\hline
+\end{tabular}
+\caption{Selected publications from 2023-2024}
+\end{table}
+
+\subsection{Mathematical Framework}
+
+Our approach is based on the following optimization equation:
+
+\begin{equation}
+\min_{\theta} \mathcal{L}(\theta) = \frac{1}{N} \sum_{i=1}^{N} \ell(f(x_i; \theta), y_i) + \lambda \|\theta\|_2^2
+\end{equation}
+
+Where we use the cross-entropy loss:
+
+\begin{align}
+\ell(f(x_i; \theta), y_i) &= -\sum_{c=1}^{C} y_{i,c} \log(\frac{e^{f_c(x_i; \theta)}}{\sum_{k=1}^{C} e^{f_k(x_i; \theta)}}) \\
+&= -\log(\frac{e^{f_{y_i}(x_i; \theta)}}{\sum_{k=1}^{C} e^{f_k(x_i; \theta)}})
+\end{align}
+
+\subsection{Research Areas}
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Machine Learning}
+\begin{itemize}
+\item Deep neural networks
+\item Reinforcement learning
+\item Transfer learning
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Applications}
+\begin{itemize}
+\item Computer vision
+\item Natural language processing
+\item Healthcare systems
+\end{itemize}
+\end{column}
+\end{columns}
+
 \section{Education}
 
 \textbf{Ph.D. in Computer Science} - Stanford University (2020)

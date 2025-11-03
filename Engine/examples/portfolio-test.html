@@ -18,6 +18,9 @@ body {
     color: #000000;
     background: #ffffff;
     min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== NAVIGATION BAR ===== */
@@ -65,18 +68,21 @@ body {
 .portfolio-layout {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
     margin-top: 60px;
     gap: 2rem;
     padding: 0 2rem;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 .portfolio-content {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 /* ===== LEFT SIDEBAR ===== */
@@ -129,6 +135,41 @@ body {
     max-width: 100%;
     word-wrap: break-word;
     overflow-x: hidden;
+    min-width: 0; /* Prevent flex item overflow */
+}
+
+.portfolio-main p {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.portfolio-main strong {
+    display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.portfolio-main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+}
+
+.portfolio-main figure {
+    max-width: 100%;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.portfolio-main figcaption {
+    max-width: 100%;
+    word-wrap: break-word;
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
 }
 
 .main-greeting {
@@ -325,19 +366,24 @@ body {
 @media (max-width: 768px) {
     .portfolio-layout {
         gap: 1rem;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-content {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         gap: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-sidebar {
         width: 100%;
-        max-width: 400px;
+        max-width: none;
         padding: 1.5rem;
+        order: 1; /* Sidebar comes first */
     }
     
     .portfolio-navbar {
@@ -352,6 +398,15 @@ body {
     
     .portfolio-main {
         padding: 1.5rem;
+        order: 2; /* Main content comes second */
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .portfolio-footer {
+        order: 3; /* Footer comes last */
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .main-greeting {
@@ -360,12 +415,30 @@ body {
 }
 
 @media (max-width: 480px) {
+    .portfolio-layout {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+        margin-top: 50px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .portfolio-content {
+        gap: 0.5rem;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
     .portfolio-sidebar {
         padding: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-main {
         padding: 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .portfolio-navbar {
@@ -415,7 +488,371 @@ body {
         margin-top: 0;
     }
 }
-</style>
+
+
+        /* ===== COMMON COMPONENTS BASE STYLES ===== */
+        
+        /* Tables */
+        .common-table {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .common-tabular {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .common-tabular .table-row {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .common-tabular .table-row.header-row {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .common-tabular .table-cell {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+        }
+        
+        .table-caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Equations */
+        .common-equation, .common-align, .common-gather, .common-multiline {
+            margin: 1.5rem 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        
+        .equation-content {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .align-row, .gather-row, .multiline-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+        
+        .align-left {
+            flex: 1;
+            text-align: right;
+            margin-right: 1rem;
+        }
+        
+        .align-right {
+            flex: 1;
+            text-align: left;
+            margin-left: 1rem;
+        }
+        
+        .multiline-left {
+            text-align: left;
+        }
+        
+        .multiline-center {
+            text-align: center;
+        }
+        
+        .multiline-right {
+            text-align: right;
+        }
+        
+        /* Math Components */
+        .common-frac {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .frac-numerator {
+            display: block;
+            border-bottom: 1px solid #000;
+            padding: 0 0.25rem;
+        }
+        
+        .frac-denominator {
+            display: block;
+            padding: 0 0.25rem;
+        }
+        
+        .common-sqrt, .common-root {
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .common-sum, .common-integral, .common-product, .common-limit {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2em;
+        }
+        
+        /* Layout Components */
+        .common-columns {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .common-column {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .common-minipage, .common-parbox {
+            border: 1px dashed #ccc;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        /* Lists */
+        .common-itemize, .common-enumerate {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .itemize-item, .enumerate-item {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+        
+        .common-description {
+            margin: 1rem 0;
+        }
+        
+        .description-term {
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .description-desc {
+            margin-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Figures */
+        .common-figure, .common-wrapfigure {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .figure-caption, .wrap-caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .common-wrapfigure {
+            margin: 0 1rem 1rem 1rem;
+        }
+        
+        /* Sections */
+        .common-section, .common-subsection, .common-subsubsection {
+            margin: 2rem 0 1rem 0;
+            color: #333;
+            line-height: 1.3;
+        }
+        
+        .common-section {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .common-subsection {
+            font-size: 1.5rem;
+        }
+        
+        .common-subsubsection {
+            font-size: 1.3rem;
+        }
+        
+        .common-paragraph {
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.5rem 0;
+            font-weight: 600;
+        }
+        
+        .common-subparagraph {
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 600;
+        }
+        
+        /* Text Components */
+        .common-textbf {
+            font-weight: 600;
+        }
+        
+        .common-textit, .common-emph {
+            font-style: italic;
+        }
+        
+        .common-texttt {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        .common-underline {
+            text-decoration: underline;
+        }
+        
+        /* References */
+        .common-ref {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .common-ref:hover {
+            text-decoration: underline;
+        }
+        
+        .common-cite {
+            color: #0066cc;
+            font-size: 0.9em;
+        }
+        
+        /* Verbatim */
+        .common-verbatim, .common-listing, .common-minted {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 1rem 0;
+        }
+        
+        /* Boxes */
+        .common-fbox, .common-framebox {
+            border: 1px solid #000;
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .common-colorbox {
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .common-fcolorbox {
+            border: 1px solid;
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        /* Longtable */
+        .common-longtable {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        .longtable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        
+        .longtable th {
+            background: #f8f9fa;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        .longtable td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .common-columns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .common-tabular {
+                font-size: 0.85rem;
+            }
+            
+            .common-tabular .table-cell {
+                padding: 0.5rem;
+            }
+            
+            .equation-content {
+                font-size: 1rem;
+                padding: 0.75rem;
+            }
+            
+            .common-wrapfigure {
+                float: none;
+                width: 100% !important;
+                margin: 1rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .common-tabular {
+                font-size: 0.8rem;
+            }
+            
+            .common-tabular .table-cell {
+                padding: 0.4rem;
+            }
+            
+            .common-section {
+                font-size: 1.5rem;
+            }
+            
+            .common-subsection {
+                font-size: 1.3rem;
+            }
+            
+            .common-subsubsection {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .common-figure, .common-table {
+                page-break-inside: avoid;
+            }
+            
+            .common-equation {
+                page-break-inside: avoid;
+            }
+            
+            .common-columns {
+                flex-direction: column;
+            }
+        }
+        </style>
 </head>
 <body>
     
@@ -550,29 +987,86 @@ body {
 % Default shape (rounded square):
 % <aside class="portfolio-sidebar"><img src="profile_photo.png</aside>Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA" alt="Profile" class="profile-image shape-default" /></p>
 <p>% Additional LaTeX content for the portfolio
-<h2 class="section">Research Interests</h2></p>
-<p>I work on <strong>deep learning</strong> and <strong>reinforcement learning</strong> with applications to robotics and healthcare.</p>
-<h3 class="subsection">Current Projects</h3>
-<ul class="itemize"><li>Neural architecture search for computer vision</li>
-<li>Federated learning for medical imaging</li>
-<li>Autonomous navigation algorithms</li></ul>
-<h2 class="section">Featured Work</h2>
+<h2 class="common-section">Research Interests</h2></p>
+<p>I work on <strong class="common-textbf">deep learning</strong> and <strong class="common-textbf">reinforcement learning</strong> with applications to robotics and healthcare.</p>
+<h3 class="common-subsection">Current Projects</h3>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Neural architecture search for computer vision</li>
+<li class="itemize-item">Federated learning for medical imaging</li>
+<li class="itemize-item">Autonomous navigation algorithms</li>
+</ul>
+<h2 class="common-section">Featured Work</h2>
 <p>Here are some examples of my recent work:</p>
 <p>% Image in main content with width 80% of text width
-<img src="profile_photo.png" alt="Image" style="width=0.8\textwidth" /></p>
-<h3 class="subsection">Research Images</h3>
+<img src="profile_photo.png" alt="Image" style="width: 100%; height: auto; max-width: 100%;"></p>
+<h3 class="common-subsection">Research Images</h3>
 <p>% Simple image without options (default size)
-<img src="profile_photo.png" alt="Image" /></p>
+<img src="profile_photo.png" alt="Image"></p>
 <p>% Image with specific width in pixels
-<img src="profile_photo.png" alt="Image" style="width=200px" /></p>
+<img src="profile_photo.png" alt="Image" style="width: 200px; height: auto; max-width: 100%;"></p>
 <p>% Image with both width and height
-<img src="profile_photo.png" alt="Image" style="width=150px,height=100px" /></p>
+<img src="profile_photo.png" alt="Image" style="width: 150px; height: auto; max-width: 100%; max-height: 100px;"></p>
 <p>% Image with figure environment
-<figure class="figure"><figcaption>Research visualization showing deep learning model performance</figcaption></figure></p>
-<h2 class="section">Education</h2>
-<p><strong>Ph.D. in Computer Science</strong> - Stanford University (2020)</p>
-<p><strong>M.S. in Mathematics</strong> - MIT (2018)</p>
-<p><strong>B.S. in Physics</strong> - UC Berkeley (2016)</p>
+<div class="common-figure" >
+<img src="profile_photo.png" alt="Figure" style="max-width: 100%; height: auto; max-width: 189px;">
+<div class="figure-caption">Research visualization showing deep learning model performance</div>
+</div></p>
+<h2 class="common-section">Publications and Data</h2>
+<h3 class="common-subsection">Recent Publications Table</h3>
+<p>
+                <div class="common-table centered" >
+                    <table class="common-tabular">
+<colgroup>
+<col style="text-align: left"><col style="text-align: center"><col style="text-align: center"></colgroup>
+<tr class="table-row "><td class="table-cell" style="text-align: left">|}
+\hline
+<strong class="common-textbf">Year</strong></td><td class="table-cell" style="text-align: center"><strong class="common-textbf">Venue</strong></td><td class="table-cell" style="text-align: center"><strong class="common-textbf">Title</strong></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
+<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
+2024</td><td class="table-cell" style="text-align: center">ICML</td><td class="table-cell" style="text-align: center">Deep Learning for Scientific Discovery</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
+<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
+2024</td><td class="table-cell" style="text-align: center">NeurIPS</td><td class="table-cell" style="text-align: center">Efficient Training of Large Language Models</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
+<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
+2023</td><td class="table-cell" style="text-align: center">CVPR</td><td class="table-cell" style="text-align: center">Neural Architecture Search for Computer Vision</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
+<tr class="table-row "><td class="table-cell" style="text-align: left">\hline</td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td></tr>
+</table>
+                    <div class="table-caption">Selected publications from 2023-2024</div>
+                </div>
+            </p>
+<h3 class="common-subsection">Mathematical Framework</h3>
+<p>Our approach is based on the following optimization equation:</p>
+<p>
+                <div class="common-equation" >
+                    <div class="equation-content">
+                        \min_{\theta} \mathcal{L}(\theta) = <span class="common-frac"><span class="frac-numerator">1</span><span class="frac-denominator">N</span></span> <span class="common-sum">∑<sub>{i=1</sub></span>}^{N} \ell(f(x_i; \theta), y_i) + \lambda \|\theta\|_2^2
+                    </div>
+                </div>
+            </p>
+<p>Where we use the cross-entropy loss:</p>
+<p><div class="common-align">
+<div class="align-row">
+<div class="align-column align-left">\ell(f(x_i; \theta), y_i)</div><div class="align-column align-right">= -<span class="common-sum">∑<sub>{c=1</sub></span>}^{C} y_{i,c} \log(\frac{e^{f_c(x_i; \theta)}}{<span class="common-sum">∑<sub>{k=1</sub></span>}^{C} e^{f_k(x_i; \theta)}})</div></div>
+<div class="align-row">
+<div class="align-column align-left"></div><div class="align-column align-right">= -\log(\frac{e^{f_{y_i}(x_i; \theta)}}{<span class="common-sum">∑<sub>{k=1</sub></span>}^{C} e^{f_k(x_i; \theta)}})</div></div>
+</div></p>
+<h3 class="common-subsection">Research Areas</h3>
+<p><div class="common-columns">
+<div class="column" style="flex: 1; padding: 0 0.5rem;"><strong class="common-textbf">Machine Learning</strong>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Deep neural networks</li>
+<li class="itemize-item">Reinforcement learning</li>
+<li class="itemize-item">Transfer learning</li>
+</ul></div>
+<div class="column" style="flex: 1; padding: 0 0.5rem;"><strong class="common-textbf">Applications</strong>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Computer vision</li>
+<li class="itemize-item">Natural language processing</li>
+<li class="itemize-item">Healthcare systems</li>
+</ul></div>
+</div></p>
+<h2 class="common-section">Education</h2>
+<p><strong class="common-textbf">Ph.D. in Computer Science</strong> - Stanford University (2020)</p>
+<p><strong class="common-textbf">M.S. in Mathematics</strong> - MIT (2018)</p>
+<p><strong class="common-textbf">B.S. in Physics</strong> - UC Berkeley (2016)</p>
 <p>
         </div></p></section>
         
