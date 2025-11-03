@@ -10,7 +10,7 @@ class PortfolioTheme {
         this.description = 'Clean portfolio theme for scientists with simple layout';
         
         this.css = `
-/* ===== SIMPLE PORTFOLIO THEME ===== */
+/* ===== SIMPLE PREMIUM PORTFOLIO THEME ===== */
 * {
     margin: 0;
     padding: 0;
@@ -18,30 +18,34 @@ class PortfolioTheme {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #333333;
+    color: #000000;
     background: #ffffff;
     min-height: 100vh;
 }
 
 /* ===== NAVIGATION BAR ===== */
 .portfolio-navbar {
-    background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 1rem 2rem;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 60px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .navbar-content {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .navbar-links {
@@ -52,35 +56,40 @@ body {
 
 .navbar-link {
     text-decoration: none;
-    color: #333333;
+    color: #000000;
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: all 0.3s ease;
 }
 
 .navbar-link:hover {
-    background: #f5f5f5;
-    color: #007bff;
+    background: #f8f8f8;
 }
 
 /* ===== MAIN LAYOUT ===== */
 .portfolio-layout {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
-    min-height: calc(100vh - 70px);
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 60px;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.portfolio-content {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
 }
 
 /* ===== LEFT SIDEBAR ===== */
 .portfolio-sidebar {
-    width: 280px;
-    background: #f8f9fa;
-    border-right: 1px solid #e0e0e0;
+    background: #ffffff;
     padding: 2rem;
-    position: sticky;
-    top: 70px;
-    height: calc(100vh - 70px);
+    width: 300px;
+    flex-shrink: 0;
     overflow-y: auto;
 }
 
@@ -100,59 +109,37 @@ body {
 .profile-name {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #333;
+    color: #000000;
     margin-bottom: 0.5rem;
 }
 
 .profile-title {
     font-size: 1rem;
-    color: #666;
+    color: #666666;
     margin-bottom: 0.5rem;
 }
 
 .profile-location {
     font-size: 0.9rem;
-    color: #888;
+    color: #666666;
     margin-bottom: 1.5rem;
-}
-
-.social-links {
-    list-style: none;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    text-decoration: none;
-    color: #666;
-    transition: color 0.3s ease;
-}
-
-.social-link:hover {
-    color: #007bff;
-}
-
-.social-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* ===== MAIN CONTENT ===== */
 .portfolio-main {
     flex: 1;
+    overflow-y: auto;
     padding: 2rem 3rem;
-    max-width: 800px;
+    background: #ffffff;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-x: hidden;
 }
 
 .main-greeting {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: #000000;
     margin-bottom: 1rem;
 }
 
@@ -162,14 +149,13 @@ body {
 
 .bio-section h3 {
     font-size: 1.5rem;
-    color: #333;
+    color: #000000;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #007bff;
     padding-bottom: 0.5rem;
 }
 
 .bio-text {
-    color: #555;
+    color: #333333;
     line-height: 1.7;
     margin-bottom: 1.5rem;
 }
@@ -182,66 +168,191 @@ body {
 .achievement-item {
     padding: 1rem;
     margin-bottom: 0.75rem;
-    background: #f8f9fa;
-    border-left: 4px solid #007bff;
+    background: #f8f8f8;
     border-radius: 4px;
 }
 
 .achievement-date {
     font-size: 0.9rem;
-    color: #666;
+    color: #666666;
     font-weight: 500;
 }
 
 .achievement-title {
     font-weight: 600;
-    color: #333;
+    color: #000000;
     margin: 0.25rem 0;
 }
 
 .achievement-description {
-    color: #666;
+    color: #666666;
     font-size: 0.95rem;
 }
 
 .inline-link {
-    color: #007bff;
+    color: #000000;
     text-decoration: none;
     font-weight: 500;
 }
 
 .inline-link:hover {
-    text-decoration: underline;
+    background: #f8f8f8;
 }
 
 .hobby-item {
     display: inline-block;
     margin: 0.25rem 0.5rem;
     padding: 0.25rem 0.75rem;
-    background: #e9ecef;
+    background: #f8f8f8;
     border-radius: 15px;
     font-size: 0.9rem;
-    color: #495057;
+    color: #000000;
+}
+
+/* ===== FOOTER ===== */
+.portfolio-footer {
+    background: #ffffff;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    color: #000000;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.footer-social-link:hover {
+    background: #f8f8f8;
+    transform: scale(1.1);
+}
+
+.profile-picture {
+    transition: all 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.achievement-item:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.inline-link:hover {
+    color: #333333;
+    background: #f8f8f8;
+    transition: all 0.2s ease;
+}
+
+.hobby-item:hover {
+    background: #e8e8e8;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+.navbar-link {
+    transition: all 0.2s ease;
+}
+
+.bio-section {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.bio-section:nth-child(1) { animation-delay: 0.1s; }
+.bio-section:nth-child(2) { animation-delay: 0.2s; }
+.bio-section:nth-child(3) { animation-delay: 0.3s; }
+.bio-section:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.footer-info {
+    color: #666666;
+    font-size: 0.9rem;
+    margin-top: 1rem;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .portfolio-layout {
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+    }
+    
+    .portfolio-content {
+        gap: 1.5rem;
+    }
+    
+    .portfolio-navbar {
+        padding: 1rem 1.5rem;
+    }
+    
+    .navbar-links {
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .portfolio-layout {
+        gap: 1rem;
+        padding: 0 1.5rem;
+    }
+    
+    .portfolio-content {
         flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
     
     .portfolio-sidebar {
         width: 100%;
-        height: auto;
-        position: relative;
-        top: 0;
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
+        max-width: 400px;
+        padding: 1.5rem;
+    }
+    
+    .portfolio-navbar {
+        padding: 1rem 1rem;
     }
     
     .navbar-links {
         flex-wrap: wrap;
         gap: 1rem;
+        justify-content: center;
     }
     
     .portfolio-main {
@@ -255,42 +366,58 @@ body {
 
 @media (max-width: 480px) {
     .portfolio-sidebar {
-        padding: 1.5rem;
+        padding: 1rem;
     }
     
     .portfolio-main {
         padding: 1rem;
     }
     
-    .navbar-content {
-        padding: 0 1rem;
+    .portfolio-navbar {
+        padding: 0.75rem 0.5rem;
+        height: 50px;
     }
     
     .navbar-links {
         gap: 0.5rem;
+        flex-wrap: wrap;
     }
     
     .navbar-link {
-        padding: 0.4rem 0.8rem;
+        padding: 0.3rem 0.6rem;
         font-size: 0.9rem;
+    }
+    
+    .portfolio-layout {
+        margin-top: 50px;
+        height: calc(100vh - 50px);
+    }
+    
+    .footer-social-links {
+        gap: 1rem;
+    }
+    
+    .footer-social-link {
+        width: 35px;
+        height: 35px;
     }
 }
 
 /* ===== PRINT STYLES ===== */
 @media print {
+    body {
+        overflow: visible;
+    }
+    
     .portfolio-navbar {
         position: static;
     }
     
-    .portfolio-sidebar {
-        position: static;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid #000;
-    }
-    
     .portfolio-layout {
+        display: flex;
         flex-direction: column;
+        height: auto;
+        margin-top: 0;
     }
 }
 `;
@@ -298,7 +425,7 @@ body {
         this.js = `
 // Simple Portfolio JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
+    // Navigation links click handling
     document.querySelectorAll('.navbar-link').forEach(link => {
         link.addEventListener('click', function(e) {
             if (this.getAttribute('href').startsWith('#')) {
@@ -314,35 +441,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Add hover effects to achievement items
-    document.querySelectorAll('.achievement-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(5px)';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0)';
-        });
-    });
-    
-    // Responsive mobile menu toggle
-    const navbar = document.querySelector('.portfolio-navbar');
-    if (navbar) {
-        const mediaQuery = window.matchMedia('(max-width: 768px)');
-        
-        function handleMobileMenu() {
-            if (mediaQuery.matches) {
-                navbar.classList.add('mobile');
-            } else {
-                navbar.classList.remove('mobile');
-            }
-        }
-        
-        handleMobileMenu();
-        mediaQuery.addListener(handleMobileMenu);
-    }
 });
 `;
     }
@@ -353,6 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
     generateHTML(parsedData) {
         const { html, context, metadata } = parsedData;
         
+        // Store metadata for use in other methods
+        this.metadata = metadata || {};
+        
         // Extract content from parsed HTML
         const processedContent = this.parsePortfolioContent(html);
         
@@ -361,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${metadata.title || 'Portfolio'}</title>
+    <title>${this.metadata.title || 'Portfolio'}</title>
     <style>${this.css}</style>
 </head>
 <body>
@@ -400,15 +501,52 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <!-- Main Layout -->
             <div class="portfolio-layout">
-                <!-- Left Sidebar -->
-                <aside class="portfolio-sidebar">
-                    ${sidebarContent}
-                </aside>
+                <div class="portfolio-content">
+                    <!-- Left Sidebar -->
+                    <aside class="portfolio-sidebar">
+                        ${sidebarContent}
+                    </aside>
+                    
+                    <!-- Main Content -->
+                    <main class="portfolio-main">
+                        ${mainContent}
+                    </main>
+                </div>
                 
-                <!-- Main Content -->
-                <main class="portfolio-main">
-                    ${mainContent}
-                </main>
+                <!-- Footer -->
+                <footer class="portfolio-footer">
+                    <div class="footer-social-links">
+                        <a href="mailto:email@example.com" class="footer-social-link" title="Email">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" class="footer-social-link" title="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/yourusername" class="footer-social-link" title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/yourusername" class="footer-social-link" title="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.46 6c-.85.38-1.75.64-2.7.76 1-.6 1.76-1.55 2.12-2.68-.93.55-1.96.95-3.06 1.17-.88-.94-2.13-1.53-3.51-1.53-2.66 0-4.81 2.16-4.81 4.81 0 .38.04.75.13 1.1-4-.2-7.54-2.11-9.91-5.02-.41.71-.65 1.53-.65 2.4 0 1.67.85 3.14 2.14 4.01-.79-.03-1.54-.25-2.19-.61v.06c0 2.33 1.66 4.28 3.86 4.72-.4.11-.83.17-1.27.17-.31 0-.62-.03-.92-.08.63 1.91 2.39 3.3 4.49 3.34-1.65 1.29-3.72 2.06-5.97 2.06-.39 0-.77-.02-1.15-.07 2.13 1.36 4.65 2.16 7.37 2.16 8.84 0 13.68-7.32 13.68-13.68 0-.21 0-.42-.01-.62.94-.68 1.76-1.53 2.4-2.5z"/>
+                            </svg>
+                        </a>
+                        <a href="https://scholar.google.com/yourusername" class="footer-social-link" title="Google Scholar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14m0-1a6 6 0 1 0 0-12 6 6 0 0 0 0 12M6 6.75C6 5.78 6.78 5 7.75 5h8.5c.97 0 1.75.78 1.75 1.75v8.5c0 .97-.78 1.75-1.75 1.75h-8.5C6.78 17 6 16.22 6 15.25v-8.5M7.75 6a.75.75 0 0 0-.75.75v8.5c0 .415.335.75.75.75h8.5a.75.75 0 0 0 .75-.75v-8.5a.75.75 0 0 0-.75-.75h-8.5M12 9l-2 2h4l-2-2m0 1l1.5 1.5L12 13l-1.5-1.5L12 10Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="footer-info">
+                        <p>&copy; 2024 ${this.metadata.author || 'Your Name'}. All rights reserved.</p>
+                        <p>Generated with LaTeX to HTML Engine</p>
+                    </div>
+                </footer>
             </div>
         `;
     }
@@ -461,42 +599,37 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
             <div class="profile-container">
                 <div class="profile-picture">
-                    <span>👤</span>
+                    <img src="profile_photo.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px;">
                 </div>
-                <h2 class="profile-name">${metadata.author || 'Your Name'}</h2>
+                <h2 class="profile-name">${this.metadata.author || 'Your Name'}</h2>
                 <p class="profile-title">Research Scientist</p>
-                <p class="profile-location">📍 City, Country</p>
+                <p class="profile-location">City, Country</p>
             </div>
             
             <ul class="social-links">
                 <li>
                     <a href="mailto:email@example.com" class="social-link">
-                        <span class="social-icon">📧</span>
-                        <span>Email</span>
+                        <span class="social-icon">Email</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://twitter.com" class="social-link">
-                        <span class="social-icon">🐦</span>
-                        <span>Twitter</span>
+                        <span class="social-icon">Twitter</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://linkedin.com" class="social-link">
-                        <span class="social-icon">💼</span>
-                        <span>LinkedIn</span>
+                        <span class="social-icon">LinkedIn</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://github.com" class="social-link">
-                        <span class="social-icon">💻</span>
-                        <span>GitHub</span>
+                        <span class="social-icon">GitHub</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://scholar.google.com" class="social-link">
-                        <span class="social-icon">🎓</span>
-                        <span>Google Scholar</span>
+                        <span class="social-icon">Google Scholar</span>
                     </a>
                 </li>
             </ul>
@@ -569,12 +702,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Generate shape styles
         let shapeStyle = '';
-        if (imageShape === 'circle') {
+        if (imageShape === 'rounded') {
+            shapeStyle = 'border-radius: 20px; width: 120px; height: 120px;';
+        } else if (imageShape === 'circle') {
             shapeStyle = 'border-radius: 50%; width: 120px; height: 120px;';
         } else if (imageShape === 'rectangle') {
-            shapeStyle = 'border-radius: 8px; width: 120px; height: 120px;';
+            shapeStyle = 'border-radius: 0px; width: 120px; height: 120px;';
         } else { // default
-            shapeStyle = 'border-radius: 4px; width: 120px; height: 120px;';
+            shapeStyle = 'border-radius: 8px; width: 120px; height: 120px;';
         }
         
         // Remove gray background when image is present
@@ -590,38 +725,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <h2 class="profile-name">${name}</h2>
                 <p class="profile-title">${title}</p>
-                <p class="profile-location">📍 ${location}</p>
+                <p class="profile-location">${location}</p>
             </div>
             
             <ul class="social-links">
                 <li>
                     <a href="mailto:email@example.com" class="social-link">
-                        <span class="social-icon">📧</span>
-                        <span>Email</span>
+                        <span class="social-icon">Email</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://twitter.com" class="social-link">
-                        <span class="social-icon">🐦</span>
-                        <span>Twitter</span>
+                        <span class="social-icon">Twitter</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://linkedin.com" class="social-link">
-                        <span class="social-icon">💼</span>
-                        <span>LinkedIn</span>
+                        <span class="social-icon">LinkedIn</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://github.com" class="social-link">
-                        <span class="social-icon">💻</span>
-                        <span>GitHub</span>
+                        <span class="social-icon">GitHub</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://scholar.google.com" class="social-link">
-                        <span class="social-icon">🎓</span>
-                        <span>Google Scholar</span>
+                        <span class="social-icon">Google Scholar</span>
                     </a>
                 </li>
             </ul>
