@@ -26,9 +26,13 @@ import { styled } from '@mui/material/styles';
 import FileExplorer from './FileExplorer';
 import LaTeXLibrary from './LaTeXLibrary';
 
+interface DrawerContainerProps {
+  open: boolean;
+}
+
 const DrawerContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ open }) => ({
+})<DrawerContainerProps>(({ open }) => ({
   width: open ? 320 : 80,
   transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   borderRight: '1px solid #e2e8f0',
@@ -56,9 +60,13 @@ const NavigationList = styled(List, {
   padding: '8px 0',
 });
 
+interface NavItemProps {
+  active?: boolean;
+}
+
 const NavItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ active = false }) => ({
+})<NavItemProps>(({ active = false }) => ({
   margin: '4px 12px',
   borderRadius: '12px',
   minHeight: '48px',
@@ -126,6 +134,19 @@ const ActionBtn = styled(IconButton, {
   },
 });
 
+interface MiniDrawerProps {
+  files: string[];
+  activeFile: string | null;
+  onFileSelect: (filename: string) => void;
+  onFileCreate: (filename: string) => void;
+  onFileDelete: (filename: string) => void;
+  onFileRename: (oldName: string, newName: string) => void;
+  onFolderCreate: () => void;
+  open: boolean;
+  onToggle: () => void;
+  isMobile?: boolean;
+}
+
 const MiniDrawer = ({
   files,
   activeFile,
@@ -137,7 +158,7 @@ const MiniDrawer = ({
   open,
   onToggle,
   isMobile = false,
-}) => {
+}: MiniDrawerProps) => {
   const [activeTab, setActiveTab] = useState('explorer');
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));

@@ -7,6 +7,7 @@ import {
   Tab,
   IconButton,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import {
   FolderOpen,
@@ -23,9 +24,13 @@ import { styled } from '@mui/material/styles';
 import FileExplorer from './FileExplorer';
 import LaTeXLibrary from './LaTeXLibrary';
 
+interface SidebarContainerProps {
+  open: boolean;
+}
+
 const SidebarContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ open }) => ({
+})<SidebarContainerProps>(({ open }) => ({
   width: open ? 280 : 48,
   height: '100%',
   background: '#252526',
@@ -61,9 +66,13 @@ const ActivityBar = styled(Box, {
   padding: '8px 0',
 });
 
+interface ActivityBarItemProps {
+  active?: boolean;
+}
+
 const ActivityBarItem = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ active = false }) => ({
+})<ActivityBarItemProps>(({ active = false }) => ({
   width: '40px',
   height: '40px',
   margin: '2px 0',
@@ -156,9 +165,13 @@ const ContentArea = styled(Box, {
   background: '#1e1e1e',
 });
 
+interface DropZoneProps {
+  isDragOver?: boolean;
+}
+
 const DropZone = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ isDragOver = false }) => ({
+})<DropZoneProps>(({ isDragOver = false }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -178,6 +191,20 @@ const DropZone = styled(Box, {
   },
 }));
 
+interface VSCodeSidebarProps {
+  files: string[];
+  activeFile: string | null;
+  onFileSelect: (filename: string) => void;
+  onFileCreate: (filename: string) => void;
+  onFileDelete: (filename: string) => void;
+  onFileRename: (oldName: string, newName: string) => void;
+  onFolderCreate: () => void;
+  onFileUpload: (files: File[]) => void;
+  open: boolean;
+  onToggle: () => void;
+  isMobile?: boolean;
+}
+
 const VSCodeSidebar = ({
   files,
   activeFile,
@@ -190,7 +217,7 @@ const VSCodeSidebar = ({
   open,
   onToggle,
   isMobile = false,
-}) => {
+}: VSCodeSidebarProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isDragOver, setIsDragOver] = useState(false);
 

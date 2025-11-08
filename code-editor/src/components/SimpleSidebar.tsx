@@ -111,9 +111,13 @@ const ContentArea = styled(Box, {
   background: '#1e1e1e',
 });
 
+interface DropZoneProps {
+  isDragOver?: boolean;
+}
+
 const DropZone = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ isDragOver = false }) => ({
+})<DropZoneProps>(({ isDragOver = false }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -133,6 +137,17 @@ const DropZone = styled(Box, {
   },
 }));
 
+interface SimpleSidebarProps {
+  files: string[];
+  activeFile: string | null;
+  onFileSelect: (filename: string) => void;
+  onFileCreate: (filename: string) => void;
+  onFileDelete: (filename: string) => void;
+  onFileRename: (oldName: string, newName: string) => void;
+  onFolderCreate: () => void;
+  onFileUpload: (files: File[]) => void;
+}
+
 const SimpleSidebar = ({
   files,
   activeFile,
@@ -142,7 +157,7 @@ const SimpleSidebar = ({
   onFileRename,
   onFolderCreate,
   onFileUpload,
-}) => {
+}: SimpleSidebarProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isDragOver, setIsDragOver] = useState(false);
 

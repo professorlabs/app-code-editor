@@ -157,9 +157,13 @@ const CopyBtn = styled(IconButton, {
   },
 });
 
+interface CategoryIconProps {
+  category: string;
+}
+
 const CategoryIcon = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})(({ category }) => ({
+})<CategoryIconProps>(({ category }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
@@ -290,10 +294,10 @@ const LaTeXLibrary = () => {
     if (!searchQuery) return latexSnippets;
     
     const query = searchQuery.toLowerCase();
-    const filtered = {};
+    const filtered: typeof latexSnippets = {} as typeof latexSnippets;
     
     Object.keys(latexSnippets).forEach(category => {
-      filtered[category] = latexSnippets[category].filter(snippet => 
+      filtered[category as keyof typeof latexSnippets] = latexSnippets[category as keyof typeof latexSnippets].filter(snippet => 
         snippet.title.toLowerCase().includes(query) ||
         snippet.code.toLowerCase().includes(query) ||
         snippet.tags.some(tag => tag.toLowerCase().includes(query))
