@@ -22,10 +22,9 @@ body {
     line-height: 1.6;
     color: #000000;
     background: #ffffff;
-    min-height: 100vh;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
+    overflow-x: auto;
 }
 
 /* ===== NAVIGATION BAR ===== */
@@ -73,30 +72,28 @@ body {
 .portfolio-layout {
     display: flex;
     flex-direction: column;
-    max-width: 1400px;
+    width: 1000px;
     margin: 0 auto;
     margin-top: 60px;
-    gap: 2rem;
-    padding: 0 2rem;
-    min-width: 0;
-    overflow-x: hidden;
+    gap: 0;
+    background: #ffffff;
 }
 
 .portfolio-content {
     display: flex;
-    gap: 2rem;
-    justify-content: center;
-    min-width: 0;
-    overflow-x: hidden;
+    gap: 0;
+    min-height: 600px;
+    width: 100%;
 }
 
 /* ===== LEFT SIDEBAR ===== */
 .portfolio-sidebar {
     background: #ffffff;
     padding: 2rem;
-    width: 300px;
+    width: 250px;
     flex-shrink: 0;
-    overflow-y: auto;
+    border-right: 1px solid #e5e5e5;
+    overflow: hidden;
 }
 
 .profile-container {
@@ -134,26 +131,20 @@ body {
 /* ===== MAIN CONTENT ===== */
 .portfolio-main {
     flex: 1;
-    overflow-y: auto;
     padding: 2rem 3rem;
     background: #ffffff;
-    max-width: 100%;
     word-wrap: break-word;
-    overflow-x: hidden;
-    min-width: 0; /* Prevent flex item overflow */
+    min-width: 0;
+    width: auto;
 }
 
 .portfolio-main p {
-    max-width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    margin: 1rem 0;
+    text-align: justify;
 }
 
 .portfolio-main strong {
-    display: inline-block;
-    max-width: 100%;
-    word-wrap: break-word;
+    font-weight: 600;
 }
 
 .portfolio-main img {
@@ -164,14 +155,11 @@ body {
 }
 
 .portfolio-main figure {
-    max-width: 100%;
     margin: 2rem 0;
     text-align: center;
 }
 
 .portfolio-main figcaption {
-    max-width: 100%;
-    word-wrap: break-word;
     font-style: italic;
     color: #666;
     margin-top: 0.5rem;
@@ -255,8 +243,8 @@ body {
     background: #ffffff;
     padding: 1.5rem 2rem;
     text-align: center;
-    margin-top: 2rem;
-    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    margin-top: auto;
 }
 
 .footer-social-links {
@@ -349,130 +337,107 @@ body {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
+@media (max-width: 1000px) {
     .portfolio-layout {
-        gap: 1.5rem;
-        padding: 0 1.5rem;
-    }
-    
-    .portfolio-content {
-        gap: 1.5rem;
-    }
-    
-    .portfolio-navbar {
-        padding: 1rem 1.5rem;
-    }
-    
-    .navbar-links {
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .portfolio-layout {
-        gap: 1rem;
-        padding: 0 1rem;
         width: 100%;
-        overflow-x: hidden;
+        margin: 60px 1rem 1rem 1rem;
     }
     
     .portfolio-content {
         flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-        width: 100%;
-        overflow-x: hidden;
     }
     
     .portfolio-sidebar {
         width: 100%;
-        max-width: none;
+        border-right: none;
+        border-bottom: 1px solid #e5e5e5;
         padding: 1.5rem;
-        order: 1; /* Sidebar comes first */
-    }
-    
-    .portfolio-navbar {
-        padding: 1rem 1rem;
-    }
-    
-    .navbar-links {
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
     }
     
     .portfolio-main {
         padding: 1.5rem;
-        order: 2; /* Main content comes second */
-        width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .portfolio-footer {
-        order: 3; /* Footer comes last */
-        width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .main-greeting {
-        font-size: 2rem;
     }
 }
 
-@media (max-width: 480px) {
-    .portfolio-layout {
-        gap: 0.5rem;
-        padding: 0 0.5rem;
-        margin-top: 50px;
-        width: 100%;
-        overflow-x: hidden;
+/* ===== OVERRIDE COMMON COMPONENTS RESPONSIVE ISSUES ===== */
+/* Prevent Common Components responsive rules from affecting fixed layout */
+@media (min-width: 1001px) {
+    /* Override ALL Common Components responsive rules */
+    .portfolio-layout .common-section,
+    .portfolio-layout .common-subsection, 
+    .portfolio-layout .common-subsubsection {
+        font-size: inherit !important;
+        margin: 2rem 0 1rem 0 !important;
+        width: auto !important;
+        max-width: none !important;
+        display: block !important;
+        float: none !important;
+        position: static !important;
+        overflow: visible !important;
     }
     
-    .portfolio-content {
-        gap: 0.5rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-section {
+        font-size: 1.8rem !important;
+        border-bottom: 2px solid #eee !important;
+        padding-bottom: 0.5rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-sidebar {
-        padding: 1rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-subsection {
+        font-size: 1.5rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-main {
-        padding: 1rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-subsubsection {
+        font-size: 1.3rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-navbar {
-        padding: 0.75rem 0.5rem;
-        height: 50px;
+    .portfolio-layout .common-columns {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 1rem !important;
+        margin: 1rem 0 !important;
     }
     
-    .navbar-links {
-        gap: 0.5rem;
-        flex-wrap: wrap;
+    .portfolio-layout .common-column {
+        flex: 1 !important;
+        overflow: visible !important;
+        width: auto !important;
+        max-width: none !important;
     }
     
-    .navbar-link {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.9rem;
+    .portfolio-layout .common-tabular {
+        font-size: 0.95rem !important;
+        width: 100% !important;
     }
     
-    .portfolio-layout {
-        margin-top: 50px;
-        height: calc(100vh - 50px);
+    .portfolio-layout .common-tabular .table-cell {
+        padding: 0.75rem !important;
     }
     
-    .footer-social-links {
-        gap: 1rem;
+    .portfolio-layout .equation-content {
+        font-size: 1.1rem !important;
+        padding: 1rem !important;
     }
     
-    .footer-social-link {
-        width: 35px;
-        height: 35px;
+    .portfolio-layout .common-wrapfigure {
+        float: none !important;
+        width: auto !important;
+        margin: 1.5rem 0 !important;
+    }
+    
+    /* Ensure main content displays properly */
+    .portfolio-layout .portfolio-main {
+        display: block !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+    
+    /* Ensure main content wrapper is not constrained */
+    .portfolio-layout main {
+        display: block !important;
+        width: 100% !important;
     }
 }
 
@@ -856,62 +821,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Convert LaTeX sections to HTML
         mainContent = this.convertLaTeXSections(mainContent);
         
-        return `
-            <h1 class="main-greeting">Hello!</h1>
-            
-            <section class="bio-section" id="about">
-                <h3>About</h3>
-                <p class="bio-text">
-                    Welcome to my portfolio! I'm a research scientist passionate about 
-                    <span class="inline-link">machine learning</span>, 
-                    <span class="inline-link">artificial intelligence</span>, and 
-                    <span class="inline-link">data science</span>.
-                </p>
-            </section>
-            
-            <section class="bio-section" id="news">
-                <h3>Recent News</h3>
-                <ul class="achievement-list">
-                    <li class="achievement-item">
-                        <div class="achievement-date">October 2024</div>
-                        <div class="achievement-title">New Paper Published</div>
-                        <div class="achievement-description">Our research on deep learning was accepted at ICML 2024.</div>
-                    </li>
-                    <li class="achievement-item">
-                        <div class="achievement-date">September 2024</div>
-                        <div class="achievement-title">Conference Presentation</div>
-                        <div class="achievement-description">Presented our work at NeurIPS 2024 in Vancouver.</div>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="bio-section" id="publications">
-                <h3>Selected Publications</h3>
-                <ul class="achievement-list">
-                    <li class="achievement-item">
-                        <div class="achievement-title">Deep Learning for Scientific Discovery</div>
-                        <div class="achievement-description">Nature Machine Intelligence, 2024</div>
-                    </li>
-                    <li class="achievement-item">
-                        <div class="achievement-title">Efficient Training of Large Language Models</div>
-                        <div class="achievement-description">ICML 2024</div>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="bio-section" id="hobbies">
-                <h3>Hobbies & Interests</h3>
-                <div>
-                    <span class="hobby-item">🏃 Running</span>
-                    <span class="hobby-item">📚 Reading</span>
-                    <span class="hobby-item">🎵 Music</span>
-                    <span class="hobby-item">♟️ Chess</span>
-                    <span class="hobby-item">🎨 Art</span>
-                </div>
-            </section>
-            
-            ${mainContent ? `<section id="additional-content">${mainContent}</section>` : ''}
-        `;
+        // Return only the actual LaTeX content, no template garbage
+        return mainContent || '';
     }
 
     /**

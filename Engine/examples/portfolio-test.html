@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Jane Smith</title>
+    <title>Dr. Sarah Johnson</title>
     <style>
 /* ===== SIMPLE PREMIUM PORTFOLIO THEME ===== */
 * {
@@ -17,10 +17,9 @@ body {
     line-height: 1.6;
     color: #000000;
     background: #ffffff;
-    min-height: 100vh;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
+    overflow-x: auto;
 }
 
 /* ===== NAVIGATION BAR ===== */
@@ -68,30 +67,28 @@ body {
 .portfolio-layout {
     display: flex;
     flex-direction: column;
-    max-width: 1400px;
+    width: 1000px;
     margin: 0 auto;
     margin-top: 60px;
-    gap: 2rem;
-    padding: 0 2rem;
-    min-width: 0;
-    overflow-x: hidden;
+    gap: 0;
+    background: #ffffff;
 }
 
 .portfolio-content {
     display: flex;
-    gap: 2rem;
-    justify-content: center;
-    min-width: 0;
-    overflow-x: hidden;
+    gap: 0;
+    min-height: 600px;
+    width: 100%;
 }
 
 /* ===== LEFT SIDEBAR ===== */
 .portfolio-sidebar {
     background: #ffffff;
     padding: 2rem;
-    width: 300px;
+    width: 250px;
     flex-shrink: 0;
-    overflow-y: auto;
+    border-right: 1px solid #e5e5e5;
+    overflow: hidden;
 }
 
 .profile-container {
@@ -129,26 +126,20 @@ body {
 /* ===== MAIN CONTENT ===== */
 .portfolio-main {
     flex: 1;
-    overflow-y: auto;
     padding: 2rem 3rem;
     background: #ffffff;
-    max-width: 100%;
     word-wrap: break-word;
-    overflow-x: hidden;
-    min-width: 0; /* Prevent flex item overflow */
+    min-width: 0;
+    width: auto;
 }
 
 .portfolio-main p {
-    max-width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    margin: 1rem 0;
+    text-align: justify;
 }
 
 .portfolio-main strong {
-    display: inline-block;
-    max-width: 100%;
-    word-wrap: break-word;
+    font-weight: 600;
 }
 
 .portfolio-main img {
@@ -159,14 +150,11 @@ body {
 }
 
 .portfolio-main figure {
-    max-width: 100%;
     margin: 2rem 0;
     text-align: center;
 }
 
 .portfolio-main figcaption {
-    max-width: 100%;
-    word-wrap: break-word;
     font-style: italic;
     color: #666;
     margin-top: 0.5rem;
@@ -250,8 +238,8 @@ body {
     background: #ffffff;
     padding: 1.5rem 2rem;
     text-align: center;
-    margin-top: 2rem;
-    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    margin-top: auto;
 }
 
 .footer-social-links {
@@ -344,130 +332,107 @@ body {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
+@media (max-width: 1000px) {
     .portfolio-layout {
-        gap: 1.5rem;
-        padding: 0 1.5rem;
-    }
-    
-    .portfolio-content {
-        gap: 1.5rem;
-    }
-    
-    .portfolio-navbar {
-        padding: 1rem 1.5rem;
-    }
-    
-    .navbar-links {
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .portfolio-layout {
-        gap: 1rem;
-        padding: 0 1rem;
         width: 100%;
-        overflow-x: hidden;
+        margin: 60px 1rem 1rem 1rem;
     }
     
     .portfolio-content {
         flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-        width: 100%;
-        overflow-x: hidden;
     }
     
     .portfolio-sidebar {
         width: 100%;
-        max-width: none;
+        border-right: none;
+        border-bottom: 1px solid #e5e5e5;
         padding: 1.5rem;
-        order: 1; /* Sidebar comes first */
-    }
-    
-    .portfolio-navbar {
-        padding: 1rem 1rem;
-    }
-    
-    .navbar-links {
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
     }
     
     .portfolio-main {
         padding: 1.5rem;
-        order: 2; /* Main content comes second */
-        width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .portfolio-footer {
-        order: 3; /* Footer comes last */
-        width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .main-greeting {
-        font-size: 2rem;
     }
 }
 
-@media (max-width: 480px) {
-    .portfolio-layout {
-        gap: 0.5rem;
-        padding: 0 0.5rem;
-        margin-top: 50px;
-        width: 100%;
-        overflow-x: hidden;
+/* ===== OVERRIDE COMMON COMPONENTS RESPONSIVE ISSUES ===== */
+/* Prevent Common Components responsive rules from affecting fixed layout */
+@media (min-width: 1001px) {
+    /* Override ALL Common Components responsive rules */
+    .portfolio-layout .common-section,
+    .portfolio-layout .common-subsection, 
+    .portfolio-layout .common-subsubsection {
+        font-size: inherit !important;
+        margin: 2rem 0 1rem 0 !important;
+        width: auto !important;
+        max-width: none !important;
+        display: block !important;
+        float: none !important;
+        position: static !important;
+        overflow: visible !important;
     }
     
-    .portfolio-content {
-        gap: 0.5rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-section {
+        font-size: 1.8rem !important;
+        border-bottom: 2px solid #eee !important;
+        padding-bottom: 0.5rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-sidebar {
-        padding: 1rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-subsection {
+        font-size: 1.5rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-main {
-        padding: 1rem;
-        width: 100%;
-        overflow-x: hidden;
+    .portfolio-layout .common-subsubsection {
+        font-size: 1.3rem !important;
+        margin: 2rem 0 1rem 0 !important;
     }
     
-    .portfolio-navbar {
-        padding: 0.75rem 0.5rem;
-        height: 50px;
+    .portfolio-layout .common-columns {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 1rem !important;
+        margin: 1rem 0 !important;
     }
     
-    .navbar-links {
-        gap: 0.5rem;
-        flex-wrap: wrap;
+    .portfolio-layout .common-column {
+        flex: 1 !important;
+        overflow: visible !important;
+        width: auto !important;
+        max-width: none !important;
     }
     
-    .navbar-link {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.9rem;
+    .portfolio-layout .common-tabular {
+        font-size: 0.95rem !important;
+        width: 100% !important;
     }
     
-    .portfolio-layout {
-        margin-top: 50px;
-        height: calc(100vh - 50px);
+    .portfolio-layout .common-tabular .table-cell {
+        padding: 0.75rem !important;
     }
     
-    .footer-social-links {
-        gap: 1rem;
+    .portfolio-layout .equation-content {
+        font-size: 1.1rem !important;
+        padding: 1rem !important;
     }
     
-    .footer-social-link {
-        width: 35px;
-        height: 35px;
+    .portfolio-layout .common-wrapfigure {
+        float: none !important;
+        width: auto !important;
+        margin: 1.5rem 0 !important;
+    }
+    
+    /* Ensure main content displays properly */
+    .portfolio-layout .portfolio-main {
+        display: block !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+    
+    /* Ensure main content wrapper is not constrained */
+    .portfolio-layout main {
+        display: block !important;
+        width: 100% !important;
     }
 }
 
@@ -876,7 +841,7 @@ body {
                 <div class="profile-picture">
                     <img src="profile_photo.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px;">
                 </div>
-                <h2 class="profile-name">Machine Learning Researcher</h2>
+                <h2 class="profile-name">Machine Learning Research Scientist</h2>
                 <p class="profile-title">Research Scientist</p>
                 <p class="profile-location">City, Country</p>
             </div>
@@ -913,163 +878,94 @@ body {
                     
                     <!-- Main Content -->
                     <main class="portfolio-main">
-                        
-            <h1 class="main-greeting">Hello!</h1>
-            
-            <section class="bio-section" id="about">
-                <h3>About</h3>
-                <p class="bio-text">
-                    Welcome to my portfolio! I'm a research scientist passionate about 
-                    <span class="inline-link">machine learning</span>, 
-                    <span class="inline-link">artificial intelligence</span>, and 
-                    <span class="inline-link">data science</span>.
-                </p>
-            </section>
-            
-            <section class="bio-section" id="news">
-                <h3>Recent News</h3>
-                <ul class="achievement-list">
-                    <li class="achievement-item">
-                        <div class="achievement-date">October 2024</div>
-                        <div class="achievement-title">New Paper Published</div>
-                        <div class="achievement-description">Our research on deep learning was accepted at ICML 2024.</div>
-                    </li>
-                    <li class="achievement-item">
-                        <div class="achievement-date">September 2024</div>
-                        <div class="achievement-title">Conference Presentation</div>
-                        <div class="achievement-description">Presented our work at NeurIPS 2024 in Vancouver.</div>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="bio-section" id="publications">
-                <h3>Selected Publications</h3>
-                <ul class="achievement-list">
-                    <li class="achievement-item">
-                        <div class="achievement-title">Deep Learning for Scientific Discovery</div>
-                        <div class="achievement-description">Nature Machine Intelligence, 2024</div>
-                    </li>
-                    <li class="achievement-item">
-                        <div class="achievement-title">Efficient Training of Large Language Models</div>
-                        <div class="achievement-description">ICML 2024</div>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="bio-section" id="hobbies">
-                <h3>Hobbies & Interests</h3>
-                <div>
-                    <span class="hobby-item">🏃 Running</span>
-                    <span class="hobby-item">📚 Reading</span>
-                    <span class="hobby-item">🎵 Music</span>
-                    <span class="hobby-item">♟️ Chess</span>
-                    <span class="hobby-item">🎨 Art</span>
-                </div>
-            </section>
-            
-            <section id="additional-content"><p><div class="portfolio">
-            </p>
-<header class="portfolio-header">
-                <h1 class="portfolio-title">Dr. Jane Smith</h1>
-                <p class="portfolio-subtitle">Machine Learning Researcher</p>
-                <p class="portfolio-date">2024</p>
-            </header>
-<p>% Custom navigation logo (optional)
-<div class="nav-logo"><img src="profile_photo.png" alt="Logo" /></div></p>
-<p>% Custom navigation links (optional)
-<nav class="portfolio-nav"><span class="nav-item">Research</span><span class="nav-item">Publications</span><span class="nav-item">Blog</span><span class="nav-item">Contact</span></nav></p>
-<p>% Custom sidebar content with profile image (optional)
-% Circle shape (default)
-<aside class="portfolio-sidebar"><img src="profile_photo.png</aside>Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA" alt="Profile" class="profile-image shape-circle" /></p>
-<p>% Uncomment below to try different shapes:
-% Rectangle shape:
-% <aside class="portfolio-sidebar"><img src="profile_photo.png</aside>Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA" alt="Profile" class="profile-image shape-rectangle" />
-% Default shape (rounded square):
-% <aside class="portfolio-sidebar"><img src="profile_photo.png</aside>Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA" alt="Profile" class="profile-image shape-default" /></p>
-<p>% Additional LaTeX content for the portfolio
-<h2 class="common-section">Research Interests</h2></p>
-<p>I work on <strong class="common-textbf">deep learning</strong> and <strong class="common-textbf">reinforcement learning</strong> with applications to robotics and healthcare.</p>
-<h3 class="common-subsection">Current Projects</h3>
+                        <p><div class="portfolio">
+            <header class="portfolio-header">
+            <h1 class="portfolio-title">Dr. Sarah Johnson</h1>
+            <p class="portfolio-subtitle">Machine Learning Research Scientist</p>
+            <p class="portfolio-date">2024</p>
+        </header></p>
+<p>% Navigation configuration
+<div class="nav-logo"><img src="profile_photo.png" alt="Logo" /></div>
+<nav class="portfolio-nav"><span class="nav-item">Research</span><span class="nav-item">Publications</span><span class="nav-item">Projects</span><span class="nav-item">Contact</span></nav></p>
+<p>
+<h2 class="common-section">Research Overview</h2></p>
+<p>I am a <strong class="common-textbf">machine learning researcher</strong> specializing in <strong class="common-textbf">deep learning</strong> and <strong class="common-textbf">natural language processing</strong>. My work focuses on developing novel architectures for large language models and their applications in scientific discovery.</p>
+<h3 class="common-subsection">Current Research Focus</h3>
 <ul class="common-itemize" style="list-style-type: disc;">
-<li class="itemize-item">Neural architecture search for computer vision</li>
-<li class="itemize-item">Federated learning for medical imaging</li>
-<li class="itemize-item">Autonomous navigation algorithms</li>
+<li class="itemize-item">Efficient training methods for large-scale language models</li>
+<li class="itemize-item">Neural architecture search and automated model design</li>
+<li class="itemize-item">Applications of AI in healthcare and drug discovery</li>
+<li class="itemize-item">Responsible AI development and ethical considerations</li>
 </ul>
-<h2 class="common-section">Featured Work</h2>
-<p>Here are some examples of my recent work:</p>
-<p>% Image in main content with width 80% of text width
-<img src="profile_photo.png" alt="Image" style="width: 100%; height: auto; max-width: 100%;"></p>
-<h3 class="common-subsection">Research Images</h3>
-<p>% Simple image without options (default size)
-<img src="profile_photo.png" alt="Image"></p>
-<p>% Image with specific width in pixels
-<img src="profile_photo.png" alt="Image" style="width: 200px; height: auto; max-width: 100%;"></p>
-<p>% Image with both width and height
-<img src="profile_photo.png" alt="Image" style="width: 150px; height: auto; max-width: 100%; max-height: 100px;"></p>
-<p>% Image with figure environment
-<div class="common-figure" >
-<img src="profile_photo.png" alt="Figure" style="max-width: 100%; height: auto; max-width: 189px;">
-<div class="figure-caption">Research visualization showing deep learning model performance</div>
-</div></p>
-<h2 class="common-section">Publications and Data</h2>
-<h3 class="common-subsection">Recent Publications Table</h3>
-<p>
-                <div class="common-table centered" >
-                    <table class="common-tabular">
-<colgroup>
-<col style="text-align: left"><col style="text-align: center"><col style="text-align: center"></colgroup>
-<tr class="table-row "><td class="table-cell" style="text-align: left">|}
-\hline
-<strong class="common-textbf">Year</strong></td><td class="table-cell" style="text-align: center"><strong class="common-textbf">Venue</strong></td><td class="table-cell" style="text-align: center"><strong class="common-textbf">Title</strong></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
-<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
-2024</td><td class="table-cell" style="text-align: center">ICML</td><td class="table-cell" style="text-align: center">Deep Learning for Scientific Discovery</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
-<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
-2024</td><td class="table-cell" style="text-align: center">NeurIPS</td><td class="table-cell" style="text-align: center">Efficient Training of Large Language Models</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
-<tr class="table-row "><td class="table-cell" style="text-align: left">\hline
-2023</td><td class="table-cell" style="text-align: center">CVPR</td><td class="table-cell" style="text-align: center">Neural Architecture Search for Computer Vision</td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td><td class="table-cell" style="text-align: left"></td></tr>
-<tr class="table-row "><td class="table-cell" style="text-align: left">\hline</td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td><td class="table-cell" style="text-align: center"></td></tr>
-</table>
-                    <div class="table-caption">Selected publications from 2023-2024</div>
-                </div>
-            </p>
-<h3 class="common-subsection">Mathematical Framework</h3>
-<p>Our approach is based on the following optimization equation:</p>
-<p>
-                <div class="common-equation" >
-                    <div class="equation-content">
-                        \min_{\theta} \mathcal{L}(\theta) = <span class="common-frac"><span class="frac-numerator">1</span><span class="frac-denominator">N</span></span> <span class="common-sum">∑<sub>{i=1</sub></span>}^{N} \ell(f(x_i; \theta), y_i) + \lambda \|\theta\|_2^2
-                    </div>
-                </div>
-            </p>
-<p>Where we use the cross-entropy loss:</p>
-<p><div class="common-align">
-<div class="align-row">
-<div class="align-column align-left">\ell(f(x_i; \theta), y_i)</div><div class="align-column align-right">= -<span class="common-sum">∑<sub>{c=1</sub></span>}^{C} y_{i,c} \log(\frac{e^{f_c(x_i; \theta)}}{<span class="common-sum">∑<sub>{k=1</sub></span>}^{C} e^{f_k(x_i; \theta)}})</div></div>
-<div class="align-row">
-<div class="align-column align-left"></div><div class="align-column align-right">= -\log(\frac{e^{f_{y_i}(x_i; \theta)}}{<span class="common-sum">∑<sub>{k=1</sub></span>}^{C} e^{f_k(x_i; \theta)}})</div></div>
-</div></p>
-<h3 class="common-subsection">Research Areas</h3>
-<p><div class="common-columns">
-<div class="column" style="flex: 1; padding: 0 0.5rem;"><strong class="common-textbf">Machine Learning</strong>
+<h2 class="common-section">Selected Publications</h2>
+<h3 class="common-subsection">Journal Articles</h3>
 <ul class="common-itemize" style="list-style-type: disc;">
-<li class="itemize-item">Deep neural networks</li>
-<li class="itemize-item">Reinforcement learning</li>
-<li class="itemize-item">Transfer learning</li>
-</ul></div>
-<div class="column" style="flex: 1; padding: 0 0.5rem;"><strong class="common-textbf">Applications</strong>
+<li class="itemize-item"><strong class="common-textbf">Johnson, S.</strong>, et al. (2024). "Efficient Training of Large Language Models via Gradient Sparsification." <em class="common-textit">Nature Machine Intelligence</em>, 6(3), 234-245.</li>
+<li class="itemize-item">Chen, L., <strong class="common-textbf">Johnson, S.</strong>, \& Kumar, R. (2024). "Neural Architecture Search for Scientific Computing." <em class="common-textit">Journal of Machine Learning Research</em>, 25(1), 1-28.</li>
+<li class="itemize-item"><strong class="common-textbf">Johnson, S.</strong> (2023). "Scalable Transformers for Protein Structure Prediction." <em class="common-textit">Science Advances</em>, 9(15), eabc1234.</li>
+</ul>
+<h3 class="common-subsection">Conference Papers</h3>
 <ul class="common-itemize" style="list-style-type: disc;">
-<li class="itemize-item">Computer vision</li>
-<li class="itemize-item">Natural language processing</li>
-<li class="itemize-item">Healthcare systems</li>
-</ul></div>
-</div></p>
-<h2 class="common-section">Education</h2>
-<p><strong class="common-textbf">Ph.D. in Computer Science</strong> - Stanford University (2020)</p>
-<p><strong class="common-textbf">M.S. in Mathematics</strong> - MIT (2018)</p>
-<p><strong class="common-textbf">B.S. in Physics</strong> - UC Berkeley (2016)</p>
+<li class="itemize-item"><strong class="common-textbf">Johnson, S.</strong>, Zhang, M., \& Lee, K. (2024). "AutoML-Zero: Evolving Machine Learning Algorithms from Scratch." In <em class="common-textit">Proceedings of ICML 2024</em> (pp. 5678-5692).</li>
+<li class="itemize-item">Wang, T., <strong class="common-textbf">Johnson, S.</strong>, et al. (2024). "Federated Learning for Medical Imaging: Privacy-Preserving Collaborative Diagnostics." In <em class="common-textit">Proceedings of NeurIPS 2024</em>.</li>
+<li class="itemize-item"><strong class="common-textbf">Johnson, S.</strong> (2023). "Attention Is Not All You Need: A Critical Analysis." In <em class="common-textit">Proceedings of ICLR 2023</em>.</li>
+</ul>
+<h2 class="common-section">Research Projects</h2>
+<h3 class="common-subsection">AI for Drug Discovery</h3>
+<p>Leading a multidisciplinary team developing novel machine learning approaches for accelerated drug discovery. Our work has identified three promising compounds for Alzheimer's treatment currently in preclinical trials.</p>
+<h3 class="common-subsection">Scalable Training Infrastructure</h3>
+<p>Developing distributed training algorithms that reduce the computational cost of training large language models by 40\% while maintaining performance. This work is being adopted by major AI research labs.</p>
+<h2 class="common-section">Academic Background</h2>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item"><strong class="common-textbf">Ph.D. in Computer Science</strong> - Stanford University (2018-2022)
+    <ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item"></li>
+<li class="itemize-item">Advisor: Professor Andrew Ng</li>
+<li class="itemize-item">Thesis: "Efficient Methods for Training Large-Scale Neural Networks"</li>
+</ul></li>
+<li class="itemize-item"><strong class="common-textbf">M.S. in Artificial Intelligence</strong> - MIT (2016-2018)
+    <ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Focus: Deep Learning and Natural Language Processing</li>
+<li class="itemize-item">Thesis: "Neural Architecture Search with Evolutionary Algorithms"</li>
+</ul></li>
+<li class="itemize-item"><strong class="common-textbf">B.S. in Computer Science and Mathematics</strong> - UC Berkeley (2012-2016)
+    <ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Summa Cum Laude, GPA: 3.9/4.0</li>
+<li class="itemize-item">Chancellor's Scholar, ACM International Collegiate Programming Contest Finalist</li>
+</ul></li>
+</ul>
+<h2 class="common-section">Awards and Honors</h2>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">NSF CAREER Award (2024)</li>
+<li class="itemize-item">MIT Technology Review's 35 Innovators Under 35 (2023)</li>
+<li class="itemize-item">Best Paper Award, ICML 2024</li>
+<li class="itemize-item">Google PhD Fellowship (2019-2022)</li>
+<li class="itemize-item">NSF Graduate Research Fellowship (2018-2021)</li>
+</ul>
+<h2 class="common-section">Professional Activities</h2>
+<h3 class="common-subsection">Academic Service</h3>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Senior Program Committee: ICML 2024, NeurIPS 2024</li>
+<li class="itemize-item">Program Committee: ICLR 2023, AAAI 2023</li>
+<li class="itemize-item">Reviewer: Nature Machine Intelligence, JMLR, PAMI</li>
+</ul>
+<h3 class="common-subsection">Industry Collaboration</h3>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item">Research Consultant, OpenAI (2023-present)</li>
+<li class="itemize-item">Visiting Researcher, Google Brain (Summer 2022)</li>
+<li class="itemize-item">Research Intern, DeepMind (Summer 2021)</li>
+</ul>
+<h2 class="common-section">Contact Information</h2>
+<ul class="common-itemize" style="list-style-type: disc;">
+<li class="itemize-item"><strong class="common-textbf">Email</strong>: sarah.johnson@stanford.edu</li>
+<li class="itemize-item"><strong class="common-textbf">Office</strong>: Gates Computer Science Building, Room 250</li>
+<li class="itemize-item"><strong class="common-textbf">Lab</strong>: Stanford AI Lab</li>
+<li class="itemize-item"><strong class="common-textbf">Twitter</strong>: @drsarahjohnson</li>
+<li class="itemize-item"><strong class="common-textbf">GitHub</strong>: github.com/sarahjohnson</li>
+<li class="itemize-item"><strong class="common-textbf">Google Scholar</strong>: Available upon request</li>
+</ul>
 <p>
-        </div></p></section>
-        
+        </div></p>
                     </main>
                 </div>
                 
@@ -1103,7 +999,7 @@ body {
                         </a>
                     </div>
                     <div class="footer-info">
-                        <p>&copy; 2024 Machine Learning Researcher. All rights reserved.</p>
+                        <p>&copy; 2024 Machine Learning Research Scientist. All rights reserved.</p>
                         <p>Generated with LaTeX to HTML Engine</p>
                     </div>
                 </footer>

@@ -34,26 +34,32 @@ const ExplorerContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
 })({
   height: '100%',
-  background: '#252526',
-  color: '#cccccc',
+  background: '#ffffff',
+  color: '#1e293b',
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
+  animation: 'slideInFromTop 0.5s ease-out',
 });
 
 const ExplorerHeader = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'theme',
 })({
-  padding: '12px 16px',
-  fontSize: '11px',
-  fontWeight: 600,
+  padding: '16px 20px',
+  fontSize: '12px',
+  fontWeight: 700,
   textTransform: 'uppercase',
-  letterSpacing: '0.5px',
-  background: '#2d2d30',
-  borderBottom: '1px solid #3e3e42',
+  letterSpacing: '1px',
+  background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+  borderBottom: '1px solid #e2e8f0',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  color: '#475569',
+  '@media (max-width: 768px)': {
+    padding: '12px 16px',
+    fontSize: '11px',
+  },
 });
 
 const FileList = styled(List, {
@@ -67,11 +73,25 @@ const FileList = styled(List, {
 const FileItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'theme' && prop !== 'active',
 })<{ active?: boolean }>(({ active = false }) => ({
-  padding: '6px 16px',
-  minHeight: '32px',
-  background: active ? '#094771' : 'transparent',
+  padding: '10px 16px',
+  minHeight: '36px',
+  background: active ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)' : 'transparent',
+  borderRadius: '8px',
+  margin: '2px 12px',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  border: active ? '1px solid #c7d2fe' : '1px solid transparent',
   '&:hover': {
-    background: active ? '#094771' : '#2a2d2e',
+    background: active ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%)' : 'rgba(99, 102, 241, 0.05)',
+    transform: 'translateX(4px)',
+    border: active ? '1px solid #a5b4fc' : '1px solid #e2e8f0',
+  },
+  '&:active': {
+    transform: 'translateX(2px) scale(0.98)',
+  },
+  '@media (max-width: 768px)': {
+    padding: '8px 12px',
+    minHeight: '32px',
+    margin: '1px 8px',
   },
 }));
 
@@ -88,9 +108,11 @@ const FileName = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'theme',
 })({
   fontSize: '13px',
-  color: '#cccccc',
+  color: '#475569',
+  fontWeight: 500,
   '&.active': {
-    color: '#ffffff',
+    color: '#1e293b',
+    fontWeight: 600,
   },
 });
 
@@ -126,18 +148,26 @@ const FileExplorer = ({
   const getFileIcon = (filename: string) => {
     const extension = filename.split('.').pop()?.toLowerCase();
     switch (extension) {
-      case 'html':
-        return '🌐';
-      case 'css':
-        return '🎨';
-      case 'js':
-        return '⚡';
-      case 'json':
-        return '📋';
+      case 'tex':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#6366f1' }} />;
+      case 'latex':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#6366f1' }} />;
+      case 'bib':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#f59e0b' }} />;
+      case 'cls':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#10b981' }} />;
+      case 'sty':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#8b5cf6' }} />;
+      case 'pdf':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#ef4444' }} />;
+      case 'png':
+      case 'jpg':
+      case 'jpeg':
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#06b6d4' }} />;
       case 'md':
-        return '📝';
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#64748b' }} />;
       default:
-        return '📄';
+        return <InsertDriveFile sx={{ fontSize: 16, color: '#94a3b8' }} />;
     }
   };
 
@@ -200,15 +230,6 @@ const FileExplorer = ({
       </ExplorerHeader>
 
       <FileList>
-        <ListItem className="file-list-item">
-          <FileItem active={false}>
-            <FileIcon>
-              <FolderOpen className="folder-icon" />
-            </FileIcon>
-            <FileName>My Project</FileName>
-          </FileItem>
-        </ListItem>
-
         {files.map((filename) => (
           <ListItem key={filename} className="file-list-item">
             <FileItem
@@ -217,9 +238,7 @@ const FileExplorer = ({
               onContextMenu={(e) => handleContextMenu(e, filename)}
             >
               <FileIcon>
-                <span className="file-type-icon">
-                  {getFileIcon(filename)}
-                </span>
+                {getFileIcon(filename)}
               </FileIcon>
               <FileName className={activeFile === filename ? 'active' : ''}>
                 {filename}

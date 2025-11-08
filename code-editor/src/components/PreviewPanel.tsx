@@ -102,21 +102,28 @@ const PreviewPanel = ({ files }: PreviewPanelProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const generateHtmlContent = () => {
-    const htmlContent = files['index.html'] || '';
+    // Look for HTML files in the files object
+    const htmlFile = Object.keys(files).find(key => key.endsWith('.html'));
+    const htmlContent = htmlFile ? files[htmlFile] : '';
+    
+    // If no HTML file found, look for CSS and JS files for combined preview
     const cssContent = files['styles.css'] || '';
     const jsContent = files['script.js'] || '';
 
     // If HTML already includes CSS/JS references, use as-is
-    if (htmlContent.includes('<script') || htmlContent.includes('<link')) {
+    if (htmlContent && (htmlContent.includes('<script') || htmlContent.includes('<link'))) {
       return htmlContent;
     }
 
-    // Otherwise, inline the CSS and JS
-    const processedHtml = htmlContent
-      .replace('</head>', `    <style>\n${cssContent}\n    </style>\n</head>`)
-      .replace('</body>', `    <script>\n${jsContent}\n    </script>\n</body>`);
+    // If we have HTML content, inline the CSS and JS if they exist
+    if (htmlContent) {
+      return htmlContent
+        .replace('</head>', `    <style>\n${cssContent}\n    </style>\n</head>`)
+        .replace('</body>', `    <script>\n${jsContent}\n    </script>\n</body>`);
+    }
 
-    return processedHtml;
+    // Return empty HTML if no content found
+    return '<html><head><title>Preview</title></head><body><p>No content to preview</p></body></html>';
   };
 
   const updatePreview = () => {

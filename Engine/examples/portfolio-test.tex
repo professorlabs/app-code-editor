@@ -1,129 +1,123 @@
 \documentclass{portfolio}
 \usepackage[utf8]{inputenc}
 
-\title{Dr. Jane Smith}
-\author{Machine Learning Researcher}
+\title{Dr. Sarah Johnson}
+\author{Machine Learning Research Scientist}
 \date{2024}
 
 \begin{document}
 
-\maketitle
-
-% Custom navigation logo (optional)
+% Navigation configuration
 \navlogo{profile_photo.png}
+\nabbar{Research, Publications, Projects, Contact}
 
-% Custom navigation links (optional)
-\nabbar{Research, Publications, Blog, Contact}
 
-% Custom sidebar content with profile image (optional)
-% Circle shape (default)
-\sidebar{\profileimage[shape=circle]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
 
-% Uncomment below to try different shapes:
-% Rectangle shape:
-% \sidebar{\profileimage[shape=rectangle]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
-% Default shape (rounded square):
-% \sidebar{\profileimage[shape=default]{profile_photo.png}Dr. Jane Smith | Senior Research Scientist | MIT, Cambridge, MA}
 
-% Additional LaTeX content for the portfolio
-\section{Research Interests}
+\section{Research Overview}
 
-I work on \textbf{deep learning} and \textbf{reinforcement learning} with applications to robotics and healthcare.
+I am a \textbf{machine learning researcher} specializing in \textbf{deep learning} and \textbf{natural language processing}. My work focuses on developing novel architectures for large language models and their applications in scientific discovery.
 
-\subsection{Current Projects}
+\subsection{Current Research Focus}
 
 \begin{itemize}
-    \item Neural architecture search for computer vision
-    \item Federated learning for medical imaging
-    \item Autonomous navigation algorithms
+    \item Efficient training methods for large-scale language models
+    \item Neural architecture search and automated model design
+    \item Applications of AI in healthcare and drug discovery
+    \item Responsible AI development and ethical considerations
 \end{itemize}
 
-\section{Featured Work}
+\section{Selected Publications}
 
-Here are some examples of my recent work:
+\subsection{Journal Articles}
 
-% Image in main content with width 80% of text width
-\includegraphics[width=0.8\textwidth]{profile_photo.png}
-
-\subsection{Research Images}
-
-% Simple image without options (default size)
-\includegraphics{profile_photo.png}
-
-% Image with specific width in pixels
-\includegraphics[width=200px]{profile_photo.png}
-
-% Image with both width and height
-\includegraphics[width=150px,height=100px]{profile_photo.png}
-
-% Image with figure environment
-\begin{figure}
-\includegraphics[width=5cm]{profile_photo.png}
-\caption{Research visualization showing deep learning model performance}
-\end{figure}
-
-\section{Publications and Data}
-
-\subsection{Recent Publications Table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|c|p{6cm}|}
-\hline
-\textbf{Year} & \textbf{Venue} & \textbf{Title} \\
-\hline
-2024 & ICML & Deep Learning for Scientific Discovery \\
-\hline
-2024 & NeurIPS & Efficient Training of Large Language Models \\
-\hline
-2023 & CVPR & Neural Architecture Search for Computer Vision \\
-\hline
-\end{tabular}
-\caption{Selected publications from 2023-2024}
-\end{table}
-
-\subsection{Mathematical Framework}
-
-Our approach is based on the following optimization equation:
-
-\begin{equation}
-\min_{\theta} \mathcal{L}(\theta) = \frac{1}{N} \sum_{i=1}^{N} \ell(f(x_i; \theta), y_i) + \lambda \|\theta\|_2^2
-\end{equation}
-
-Where we use the cross-entropy loss:
-
-\begin{align}
-\ell(f(x_i; \theta), y_i) &= -\sum_{c=1}^{C} y_{i,c} \log(\frac{e^{f_c(x_i; \theta)}}{\sum_{k=1}^{C} e^{f_k(x_i; \theta)}}) \\
-&= -\log(\frac{e^{f_{y_i}(x_i; \theta)}}{\sum_{k=1}^{C} e^{f_k(x_i; \theta)}})
-\end{align}
-
-\subsection{Research Areas}
-
-\begin{columns}[T]
-\begin{column}{0.5\textwidth}
-\textbf{Machine Learning}
 \begin{itemize}
-\item Deep neural networks
-\item Reinforcement learning
-\item Transfer learning
+    \item \textbf{Johnson, S.}, et al. (2024). "Efficient Training of Large Language Models via Gradient Sparsification." \textit{Nature Machine Intelligence}, 6(3), 234-245.
+    
+    \item Chen, L., \textbf{Johnson, S.}, \& Kumar, R. (2024). "Neural Architecture Search for Scientific Computing." \textit{Journal of Machine Learning Research}, 25(1), 1-28.
+    
+    \item \textbf{Johnson, S.} (2023). "Scalable Transformers for Protein Structure Prediction." \textit{Science Advances}, 9(15), eabc1234.
 \end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\textbf{Applications}
+
+\subsection{Conference Papers}
+
 \begin{itemize}
-\item Computer vision
-\item Natural language processing
-\item Healthcare systems
+    \item \textbf{Johnson, S.}, Zhang, M., \& Lee, K. (2024). "AutoML-Zero: Evolving Machine Learning Algorithms from Scratch." In \textit{Proceedings of ICML 2024} (pp. 5678-5692).
+    
+    \item Wang, T., \textbf{Johnson, S.}, et al. (2024). "Federated Learning for Medical Imaging: Privacy-Preserving Collaborative Diagnostics." In \textit{Proceedings of NeurIPS 2024}.
+    
+    \item \textbf{Johnson, S.} (2023). "Attention Is Not All You Need: A Critical Analysis." In \textit{Proceedings of ICLR 2023}.
 \end{itemize}
-\end{column}
-\end{columns}
 
-\section{Education}
+\section{Research Projects}
 
-\textbf{Ph.D. in Computer Science} - Stanford University (2020)
+\subsection{AI for Drug Discovery}
 
-\textbf{M.S. in Mathematics} - MIT (2018)
+Leading a multidisciplinary team developing novel machine learning approaches for accelerated drug discovery. Our work has identified three promising compounds for Alzheimer's treatment currently in preclinical trials.
 
-\textbf{B.S. in Physics} - UC Berkeley (2016)
+\subsection{Scalable Training Infrastructure}
+
+Developing distributed training algorithms that reduce the computational cost of training large language models by 40\% while maintaining performance. This work is being adopted by major AI research labs.
+
+\section{Academic Background}
+
+\begin{itemize}
+    \item \textbf{Ph.D. in Computer Science} - Stanford University (2018-2022)
+    \begin{itemize}
+        \item Advisor: Professor Andrew Ng
+        \item Thesis: "Efficient Methods for Training Large-Scale Neural Networks"
+    \end{itemize}
+    
+    \item \textbf{M.S. in Artificial Intelligence} - MIT (2016-2018)
+    \begin{itemize}
+        \item Focus: Deep Learning and Natural Language Processing
+        \item Thesis: "Neural Architecture Search with Evolutionary Algorithms"
+    \end{itemize}
+    
+    \item \textbf{B.S. in Computer Science and Mathematics} - UC Berkeley (2012-2016)
+    \begin{itemize}
+        \item Summa Cum Laude, GPA: 3.9/4.0
+        \item Chancellor's Scholar, ACM International Collegiate Programming Contest Finalist
+    \end{itemize}
+\end{itemize}
+
+\section{Awards and Honors}
+
+\begin{itemize}
+    \item NSF CAREER Award (2024)
+    \item MIT Technology Review's 35 Innovators Under 35 (2023)
+    \item Best Paper Award, ICML 2024
+    \item Google PhD Fellowship (2019-2022)
+    \item NSF Graduate Research Fellowship (2018-2021)
+\end{itemize}
+
+\section{Professional Activities}
+
+\subsection{Academic Service}
+
+\begin{itemize}
+    \item Senior Program Committee: ICML 2024, NeurIPS 2024
+    \item Program Committee: ICLR 2023, AAAI 2023
+    \item Reviewer: Nature Machine Intelligence, JMLR, PAMI
+\end{itemize}
+
+\subsection{Industry Collaboration}
+
+\begin{itemize}
+    \item Research Consultant, OpenAI (2023-present)
+    \item Visiting Researcher, Google Brain (Summer 2022)
+    \item Research Intern, DeepMind (Summer 2021)
+\end{itemize}
+
+\section{Contact Information}
+
+\begin{itemize}
+    \item \textbf{Email}: sarah.johnson@stanford.edu
+    \item \textbf{Office}: Gates Computer Science Building, Room 250
+    \item \textbf{Lab}: Stanford AI Lab
+    \item \textbf{Twitter}: @drsarahjohnson
+    \item \textbf{GitHub}: github.com/sarahjohnson
+    \item \textbf{Google Scholar}: Available upon request
+\end{itemize}
 
 \end{document}
