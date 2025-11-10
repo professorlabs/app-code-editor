@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     fs.writeFileSync(tempFilePath, content);
 
     // Execute the engine.js command
-    const enginePath = path.join(process.cwd(), '..', 'Engine', 'engine.js');
+    const enginePath = path.join(process.cwd(), 'Engine', 'engine.js');
     const command = `node ${enginePath} convert ${tempFilePath}`;
     
     console.log('Executing command:', command);

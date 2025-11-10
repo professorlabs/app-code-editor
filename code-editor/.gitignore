@@ -9,6 +9,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+package-lock.json
+pkg-lock.json
 
 # testing
 /coverage
@@ -19,6 +21,9 @@
 
 # production
 /build
+
+# public directory (static files)
+/public/
 
 # misc
 .DS_Store
