@@ -3,8 +3,13 @@ import './globals.css';
 import ClientLayout from './ClientLayout';
 
 export const metadata: Metadata = {
-  title: 'Code Editor',
-  description: 'A professional code editor with live preview',
+  title: 'LaTeX Studio Pro',
+  description: 'A professional LaTeX editor with live preview',
+  icons: {
+    icon: '/logo.svg',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
+  },
 };
 
 export default function RootLayout({

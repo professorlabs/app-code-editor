@@ -17,11 +17,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create a temporary directory for compilation
-    const tempDir = path.join(process.cwd(), 'temp');
-    if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir, { recursive: true });
-    }
+    // Create a temporary directory for compilation in /tmp (writable in serverless)
+    const tempDir = path.join('/tmp', `latex-${Date.now()}`);
+    fs.mkdirSync(tempDir, { recursive: true });
 
     const tempFilePath = path.join(tempDir, filename);
     
@@ -30,32 +28,40 @@ export async function POST(request: NextRequest) {
 
     // Execute the engine.js command
     const enginePath = path.join(process.cwd(), 'Engine', 'engine.js');
-    const command = `node ${enginePath} convert ${tempFilePath}`;
+    const command = `cd ${tempDir} && node ${enginePath} convert ${filename}`;
     
     console.log('Executing command:', command);
     
     const { stdout, stderr } = await execAsync(command, {
-      cwd: tempDir,
       timeout: 30000, // 30 second timeout
     });
 
     // Clean up temporary files
     try {
-      fs.unlinkSync(tempFilePath);
-      // Also clean up any generated files if needed
-      const htmlFilePath = tempFilePath.replace('.tex', '.html');
+      const htmlFilePath = path.join(tempDir, filename.replace('.tex', '.html'));
       if (fs.existsSync(htmlFilePath)) {
         const htmlContent = fs.readFileSync(htmlFilePath, 'utf-8');
-        fs.unlinkSync(htmlFilePath);
+        
+        // Clean up entire temp directory
+        fs.rmSync(tempDir, { recursive: true, force: true });
         
         return NextResponse.json({
           success: true,
           html: htmlContent,
           output: stdout,
         });
+      } else {
+        // Clean up even if no HTML generated
+        fs.rmSync(tempDir, { recursive: true, force: true });
       }
     } catch (cleanupError) {
       console.error('Error cleaning up temporary files:', cleanupError);
+      // Force cleanup
+      try {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      } catch (e) {
+        // Ignore cleanup errors
+      }
     }
 
     return NextResponse.json({

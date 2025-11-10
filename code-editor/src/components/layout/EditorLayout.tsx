@@ -10,69 +10,133 @@ import { Box, useTheme, useMediaQuery } from '@mui/material';
 import FileExplorer from '../FileExplorer';
 import CodeEditor from '../CodeEditor';
 import PreviewPanel from '../PreviewPanel';
-import Header from '../Header';
+import PremiumHeader from '../PremiumHeader';
 import SimpleSidebar from '../SimpleSidebar';
+import VSCodeSidebar from '../VSCodeSidebar';
 
 const EditorLayout = () => {
-  const [activeFile, setActiveFile] = useState<string | null>(null);
+  const [activeFile, setActiveFile] = useState<string | null>('portfolio.tex');
   const [isRunning, setIsRunning] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [files, setFiles] = useState<Record<string, string>>({
-    'main.tex': `\\documentclass{article}
+    'portfolio.tex': `\\documentclass{portfolio}
 \\usepackage[utf8]{inputenc}
-\\usepackage{amsmath}
-\\usepackage{graphicx}
-\\usepackage{geometry}
-\\geometry{a4paper, margin=1in}
 
-\\title{LaTeX Document}
-\\author{Your Name}
-\\date{\\today}
+\\title{Ibn al-Haytham (Alhazen)}
+\\author{Father of Modern Optics and Scientific Methodology}
+\\date{965 AD - 1040 AD}
 
 \\begin{document}
 
-\\maketitle
+% Navigation configuration
+\\navlogo{ibn.png}
+\\nabbar{Biography, Contributions, Legacy, Works}
 
-\\section{Introduction}
-Welcome to LaTeX Studio Pro! This is your first LaTeX document.
+% Include profile image
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.8\\textwidth]{ibn.png}
+\\caption{Ibn al-Haytham (Alhazen) - Father of Modern Optics}
+\\end{figure}
 
-\\section{Mathematical Content}
-Here's some inline math: $E = mc^2$
 
-And here's a displayed equation:
-\\begin{equation}
-    \\int_{a}^{b} f(x) \\, dx = F(b) - F(a)
-\\end{equation}
+\\section{Biography}
 
-\\section{Lists}
+\\textbf{Ibn al-Haytham} (Latinized as \\textit{Alhazen}), born in \\textbf{965 AD} in Basra, Iraq, was a pioneering mathematician, astronomer, and physicist who made fundamental contributions to the principles of optics, astronomy, mathematics, and the scientific method.
+
+\\subsection{Early Life and Education}
+
+Abū ʿAlī al-Ḥasan ibn al-Ḥasan ibn al-Haytham was born during the Islamic Golden Age. He received his education in Basra, where he developed exceptional mathematical abilities and a keen interest in natural sciences. His reputation as a brilliant scholar led to his invitation to Cairo by the Fatimid Caliph al-Hakim.
+
+\\subsection{Life in Cairo}
+
+In Cairo, Ibn al-Haytham conducted his most important optical research. According to historical accounts, he feigned madness to avoid the Caliph's dangerous political schemes, allowing him to dedicate himself entirely to scientific pursuits while under house arrest.
+
+\\section{Major Contributions}
+
+\\subsection{Book of Optics (Kitāb al-Manāẓir)}
+
+His magnum opus, \\textit{Kitāb al-Manāẓir} (Book of Optics), written between 1011 and 1021, revolutionized the understanding of vision and light:
+
 \\begin{itemize}
-    \\item First item
-    \\item Second item
-    \\begin{itemize}
-        \\item Nested item
-    \\end{itemize}
+    \\item Established that vision occurs when light travels from objects to the eye
+    \\item Proved the intromission theory of vision against the extramission theory
+    \\item Systematically studied reflection, refraction, and color phenomena
+    \\item Investigated the psychology of visual perception
 \\end{itemize}
 
-\\section{Conclusion}
-This demonstrates the basic features of LaTeX.
+\\subsection{Scientific Method}
+
+Ibn al-Haytham pioneered the modern scientific method:
+\\begin{itemize}
+    \\item Emphasized systematic experimentation and controlled testing
+    \\item Stressed the importance of mathematical description of natural phenomena
+    \\item Combined theoretical reasoning with empirical verification
+    \\item Advocated for reproducible experiments and peer review
+\\end{itemize}
+
+\\subsection{Mathematics and Astronomy}
+
+\\begin{itemize}
+    \\item Developed early analytic geometry concepts
+    \\item Solved problems using what we now call algebraic methods
+    \\item Made significant contributions to number theory
+    \\item Studied celestial mechanics and planetary motion
+    \\item Attempted to measure the height of Earth's atmosphere
+\\end{itemize}
+
+\\section{Legacy and Influence}
+
+\\subsection{Impact on Western Science}
+
+Ibn al-Haytham's works were translated into Latin in the 12th and 13th centuries and profoundly influenced:
+\\begin{itemize}
+    \\item Roger Bacon and other medieval European scholars
+    \\item The development of perspective in Renaissance art
+    \\item Kepler's laws of planetary motion
+    \\item Newton's work on optics and the scientific method
+\\end{itemize}
+
+\\subsection{Modern Recognition}
+
+Today, Ibn al-Haytham is recognized as:
+\\begin{itemize}
+    \\item The "Father of Modern Optics"
+    \\item A pioneer of the scientific method
+    \\item One of the greatest scientists of the medieval period
+    \\item An important bridge between ancient and modern science
+\\end{itemize}
+
+\\subsection{The "Alhazen Problem"}
+
+His famous mathematical problem about finding the point of reflection on a curved mirror from a given object to a given observer is known as "Alhazen's Problem" and continued to challenge mathematicians for centuries.
+
+\\section{Principal Works}
+
+\\begin{itemize}
+    \\item \\textit{Kitāb al-Manāẓir} (Book of Optics) - 7 volumes
+    \\item \\textit{Treatise on Light} - Foundational work on optics
+    \\item \\textit{On the Shape of the Eclipse} - Astronomical calculations
+    \\item \\textit{Analysis and Synthesis} - Mathematical methodology
+    \\item \\textit{Treatise on Place} - Contributions to physics
+    \\item Over 200 surviving works on various scientific topics
+\\end{itemize}
+
+\\section{Personal Philosophy}
+
+Ibn al-Haytham believed that:
+\\begin{quote}
+    "The truth is the only thing that can unite men, while falsehood is the only thing that can divide them."
+\\end{quote}
+
+He emphasized the importance of skepticism, questioning authority, and seeking truth through rigorous investigation - principles that remain central to modern science.
+
+\\section{Historical Context}
+
+Ibn al-Haytham lived during the peak of the Islamic Golden Age, a period of extraordinary cultural, scientific, and intellectual advancement that spanned from the 8th to the 14th centuries. His work exemplifies the sophisticated scientific tradition that flourished in the Islamic world and laid crucial groundwork for the European Renaissance.
 
 \\end{document}`,
-    'references.bib': `@article{einstein1905,
-    author = {Einstein, Albert},
-    title = {On the Electrodynamics of Moving Bodies},
-    journal = {Annalen der Physik},
-    volume = {17},
-    number = {10},
-    pages = {891--921},
-    year = {1905}
-}
-
-@book{knuth1984,
-    author = {Knuth, Donald E.},
-    title = {The TeXbook},
-    publisher = {Addison-Wesley},
-    year = {1984}
-}`,
+    'ibn.png': '', // This is a reference to the image file
   });
 
   const theme = useTheme();
@@ -96,10 +160,26 @@ This demonstrates the basic features of LaTeX.
   };
 
   const getCurrentFileContent = () => {
-    return activeFile ? files[activeFile] : '';
+    if (!activeFile) return '';
+    
+    // Handle image files
+    const extension = activeFile.split('.').pop()?.toLowerCase();
+    if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(extension || '')) {
+      return `[Image File: ${activeFile}]`;
+    }
+    
+    return files[activeFile] || '';
   };
 
   const handleFileCreate = (filename: string) => {
+    // Handle image files - don't create them as text files
+    const extension = filename.split('.').pop()?.toLowerCase();
+    if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(extension || '')) {
+      // Don't create image files through the text editor
+      alert('Image files cannot be created through the text editor. Please upload image files instead.');
+      return;
+    }
+    
     setFiles(prev => ({
       ...prev,
       [filename]: getDefaultContentForFile(filename),
@@ -140,6 +220,33 @@ This demonstrates the basic features of LaTeX.
       console.log(`Creating folder: ${folderName.trim()}`);
       // In a real implementation, you would handle folder creation
     }
+  };
+
+  const handleFileDownload = (filename: string, content: string) => {
+    const extension = filename.split('.').pop()?.toLowerCase();
+    
+    // Handle image files
+    if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(extension || '')) {
+      // For image files, download from public directory
+      const element = document.createElement('a');
+      element.setAttribute('href', `/${filename}`);
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      return;
+    }
+    
+    // Handle text files
+    const fileContent = files[filename] || content;
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   const handleFileUpload = (files: File[]) => {
@@ -246,24 +353,22 @@ This is a markdown file.`;
   };
 
   return (
-    <Box className="editor-layout-container">
-      <Header 
+    <Box className="editor-layout-container" sx={{ pt: '72px' }}>
+      <PremiumHeader 
         onCompile={handleCompile} 
         isCompiling={isRunning} 
         onMenuToggle={() => setDrawerOpen(!drawerOpen)}
-        isDrawerOpen={drawerOpen}
       />
-      <Box className="editor-content" sx={{ display: 'flex' }}>
+      <Box className="editor-content" sx={{ display: 'flex', height: 'calc(100vh - 72px)' }}>
         {!isMobile && drawerOpen && (
-          <SimpleSidebar
+          <VSCodeSidebar
             files={Object.keys(files)}
             activeFile={activeFile}
             onFileSelect={handleFileSelect}
             onFileCreate={handleFileCreate}
             onFileDelete={handleFileDelete}
             onFileRename={handleFileRename}
-            onFolderCreate={handleFolderCreate}
-            onFileUpload={handleFileUpload}
+            onFileDownload={handleFileDownload}
           />
         )}
         
