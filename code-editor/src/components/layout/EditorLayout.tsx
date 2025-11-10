@@ -249,9 +249,32 @@ Ibn al-Haytham lived during the peak of the Islamic Golden Age, a period of extr
     document.body.removeChild(element);
   };
 
-  const handleFileUpload = (files: File[]) => {
-    console.log('Uploading files:', files);
-    // In a real implementation, you would handle file upload
+  const handleFileUpload = async (uploadedFiles: File[]) => {
+    for (const file of uploadedFiles) {
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      
+      // Handle image files
+      if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(extension || '')) {
+        // For images, create a URL reference
+        const imageUrl = URL.createObjectURL(file);
+        setFiles(prev => ({
+          ...prev,
+          [file.name]: `[Image: ${file.name}]\\n\\includegraphics[width=0.8\\textwidth]{${file.name}}`,
+        }));
+      } else {
+        // Handle text files
+        try {
+          const content = await file.text();
+          setFiles(prev => ({
+            ...prev,
+            [file.name]: content,
+          }));
+        } catch (error) {
+          console.error('Error reading file:', file.name, error);
+          alert(`Error reading file: ${file.name}`);
+        }
+      }
+    }
   };
 
   const getDefaultContentForFile = (filename: string): string => {
@@ -318,6 +341,24 @@ This is a markdown file.`;
     setIsRunning(true);
     
     try {
+      // Process content to handle image paths for client-side
+      let processedContent = files[activeFile];
+      
+      // Replace image paths with absolute URLs for client-side compilation
+      processedContent = processedContent.replace(
+        /\\includegraphics\[([^}]+)\]{([^}]+)}/g,
+        (match, options, filename) => {
+          const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg'];
+          const extension = filename.split('.').pop()?.toLowerCase();
+          
+          if (imageExtensions.includes(extension || '')) {
+            // Convert to absolute URL for client-side access
+            return `\\includegraphics[${options}]{${window.location.origin}/${filename}}`;
+          }
+          return match;
+        }
+      );
+
       const response = await fetch('/api/compile', {
         method: 'POST',
         headers: {
@@ -325,7 +366,7 @@ This is a markdown file.`;
         },
         body: JSON.stringify({
           filename: activeFile,
-          content: files[activeFile],
+          content: processedContent,
         }),
       });
 
@@ -358,9 +399,11 @@ This is a markdown file.`;
         onCompile={handleCompile} 
         isCompiling={isRunning} 
         onMenuToggle={() => setDrawerOpen(!drawerOpen)}
+        onSidebarToggle={() => setDrawerOpen(!drawerOpen)}
+        sidebarOpen={drawerOpen}
       />
       <Box className="editor-content" sx={{ display: 'flex', height: 'calc(100vh - 72px)' }}>
-        {!isMobile && drawerOpen && (
+        {!isMobile && (
           <VSCodeSidebar
             files={Object.keys(files)}
             activeFile={activeFile}
@@ -369,6 +412,7 @@ This is a markdown file.`;
             onFileDelete={handleFileDelete}
             onFileRename={handleFileRename}
             onFileDownload={handleFileDownload}
+            onFileUpload={handleFileUpload}
           />
         )}
         

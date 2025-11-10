@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import {
   Box,
   Typography,
@@ -39,7 +39,8 @@ import {
   Image as ImageIcon,
   FileMinus,
   BookOpen,
-  Braces
+  Braces,
+  Upload
 } from 'lucide-react';
 
 // VSCode-style styled components
@@ -230,6 +231,7 @@ interface VSCodeSidebarProps {
   onFileDelete?: (filename: string) => void;
   onFileRename?: (oldName: string, newName: string) => void;
   onFileDownload?: (filename: string, content: string) => void;
+  onFileUpload?: (files: File[]) => void;
 }
 
 const VSCodeSidebar = ({
@@ -240,6 +242,7 @@ const VSCodeSidebar = ({
   onFileDelete,
   onFileRename,
   onFileDownload,
+  onFileUpload,
 }: VSCodeSidebarProps) => {
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
@@ -253,6 +256,7 @@ const VSCodeSidebar = ({
   const [newFileName, setNewFileName] = useState('');
   const [renameFileName, setRenameFileName] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const filteredFiles = files.filter(file => 
     file.toLowerCase().includes(searchTerm.toLowerCase())
@@ -316,6 +320,17 @@ const VSCodeSidebar = ({
     setCreateDialogOpen(true);
   };
 
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFiles = Array.from(event.target.files || []);
+    if (uploadedFiles.length > 0 && onFileUpload) {
+      onFileUpload(uploadedFiles);
+    }
+    // Reset the input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -343,6 +358,11 @@ const VSCodeSidebar = ({
           <Tooltip title="New File (Ctrl+N)">
             <ActionButton size="small" onClick={openCreateDialog}>
               <Plus size={16} />
+            </ActionButton>
+          </Tooltip>
+          <Tooltip title="Upload Files">
+            <ActionButton size="small" onClick={() => fileInputRef.current?.click()}>
+              <Upload size={16} />
             </ActionButton>
           </Tooltip>
           <Tooltip title="Refresh">
@@ -532,6 +552,16 @@ const VSCodeSidebar = ({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Hidden file input for uploads */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        accept="image/*,.tex,.bib,.md,.txt"
+        onChange={handleFileUpload}
+        style={{ display: 'none' }}
+      />
     </SidebarContainer>
   );
 };

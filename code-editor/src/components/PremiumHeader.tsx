@@ -17,7 +17,9 @@ import {
   Save,
   FolderOpen,
   Bell,
-  User
+  User,
+  Sidebar,
+  Share2
 } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -234,9 +236,11 @@ interface PremiumHeaderProps {
   onCompile?: () => void;
   isCompiling?: boolean;
   onMenuToggle?: () => void;
+  onSidebarToggle?: () => void;
+  sidebarOpen?: boolean;
 }
 
-const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle }: PremiumHeaderProps) => {
+const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebarToggle, sidebarOpen = true }: PremiumHeaderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -279,24 +283,24 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle }: Premium
       </Box>
       
       <List>
-        <ListItem button sx={{ borderRadius: 2, mb: 1 }}>
+        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
           <ListItemIcon><Save color="#e2e8f0" /></ListItemIcon>
           <ListItemText primary="Save" />
         </ListItem>
-        <ListItem button sx={{ borderRadius: 2, mb: 1 }}>
+        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
           <ListItemIcon><FolderOpen color="#e2e8f0" /></ListItemIcon>
           <ListItemText primary="Open" />
         </ListItem>
         <Divider sx={{ my: 2, borderColor: alpha('#ffffff', 0.1) }} />
-        <ListItem button sx={{ borderRadius: 2, mb: 1 }} onClick={onCompile}>
+        <ListItem sx={{ borderRadius: 2, mb: 1 }} onClick={onCompile}>
           <ListItemIcon><Play color="#22c55e" /></ListItemIcon>
           <ListItemText primary={isCompiling ? "Compiling..." : "Run"} />
         </ListItem>
-        <ListItem button sx={{ borderRadius: 2, mb: 1 }}>
+        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
           <ListItemIcon><Share2 color="#e2e8f0" /></ListItemIcon>
           <ListItemText primary="Share" />
         </ListItem>
-        <ListItem button sx={{ borderRadius: 2, mb: 1 }}>
+        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
           <ListItemIcon><CloudUpload color="#e2e8f0" /></ListItemIcon>
           <ListItemText primary="Deploy" />
         </ListItem>
@@ -309,6 +313,21 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle }: Premium
       <StyledAppBar position="fixed">
         <StyledToolbar>
           <LogoContainer>
+            {!isMobile && (
+              <Tooltip title={sidebarOpen ? "Hide Sidebar" : "Show Sidebar"}>
+                <IconButton
+                  onClick={onSidebarToggle}
+                  sx={{ 
+                    color: '#ffffff', 
+                    mr: 2,
+                    background: alpha('#ffffff', 0.08),
+                    '&:hover': { background: alpha('#ffffff', 0.12) }
+                  }}
+                >
+                  <Sidebar size={20} />
+                </IconButton>
+              </Tooltip>
+            )}
             {isMobile && (
               <IconButton
                 onClick={handleMobileMenuToggle}
