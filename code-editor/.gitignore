@@ -23,7 +23,7 @@ pkg-lock.json
 /build
 
 # public directory (static files)
-/public/
+# /public/
 
 # misc
 .DS_Store

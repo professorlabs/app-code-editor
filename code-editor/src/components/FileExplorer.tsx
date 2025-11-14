@@ -210,6 +210,20 @@ const FileExplorer = ({
     handleContextMenuClose();
   };
 
+  const handleFileClick = (filename: string) => {
+    const extension = filename.split('.').pop()?.toLowerCase();
+    const isImage = ['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(extension || '');
+    const isPDF = extension === 'pdf';
+    
+    if (isImage || isPDF) {
+      // Open in new tab
+      window.open(filename, '_blank');
+    } else {
+      // Regular file selection for editing
+      onFileSelect(filename);
+    }
+  };
+
   const openRenameDialog = () => {
     setRenameFileName(selectedFile);
     setRenameDialogOpen(true);
@@ -234,7 +248,7 @@ const FileExplorer = ({
           <ListItem key={filename} className="file-list-item">
             <FileItem
               active={activeFile === filename}
-              onClick={() => onFileSelect(filename)}
+              onClick={() => handleFileClick(filename)}
               onContextMenu={(e) => handleContextMenu(e, filename)}
             >
               <FileIcon>

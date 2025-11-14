@@ -1,0 +1,261 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{babel}
+\geometry{margin=1in}
+
+\title{\textbf{LaTeX to HTML Engine Tutorial}}
+\author{Complete Feature Showcase}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\onehalfspacing
+
+\tableofcontents
+
+\newpage
+
+\section*{Introduction}
+
+This tutorial demonstrates the complete capabilities of the LaTeX to HTML conversion engine. All features including math equations, images, multilingual text, themes, and formatting are supported.
+
+\section*{Text Formatting Examples}
+
+\subsection*{Basic Text Formatting}
+This document shows \textbf{bold text}, \textit{italic text}, \texttt{code text}, \underline{underlined text}, and \emph{emphasized text}.
+
+\subsection*{Font Sizes}
+\tiny Tiny text} \scriptsize Script size} \footnotesize Footnote size} \small Small text} 
+\normalsize Normal text} \large Large text} \Large Large text} \LARGE Large text} \huge Huge text} \Huge Huge text}
+
+\subsection*{Multilingual Text Support}
+\subsubsection*{Arabic Text}
+\textbf{العربية}: مرحبا بك في محرر LaTeX الاحترافي. هذا يدعم الكتابة من اليمين إلى اليسار والنصوص العربية.
+
+\subsubsection*{Bangla Text}
+\textbf{বাংলা}: LaTeX থেকে HTML রূপান্তরকারীতে আপনাকে স্বাগতম। এটি বাংলা টেক্সট সমর্থন করে।
+
+\subsubsection*{English Text}
+\textbf{English}: Welcome to the professional LaTeX to HTML converter. This supports multiple languages and complex formatting.
+
+\subsubsection*{Spanish Text}
+\textbf{Español}: ¡Bienvenido al convertidor profesional de LaTeX a HTML! Esto soporta múltiples idiomas y formato complejo.
+
+\subsubsection*{Chinese Text}
+\textbf{中文}: 欢迎使用专业的LaTeX转HTML转换器！这支持多种语言和复杂格式。
+
+\subsubsection*{Hindi Text}
+\textbf{हिन्दी}: LaTeX से HTML कनवर्टर में आपका स्वागत है। यह कई भाषाओं और जटिल फॉर्मेटिंग का समर्थन करता है।
+
+\section*{Mathematical Equations}
+
+\subsection*{Inline Math}
+Here are some inline math examples: $E = mc^2$, $\sin\theta = \frac{opp}{hyp}$, and $\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i$.
+
+\subsection*{Display Math}
+\subsubsection*{Quadratic Formula}
+\[
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]
+
+\subsubsection*{Integration}
+\[
+\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]
+
+\subsubsection*{Matrix Operations}
+Let $A \in \mathbb{R}^{2\times2}$ be:
+\[
+A = \begin{pmatrix}
+2 & 1\\
+5 & 3
+\end{pmatrix}
+\]
+
+The inverse is:
+\[
+A^{-1} = \dfrac{1}{\det(A)}\begin{pmatrix}
+d & -b\\
+-c & a
+\end{pmatrix} = \begin{pmatrix}
+3 & -1\\
+-5 & 2
+\end{pmatrix}
+\]
+
+\subsubsection*{Complex Equations}
+\[
+\begin{cases}
+\frac{\partial u}{\partial t} = \alpha \nabla^2 u\\
+u(x,0) = f(x)\\
+u(0,t) = u(L,t) = 0
+\end{cases}
+\]
+
+\subsubsection*{Summation and Products}
+\[
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}, \quad \prod_{i=1}^{n} i = n!
+\]
+
+\section*{Lists and Enumerations}
+
+\subsection*{Bullet Points (itemize)}
+\begin{itemize}
+    \item \textbf{First item} with bold text
+    \item \textit{Second item} with italic text  
+    \item Third item with math: $\alpha + \beta = \gamma$
+    \item Nested list:
+    \begin{itemize}
+        \item Sub-item one
+        \item Sub-item two with $\sqrt{2}$
+    \end{itemize}
+    \item Final item
+\end{itemize}
+
+\subsection*{Numbered Lists (enumerate)}
+\begin{enumerate}
+    \item First step: Define the problem
+    \item Second step: Formulate equations
+    \item Third step: Solve using:
+    \begin{enumerate}
+        \item Analytical methods
+        \item Numerical approximation
+        \item Verification
+    \end{enumerate}
+    \item Fourth step: Validate results
+\end{enumerate}
+
+\section*{Tables and Data}
+
+\subsection*{Simple Table}
+\begin{tabular}{|l|c|r|}
+\hline
+\textbf{Function} & \textbf{Domain} & \textbf{Range} \\
+\hline
+$f(x) = x^2$ & $\mathbb{R}$ & $[0, \infty)$ \\
+$g(x) = \sin(x)$ & $\mathbb{R}$ & $[-1, 1]$ \\
+$h(x) = e^x$ & $\mathbb{R}$ & $(0, \infty)$ \\
+\hline
+\end{tabular}
+
+\subsection*{Data Table with Results}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Units} \\
+\midrule
+Speed of light & $c = 2.998 \times 10^8$ & m/s \\
+Planck constant & $h = 6.626 \times 10^{-34}$ & J·s \\
+Gravitational constant & $G = 6.674 \times 10^{-11}$ & N·m²/kg² \\
+\bottomrule
+\end{tabular}
+
+\section*{Quotes and Citations}
+
+\subsection*{Block Quotes}
+\begin{quote}
+Mathematics is the language in which God has written the universe. The great book of nature can be read only by those who know the language in which it was written. And that language is mathematics.
+\end{quote}
+
+\subsection*{Attributed Quote}
+\begin{quotation}
+The important thing in science is not so much to obtain new facts as to discover new ways of thinking about them.
+\end{quotation}
+
+\section*{Special Mathematical Notation}
+
+\subsection*{Vectors and Bold Math}
+Let $\bm{v} = (v_1, v_2, v_3)$ be a vector in $\mathbb{R}^3$. The magnitude is $|\bm{v}| = \sqrt{v_1^2 + v_2^2 + v_3^2}$.
+
+\subsection*{Blackboard Bold}
+Common number sets: $\mathbb{N}$ (natural numbers), $\mathbb{Z}$ (integers), $\mathbb{Q}$ (rationals), $\mathbb{R}$ (real numbers), $\mathbb{C}$ (complex numbers).
+
+\subsection*{Special Functions}
+\begin{itemize}
+    \item Trigonometric: $\sin(30°) = 0.5$, $\cos(45°) = \frac{\sqrt{2}}{2}$
+    \item Logarithmic: $\ln(e) = 1$, $\log_{10}(100) = 2$
+    \item Exponential: $e^{i\pi} + 1 = 0$ (Euler's identity)
+\end{itemize}
+
+\section*{Code Examples}
+
+\subsection*{Verbatim Text}
+\begin{verbatim}
+function calculateSum(numbers) {
+    return numbers.reduce((a, b) => a + b, 0);
+}
+
+const result = calculateSum([1, 2, 3, 4, 5]);
+console.log(result); // Output: 15
+\end{verbatim}
+
+\section*{Advanced Mathematical Examples}
+
+\subsection*{Calculus}
+\subsubsection*{Derivatives}
+\[
+\frac{d}{dx}\sin(x) = \cos(x), \quad \frac{d}{dx}e^x = e^x, \quad \frac{d}{dx}\ln(x) = \frac{1}{x}
+\]
+
+\subsubsection*{Limits}
+\[
+\lim_{x \to 0} \frac{\sin(x)}{x} = 1, \quad \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e
+\]
+
+\subsection*{Linear Algebra}
+\subsubsection*{Eigenvalue Problem}
+For matrix $A$, eigenvalues $\lambda$ satisfy:
+\[
+\det(A - \lambda I) = 0
+\]
+
+For $A = \begin{pmatrix} 3 & 1 \\ 2 & 2 \end{pmatrix}$:
+\[
+\det\begin{pmatrix} 3-\lambda & 1 \\ 2 & 2-\lambda \end{pmatrix} = (3-\lambda)(2-\lambda) - 2 = \lambda^2 - 5\lambda + 4 = 0
+\]
+
+Thus $\lambda = 1$ or $\lambda = 4$.
+
+\section*{Cross-References and Structure}
+
+\subsection*{Document Structure}
+This document demonstrates:
+\begin{enumerate}
+    \item Multilingual text support (Arabic, Bangla, English, Spanish, Chinese, Hindi)
+    \item Complete math equation rendering
+    \item Tables and data presentation
+    \item Lists and hierarchical structure
+    \item Quotes and special formatting
+    \item Code examples and verbatim text
+\end{enumerate}
+
+\subsection*{Theme Support}
+This LaTeX document will be converted to HTML with:
+\begin{itemize}
+    \item \textbf{White theme}: Clean, professional appearance
+    \item \textbf{Dark theme}: Easy on the eyes for extended reading
+    \item Responsive design for mobile devices
+    \item Mathematical equation rendering
+    \item Image support and linking
+\end{itemize}
+
+\section*{Conclusion}
+
+This tutorial demonstrates that the LaTeX to HTML conversion engine supports:
+\begin{itemize}
+    \item ✅ Complete mathematical notation
+    \item ✅ Multilingual text rendering
+    \item ✅ Complex document structure
+    \item ✅ Tables, lists, and formatting
+    \item ✅ Theme customization
+    \item ✅ Responsive output
+\end{itemize}
+
+All features work seamlessly together to create professional HTML documents from LaTeX source.
+
+\end{document}

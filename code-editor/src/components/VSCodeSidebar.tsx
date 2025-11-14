@@ -136,7 +136,9 @@ const ExplorerContent = styled(Box)(({ theme }) => ({
   },
 }));
 
-const FileItem = styled(ListItemButton)<{ 
+const FileItem = styled(ListItemButton, { 
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ 
   active?: boolean;
 }>(({ theme, active = false }) => ({
   padding: '4px 8px',
