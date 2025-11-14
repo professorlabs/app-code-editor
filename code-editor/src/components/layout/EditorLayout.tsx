@@ -18,6 +18,7 @@ const EditorLayout = () => {
   const [activeFile, setActiveFile] = useState<string | null>('portfolio.tex');
   const [isRunning, setIsRunning] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [files, setFiles] = useState<Record<string, string>>({
     'portfolio.tex': `\\documentclass{portfolio}
 \\usepackage[utf8]{inputenc}
@@ -1171,7 +1172,13 @@ This is a markdown file.`;
       <PremiumHeader 
         onCompile={handleCompile} 
         isCompiling={isRunning} 
-        onMenuToggle={() => setDrawerOpen(!drawerOpen)}
+        onMenuToggle={() => {
+          if (isMobile) {
+            setMobileSidebarOpen(!mobileSidebarOpen);
+          } else {
+            setDrawerOpen(!drawerOpen);
+          }
+        }}
         onSidebarToggle={() => setDrawerOpen(!drawerOpen)}
         sidebarOpen={drawerOpen}
       />
@@ -1187,6 +1194,52 @@ This is a markdown file.`;
             onFileDownload={handleFileDownload}
             onFileUpload={handleFileUpload}
           />
+        )}
+        
+        {isMobile && mobileSidebarOpen && (
+          <>
+            {/* Backdrop overlay */}
+            <Box
+              sx={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 1100,
+              }}
+              onClick={() => setMobileSidebarOpen(false)}
+            />
+            
+            {/* Mobile sidebar */}
+            <Box
+              sx={{
+                position: 'fixed',
+                top: '72px',
+                left: 0,
+                bottom: 0,
+                width: '280px',
+                zIndex: 1200,
+                backgroundColor: '#252526',
+                boxShadow: '2px 0 8px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <VSCodeSidebar
+                files={Object.keys(files)}
+                activeFile={activeFile}
+                onFileSelect={(filename) => {
+                  handleFileSelect(filename);
+                  setMobileSidebarOpen(false); // Close sidebar after selecting file
+                }}
+                onFileCreate={handleFileCreate}
+                onFileDelete={handleFileDelete}
+                onFileRename={handleFileRename}
+                onFileDownload={handleFileDownload}
+                onFileUpload={handleFileUpload}
+              />
+            </Box>
+          </>
         )}
         
         <Box sx={{ flex: 1, display: 'flex', minWidth: 0 }}>

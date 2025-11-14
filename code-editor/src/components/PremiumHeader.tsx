@@ -2,24 +2,15 @@
 
 import { 
   Play, 
-  Settings, 
   CloudUpload, 
-  Download,
-  GitBranch,
   Globe,
-  Zap,
   Shield,
-  Eye,
-  Layers,
   Menu,
-  X,
   ChevronDown,
   Save,
-  FolderOpen,
-  Bell,
   User,
   Sidebar,
-  Share2
+  FolderOpen
 } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -38,14 +29,8 @@ import {
   styled,
   Badge,
   Tooltip,
-  Divider,
   useTheme,
   useMediaQuery,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
 } from '@mui/material';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -223,15 +208,6 @@ const PremiumBadge = styled(Chip)(({ theme }) => ({
   marginLeft: '8px',
 }));
 
-const MobileMenuDrawer = styled(Drawer)(({ theme }) => ({
-  '& .MuiDrawer-paper': {
-    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-    width: '300px',
-    border: 'none',
-    boxShadow: '0 0 32px rgba(0, 0, 0, 0.3)',
-  },
-}));
-
 interface PremiumHeaderProps {
   onCompile?: () => void;
   isCompiling?: boolean;
@@ -243,7 +219,6 @@ interface PremiumHeaderProps {
 const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebarToggle, sidebarOpen = true }: PremiumHeaderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [fileMenuAnchor, setFileMenuAnchor] = useState<null | HTMLElement>(null);
   const [deployMenuAnchor, setDeployMenuAnchor] = useState<null | HTMLElement>(null);
 
@@ -263,51 +238,7 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebar
     setDeployMenuAnchor(null);
   };
 
-  const handleMobileMenuToggle = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-    onMenuToggle?.();
-  };
-
-  const MobileMenuContent = () => (
-    <Box sx={{ p: 2, height: '100%', color: '#ffffff' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-        <Logo>
-          <LogoIcon>
-            <Image src="/logo.svg" alt="Logo" width={28} height={28} />
-          </LogoIcon>
-          <LogoText variant="h6">LaTeX Studio</LogoText>
-        </Logo>
-        <IconButton onClick={() => setMobileMenuOpen(false)} sx={{ color: '#ffffff' }}>
-          <X size={24} />
-        </IconButton>
-      </Box>
-      
-      <List>
-        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
-          <ListItemIcon><Save color="#e2e8f0" /></ListItemIcon>
-          <ListItemText primary="Save" />
-        </ListItem>
-        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
-          <ListItemIcon><FolderOpen color="#e2e8f0" /></ListItemIcon>
-          <ListItemText primary="Open" />
-        </ListItem>
-        <Divider sx={{ my: 2, borderColor: alpha('#ffffff', 0.1) }} />
-        <ListItem sx={{ borderRadius: 2, mb: 1 }} onClick={onCompile}>
-          <ListItemIcon><Play color="#22c55e" /></ListItemIcon>
-          <ListItemText primary={isCompiling ? "Compiling..." : "Run"} />
-        </ListItem>
-        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
-          <ListItemIcon><Share2 color="#e2e8f0" /></ListItemIcon>
-          <ListItemText primary="Share" />
-        </ListItem>
-        <ListItem sx={{ borderRadius: 2, mb: 1 }}>
-          <ListItemIcon><CloudUpload color="#e2e8f0" /></ListItemIcon>
-          <ListItemText primary="Deploy" />
-        </ListItem>
-      </List>
-    </Box>
-  );
-
+  
   return (
     <>
       <StyledAppBar position="fixed">
@@ -330,7 +261,7 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebar
             )}
             {isMobile && (
               <IconButton
-                onClick={handleMobileMenuToggle}
+                onClick={onMenuToggle}
                 sx={{ 
                   color: '#ffffff', 
                   mr: 1,
@@ -345,8 +276,12 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebar
               <LogoIcon>
                 <Image src="/logo.svg" alt="Logo" width={28} height={28} />
               </LogoIcon>
-              <LogoText variant="h6">LaTeX Studio</LogoText>
-              <PremiumBadge label="PRO" size="small" />
+              {!isMobile && (
+                <>
+                  <LogoText variant="h6">LaTeX Studio</LogoText>
+                  <PremiumBadge label="PRO" size="small" />
+                </>
+              )}
             </Logo>
           </LogoContainer>
 
@@ -424,6 +359,16 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebar
                 </MuiMenu>
               </>
             )}
+            
+            {isMobile && (
+              <RunButton
+                onClick={onCompile}
+                disabled={isCompiling}
+                startIcon={<Play size={20} />}
+              >
+                {isCompiling ? 'Compiling...' : 'Compile'}
+              </RunButton>
+            )}
           </CenterActions>
 
           <RightActions>
@@ -442,14 +387,6 @@ const PremiumHeader = ({ onCompile, isCompiling = false, onMenuToggle, onSidebar
           </RightActions>
         </StyledToolbar>
       </StyledAppBar>
-
-      <MobileMenuDrawer
-        anchor="left"
-        open={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-      >
-        <MobileMenuContent />
-      </MobileMenuDrawer>
     </>
   );
 };

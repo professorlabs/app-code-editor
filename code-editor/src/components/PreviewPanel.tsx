@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Box, Typography, IconButton, Button, CircularProgress } from '@mui/material';
+import { Box, Typography, IconButton, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import { Refresh, OpenInNew, ErrorOutline, Html } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
@@ -67,14 +67,22 @@ const HeaderTitle = styled(Typography, {
 
 const ActionButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'theme',
-})({
+})(({ theme }) => ({
   color: '#cccccc',
   padding: '4px',
   '&:hover': {
     background: '#3e3e42',
     color: '#ffffff',
   },
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '6px',
+    backgroundColor: '#4caf50',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#45a049',
+    },
+  },
+}));
 
 const RunButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== 'theme',
@@ -102,6 +110,8 @@ const PreviewPanel = ({ files, activeFile }: PreviewPanelProps) => {
   const [refreshKey, setRefreshKey] = useState(0);
   const [currentHtmlFile, setCurrentHtmlFile] = useState<string | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const generateHtmlContent = () => {
     let selectedHtmlFile: string | null = null;
@@ -242,29 +252,38 @@ const PreviewPanel = ({ files, activeFile }: PreviewPanelProps) => {
   return (
     <PreviewContainer>
       <PreviewHeader>
-        <HeaderTitle>
-          PREVIEW {currentHtmlFile ? `- ${currentHtmlFile}` : ''}
-        </HeaderTitle>
-        <Box display="flex" alignItems="center" gap={1}>
-          {currentHtmlFile && (
-            <Box display="flex" alignItems="center" gap={0.5}>
-              <Html sx={{ fontSize: 14, color: '#4caf50' }} />
-              <Typography variant="caption" sx={{ color: '#cccccc', fontSize: '10px' }}>
-                HTML
-              </Typography>
+        {!isMobile && (
+          <>
+            <HeaderTitle>
+              PREVIEW {currentHtmlFile ? `- ${currentHtmlFile}` : ''}
+            </HeaderTitle>
+            <Box display="flex" alignItems="center" gap={1}>
+              {currentHtmlFile && (
+                <Box display="flex" alignItems="center" gap={0.5}>
+                  <Html sx={{ fontSize: 14, color: '#4caf50' }} />
+                  <Typography variant="caption" sx={{ color: '#cccccc', fontSize: '10px' }}>
+                    HTML
+                  </Typography>
+                </Box>
+              )}
+              <RunButton
+                onClick={handleRefresh}
+                startIcon={<Refresh sx={{ fontSize: 12 }} />}
+                size="small"
+              >
+                Refresh
+              </RunButton>
             </Box>
-          )}
-          <RunButton
-            onClick={handleRefresh}
-            startIcon={<Refresh sx={{ fontSize: 12 }} />}
-            size="small"
-          >
-            Refresh
-          </RunButton>
-          <ActionButton onClick={handleOpenInNewTab} size="small">
-            <OpenInNew sx={{ fontSize: 14 }} />
-          </ActionButton>
-        </Box>
+          </>
+        )}
+        
+        {isMobile && (
+          <Box sx={{ flex: 1 }} />
+        )}
+        
+        <ActionButton onClick={handleOpenInNewTab} size="small">
+          <OpenInNew sx={{ fontSize: 14 }} />
+        </ActionButton>
       </PreviewHeader>
 
       <PreviewContent>
