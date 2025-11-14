@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
     // Write the LaTeX content to the temporary file
     fs.writeFileSync(tempFilePath, content);
 
-    // Execute the engine.js command
-    const enginePath = path.join(process.cwd(), 'src', 'Engine', 'engine.js');
+    // Execute the engine-wrapper.js command
+    const enginePath = path.join(process.cwd(), 'src', 'app', 'api', 'compile', 'engine-wrapper.js');
     const command = `cd ${tempDir} && node ${enginePath} convert ${filename}`;
     
     console.log('Executing command:', command);
