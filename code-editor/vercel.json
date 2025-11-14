@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/app/api/compile/route.ts": {
+      "maxDuration": 30
+    }
+  },
+  "includeFiles": [
+    "src/Engine/**"
+  ]
+}
